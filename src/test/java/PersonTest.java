@@ -1,3 +1,4 @@
+import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.service.PersonService;
 
@@ -22,6 +23,10 @@ public class PersonTest {
                         .email("a2@a.com")
                         .image("/img/0002.jpg")
                         .build();
+
+        BeanValidator<Person> personValidator = new BeanValidator<>();
+        System.out.println(personValidator.validate(person1));
+        System.out.println(personValidator.validate(person2));
 
         System.out.println(PersonService.getService().save(person1));
         System.out.println(PersonService.getService().save(person2));
