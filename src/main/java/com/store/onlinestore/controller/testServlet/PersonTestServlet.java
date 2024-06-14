@@ -37,14 +37,14 @@ public class PersonTestServlet extends HttpServlet {
                             .build();
 
             BeanValidator<Person> personValidator = new BeanValidator<>();
-            if(!personValidator.validate(person1).isEmpty()) {
+            if(personValidator.validate(person1).isEmpty()) {
                 System.out.println(personValidator.validate(person1));
             }else{
                 System.out.println(personValidator.validate(person1));
             }
 
 
-            if(!personValidator.validate(person2).isEmpty()) {
+            if(personValidator.validate(person2).isEmpty()) {
                 System.out.println(personValidator.validate(person2));
             }else{
                 System.out.println(personValidator.validate(person2));
