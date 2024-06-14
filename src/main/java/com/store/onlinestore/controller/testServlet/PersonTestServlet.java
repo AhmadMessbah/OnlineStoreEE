@@ -37,11 +37,18 @@ public class PersonTestServlet extends HttpServlet {
                             .build();
 
             BeanValidator<Person> personValidator = new BeanValidator<>();
-            System.out.println(personValidator.validate(person1));
-            System.out.println(personValidator.validate(person2));
+            if(!personValidator.validate(person1).isEmpty()) {
+                System.out.println(personValidator.validate(person1));
+            }else{
+                System.out.println(personValidator.validate(person1));
+            }
 
-            System.out.println(PersonService.getService().save(person1));
-            System.out.println(PersonService.getService().save(person2));
+
+            if(!personValidator.validate(person2).isEmpty()) {
+                System.out.println(personValidator.validate(person2));
+            }else{
+                System.out.println(personValidator.validate(person2));
+            }
 
             System.out.println(PersonService.getService().findAll());
 
