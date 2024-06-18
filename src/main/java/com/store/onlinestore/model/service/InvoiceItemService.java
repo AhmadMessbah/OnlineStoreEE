@@ -50,13 +50,7 @@ public class InvoiceItemService {
             return repository.findById(id, InvoiceItem.class);
         }
     }
-//    public List<InvoiceItem>  findByName(String name) throws Exception {
-//        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()){
-//            Map<String,Object> params = new HashMap<>();
-//            params.put("name", name+"%");
-//            return repository.executeQuery("InvoiceItem.FindByName",params, InvoiceItem.class);
-//        }
-//    }
+
 
 
 }
