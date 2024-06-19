@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import javax.naming.Name;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -34,6 +35,22 @@ public class Inventory {
     private LocalDateTime registerDate;
 
     @OneToMany
-    private List<Product> product;
+    private List<Product> productList;
+
+    @OneToMany
+    private List<Supplier> supplierList;
+
+    public void addProduct(Product product){
+        if (productList == null){
+            productList = new ArrayList<>();
+        }
+        productList.add(product);
+    }
+    public void addSupplier(Supplier supplier){
+        if (supplierList == null){
+            supplierList = new ArrayList<>();
+        }
+        supplierList.add(supplier);
+    }
 
 }
