@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.naming.Name;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -27,6 +29,9 @@ public class Inventory {
 
     @Column(name = "productCount")
     private int count;
+
+    @Column(name = "registerProductDate")
+    private LocalDateTime registerDate;
 
     @OneToMany
     private List<Product> product;
