@@ -24,7 +24,6 @@ public class Card extends Payment {
     private long id;
     @Column(name = "cardNumber" ,unique = true)
     private long cardNumber;
-
     @Column(name = "cvv2")
     private int cvv2;
 

@@ -14,7 +14,7 @@ public class CardService {
     private CardService() {
     }
 
-    public Card save(Card Card) throws Exception {
+    public Card save(Card Card)  throws Exception {
         try (CrudRepository<Card, Long> repository = new CrudRepository<>()) {
             return repository.save(Card);
         }
