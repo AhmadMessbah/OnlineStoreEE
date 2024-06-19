@@ -48,5 +48,6 @@ public class Product {
     @Column(name = "in_stock")
     private Integer inStock;
 
-
+    @ManyToOne
+    private Inventory inventory;
 }
