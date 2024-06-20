@@ -33,8 +33,11 @@ public class Inventory {
     @Column(name = "inventoryName")
     private String name;
 
-    @Column(name = "productCount")
-    private int count;
+    @Column(name = "productStock")
+    private int productStock;
+
+    @Column(name = "totalStock")
+    private int totalStock;
 
     @Column(name = "registerProductDate")
     private LocalDateTime registerDate;

@@ -44,10 +44,22 @@ public class TransactionInventory {
     @OneToOne
     private Person receiverPerson;
 
+// TODO: 6/20/2024 payment abstract class 
+//    @OneToMany
+//    private List<Payment> paymentList;
+
     public void addProduct(Product product){
         if (productList == null){
             productList = new ArrayList<>();
         }
         productList.add(product);
     }
+
+    // TODO: 6/20/2024  
+//    public void addPayment(Payment payment){
+//        if (paymentList == null){
+//            paymentList = new ArrayList<>();
+//        }
+//        paymentList.add(payment);
+//    }
 }

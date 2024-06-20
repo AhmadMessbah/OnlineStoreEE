@@ -1,5 +1,7 @@
 package com.store.onlinestore.model.service;
 
+import com.store.onlinestore.controller.exception.TransactionNotFoundException;
+import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.entity.TransactionInventory;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
@@ -25,9 +27,13 @@ public class TransactionService {
     }
     public TransactionInventory remove(Long id) throws Exception {
         try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, TransactionInventory.class);
+            if (repository.findById(id , TransactionInventory.class) != null){
+                return repository.remove(id, TransactionInventory.class);
+            }
+            throw new TransactionNotFoundException();
         }
     }
+
     public List<TransactionInventory> findAll() throws Exception {
         try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
             return repository.findAll(TransactionInventory.class);

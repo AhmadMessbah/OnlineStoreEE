@@ -1,5 +1,8 @@
 package com.store.onlinestore.model.service;
 
+import com.store.onlinestore.controller.exception.InventoryNotFoundException;
+import com.store.onlinestore.controller.exception.SupplierNotFoundException;
+import com.store.onlinestore.model.entity.Inventory;
 import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
@@ -27,12 +30,16 @@ public class SupplierService {
             return repository.edit(supplier);
         }
     }
-    public Supplier remove(long id) throws Exception {
-        try(CrudRepository<Supplier , Long> repository = new CrudRepository<>()){
-          return repository.remove(id , Supplier.class);
+    public Supplier remove(Long id) throws Exception {
+        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
+            if (repository.findById(id, Supplier.class) != null) {
+                return repository.remove(id, Supplier.class);
+            }
+            throw new SupplierNotFoundException();
         }
     }
-    public List<Supplier> findAll() throws Exception {
+
+        public List<Supplier> findAll() throws Exception {
         try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
             return repository.findAll(Supplier.class);
         }
