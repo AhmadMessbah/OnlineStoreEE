@@ -23,8 +23,8 @@ public class InvoiceItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @ManyToOne
-//    private Product product;
+    @ManyToOne
+    private Product product;
 
     @Column(name = "count")
     private int count;
