@@ -17,8 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @SuperBuilder
 
-@Entity(name = "inventory")
+@Entity(name = "inventoryEntity")
 @Table(name = "inaventory_tbl")
+@NamedQueries({
+        // TODO: 6/20/2024 check product list 
+//        @NamedQuery(name = "Inventory.FindByproduct", query = "select p from inventoryEntity p where p.productList like :product "),
+        @NamedQuery(name = "Inventory.FindByName" , query = "select p from inventoryEntity p where p.name like :name")
+})
 public class Inventory {
 
     @Id

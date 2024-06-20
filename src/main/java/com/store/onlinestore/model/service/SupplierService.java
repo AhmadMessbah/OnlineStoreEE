@@ -32,6 +32,11 @@ public class SupplierService {
           return repository.remove(id , Supplier.class);
         }
     }
+    public List<Supplier> findAll() throws Exception {
+        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
+            return repository.findAll(Supplier.class);
+        }
+    }
     public Supplier findById(Long id) throws Exception {
         try(CrudRepository<Supplier , Long> repository = new CrudRepository<>()){
             return repository.findById(id , Supplier.class);
