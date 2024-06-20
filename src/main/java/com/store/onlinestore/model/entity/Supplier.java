@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.naming.Name;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,6 +15,11 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "supplierEntity")
 @Table(name = "supplier_tbl")
+@NamedQueries({
+        @NamedQuery(name = "supplier.FindByNameAndFamily" , query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
+        @NamedQuery(name = "supplier.FindByMobilePhone" , query = "select p from supplierEntity p where p.mobilePhone=:mobailphone"),
+        @NamedQuery(name = "FideByNationalCode" , query = "select p from supplierEntity p where p.nationalCode like :nationalCode")
+})
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
