@@ -34,9 +34,11 @@ public class Product {
     @Column(name = "brand")
     private String brand;
     @Column(name = "unit_id")
-    private Long unitId;
+    @OneToOne
+    private ProductUnit unitId;
     @Column(name = "product_group_id")
-    private Long productGroupId;
+    @ManyToOne
+    private ProductGroup productGroupId;
     @Column(name = "price")
     private Integer price;
     @Column(name = "image", length = 50)
