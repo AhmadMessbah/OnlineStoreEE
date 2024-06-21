@@ -5,7 +5,6 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.*;
 
 import com.store.onlinestore.model.service.InvoiceService;
-import com.store.onlinestore.model.service.ProductGroupService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

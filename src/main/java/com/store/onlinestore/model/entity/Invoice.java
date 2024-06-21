@@ -30,10 +30,11 @@ import java.util.List;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "serial", length = 5)
-    @Pattern(regexp = "^[A-Z]{1}\\-[\\d]{5}$", message = "Invalid Serial")
+    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
     @ManyToOne
@@ -51,6 +52,7 @@ public class Invoice {
 
 
     @OneToMany
+    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
 
@@ -63,15 +65,15 @@ public class Invoice {
     }
 
     //TODO Use payment Clas or use variable
-//    @Column(name = "discount")
-//    private int discount;
-//
-//    @Column(name = "pure_amount")
-//    private int pureAmount;
+    @Column(name = "discount")
+    private int discount;
 
-    @OneToOne
-    @JoinColumn(name = "PaymentTransaction_id")
-    private PaymentTransaction payement;
+    @Column(name = "pure_amount")
+    private int pureAmount;
+
+//    @OneToOne
+//    @JoinColumn(name = "PaymentTransaction_id")
+//    private PaymentTransaction payement;
 
 
 }
