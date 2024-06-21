@@ -39,7 +39,7 @@ public class Invoice {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-    private Person customer;
+    private Customer customer;
 
     @Column(name = "date_time")
     private LocalDateTime localDateTime;
