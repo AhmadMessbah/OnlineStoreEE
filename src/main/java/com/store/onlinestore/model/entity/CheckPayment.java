@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 
 })
 
-public class Check extends Payment {
+public class CheckPayment extends Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

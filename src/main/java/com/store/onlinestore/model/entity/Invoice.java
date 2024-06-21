@@ -55,6 +55,16 @@ public class Invoice {
     private List<InvoiceItem> invoiceItemList;
 
 
+    @Column(name = "discount")
+    private int discount;
+
+    @Column(name = "pure_amount")
+    private int pureAmount;
+
+//    @OneToOne
+//    @JoinColumn(name = "PaymentTransaction_id")
+//    private PaymentTransaction payement;
+
     public int getAmount() {
         amount = 0;
         invoiceItemList.forEach(
@@ -62,18 +72,5 @@ public class Invoice {
         );
         return amount;
     }
-//
-//    //TODO Use payment Clas or use variable
-//    @Column(name = "discount")
-//    private int discount;
-//
-//    @Column(name = "pure_amount")
-//    private int pureAmount;
-
-//    @OneToOne
-//    @JoinColumn(name = "PaymentTransaction_id")
-//    private PaymentTransaction payement;
-
-
 }
 

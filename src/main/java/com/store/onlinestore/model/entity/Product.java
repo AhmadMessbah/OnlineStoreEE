@@ -60,6 +60,7 @@ public class Product {
     private String barcode;
 
 
+//    todo :
     @ManyToOne
     private Inventory inventory;
 }

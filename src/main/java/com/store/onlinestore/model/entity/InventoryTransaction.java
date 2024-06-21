@@ -39,15 +39,12 @@ public class InventoryTransaction {
     @JoinTable(name = "inventory_transaction_product_tbl")
     private List<Product> productList;
 
-    @OneToOne
-    private Person deliveryPerson;
+    @ManyToOne
+    private Manager deliveryPerson;
 
-    @OneToOne
-    private Person receiverPerson;
+    @ManyToOne
+    private Customer receiverPerson;
 
-// TODO: 6/20/2024 payment abstract class 
-//    @OneToMany
-//    private List<Payment> paymentList;
 
     public void addProduct(Product product){
         if (productList == null){
@@ -55,12 +52,4 @@ public class InventoryTransaction {
         }
         productList.add(product);
     }
-
-    // TODO: 6/20/2024  
-//    public void addPayment(Payment payment){
-//        if (paymentList == null){
-//            paymentList = new ArrayList<>();
-//        }
-//        paymentList.add(payment);
-//    }
 }

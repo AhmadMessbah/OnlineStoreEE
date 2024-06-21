@@ -1,4 +1,6 @@
 package com.store.onlinestore.model.entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +11,18 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @SuperBuilder
+
 @MappedSuperclass
 public abstract class Payment {
+    @ManyToOne
+    private Customer customer;
+
+    @Column(name = "price")
     private float price;
-    private int discount;
-    private float pureAmount;
+
+    @Column(name="payment_date")
     private LocalDateTime dateOfPayment;
 
-
+    @Column(name="description")
+    private String description;
 }

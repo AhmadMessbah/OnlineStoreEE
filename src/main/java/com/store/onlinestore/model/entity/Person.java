@@ -24,7 +24,8 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "personSeq", sequenceName = "person_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeq")
     @Column(name = "id")
     private Long id;
 

@@ -25,10 +25,10 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "supplierName")
+    @Column(name = "supplier_name")
     private String name;
 
-    @Column(name = "supplierFamily")
+    @Column(name = "supplier_family")
     private String family;
 
     @Column(name = "mobile")
