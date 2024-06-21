@@ -21,13 +21,13 @@ public class ProductUnitTestServlet extends HttpServlet {
                     .description("hhhh")
                     .build();
 
-//            ProductUnit productUnit2 = ProductUnit.builder()
-//                    .name("qqq")
-//                    .symbol("ml")
-//                    .description("ssss")
-//                    .build();
+            ProductUnit productUnit2 = ProductUnit.builder()
+                    .name("qqq")
+                    .symbol("ml")
+                    .description("ssss")
+                    .build();
 
-            System.out.println(ProductUnitService.getService().save(productUnit1));
+//            System.out.println(ProductUnitService.getService().save(productUnit1));
 //            System.out.println(ProductUnitService.getService().save(productUnit2));
 
 //            System.out.println(ProductUnitService.getService().edit(productUnit1));
@@ -37,8 +37,7 @@ public class ProductUnitTestServlet extends HttpServlet {
 
 //            System.out.println(ProductUnitService.getService().findAll());
 
-            // TODO : DOESN'T WORK
-//            System.out.println(ProductUnitService.getService().findByName("a"));
+//            System.out.println(ProductUnitService.getService().findByName("q"));
 
 //            System.out.println(ProductUnitService.getService().findById(2L));
         }catch (Exception e) {
