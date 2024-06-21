@@ -85,7 +85,7 @@ public class InvoiceTestServlet extends HttpServlet {
             Invoice invoice =
                     Invoice
                             .builder()
-                            .serial("ab-123")
+                            .serial("A-00001")
                             .customer(person1)
                             .invoiceItemList(invoiceItemList)
 //                            .discount(100)
@@ -93,24 +93,24 @@ public class InvoiceTestServlet extends HttpServlet {
                             .build();
 
             BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
-//            if(invoiceValidator.validate(invoice).isEmpty()) {
-//                System.out.println(InvoiceService.getService().save(invoice));
-//            }else{
-//                System.out.println(invoiceValidator.validate(invoice));
-//            }
-
             if(invoiceValidator.validate(invoice).isEmpty()) {
-                System.out.println(InvoiceService.getService().edit(invoice));
+                System.out.println(InvoiceService.getService().save(invoice));
             }else{
                 System.out.println(invoiceValidator.validate(invoice));
             }
 
-
-            System.out.println(InvoiceService.getService().findAll());
-            System.out.println(InvoiceService.getService().findById(1L));
-            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
-            System.out.println(InvoiceService.getService().findByCustomer(person1));
-            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
+//            if(invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().edit(invoice));
+//            }else{
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+//
+//
+//            System.out.println(InvoiceService.getService().findAll());
+//            System.out.println(InvoiceService.getService().findById(1L));
+//            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
+//            System.out.println(InvoiceService.getService().findByCustomer(person1));
+//            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
             //TODO
 //            System.out.println(InvoiceService.getService().findByRangeDate());
 

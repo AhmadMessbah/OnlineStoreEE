@@ -2,6 +2,7 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,10 +32,12 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "serial", length = 15)
+    @Column(name = "serial", length = 5)
+    @Pattern(regexp = "^[A-Z]{1}\\-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
     @ManyToOne
+    @JoinColumn(name = "person_id")
     private Person customer;
 
     @Column(name = "date_time")
@@ -42,6 +45,9 @@ public class Invoice {
 
     @Column(name = "amount")
     private int amount;
+
+    @Column(name = "Comment")
+    private String comment;
 
 
     @OneToMany
@@ -64,6 +70,7 @@ public class Invoice {
 //    private int pureAmount;
 
     @OneToOne
+    @JoinColumn(name = "PaymentTransaction_id")
     private PaymentTransaction payement;
 
 
