@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.NamedQuery;
 
 @NoArgsConstructor
 @Getter
@@ -17,12 +16,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity(name = "customerEntity")
 @Table(name="customer_tbl")
-//@NamedQueries({
-//        @NamedQuery(name = "Customer.FindByUsername", query = "select c from customerEntity c where c.userName like :username ),
-//                @NamedQuery(name = "Customer.findByUsernameAndPassword", query = "select c from customerEntity c where c.userName =:username and c.password =:password")
-//})
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -36,27 +30,18 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Family")
     private String family;
 
-    @Column(name="phone_number", length = 15, unique = true)
-    @Pattern(regexp = "^(09|\\+989)\\d{9}$" ,message = "Invalid PhoneNumber")
-    private String phoneNumber;
+    @Column(name="password", length = 15)
+    @Pattern(regexp = "123admin" ,message = "Invalid Password")
+    private String password;
 
     @Column(name="email", length = 50)
     @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
     private String email;
 
-    @Column(name = "username", length = 20, unique = true, nullable = false)
-    @Pattern(regexp = "^[A-Za-z]{3,30}$", message = "Invalid UserName")
-    private String userName;
-
-    @Column(name = "password", length = 30, nullable = false)
-    @Pattern(regexp = "^[A-Za-z]{8,30}$", message = "Invalid Password")
-    private String password;
-
-    @Column(name="address", length = 100)
-    @Pattern(regexp = "^[A-Za-z]{10,100}$" ,message = "Invalid Address")
-    private String address;
+    @Column(name="image", length = 50)
+    private String image;
 
     @OneToOne
-    private Role role;
-
+    private Role role ;
 }
+

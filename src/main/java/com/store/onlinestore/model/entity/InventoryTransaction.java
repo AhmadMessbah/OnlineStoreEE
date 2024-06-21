@@ -21,7 +21,7 @@ import java.util.List;
         @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select p from personEntity p where p.name like :name and p.family like :family"),
         @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
 })
-public class TransactionInventory {
+public class InventoryTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
