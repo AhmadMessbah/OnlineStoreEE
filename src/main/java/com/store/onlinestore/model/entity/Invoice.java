@@ -34,11 +34,11 @@ public class Invoice {
     private Long id;
 
     @Column(name = "serial", length = 5)
-    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
+//    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+//    @JoinColumn(name = "person_id")
     private Customer customer;
 
     @Column(name = "date_time")
@@ -50,9 +50,8 @@ public class Invoice {
     @Column(name = "Comment")
     private String comment;
 
-
     @OneToMany
-    @JoinColumn(name= "invoiceItem_id")
+//    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
 
