@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(value = "/productgroup.test")
+@WebServlet(value = "/product-group-test")
 public class ProductGroupTestServlet extends HttpServlet {
 
     @Override
