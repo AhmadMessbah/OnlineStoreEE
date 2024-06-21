@@ -49,7 +49,7 @@ public class ProductUnitService {
     public List<ProductUnit> findByName(String name) throws Exception {
         try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name + "%");
+            params.put("name", name);
             List<ProductUnit> unitList = unitRepository.executeQuery("ProductUnit.FindByName", params, ProductUnit.class);
             if (unitList != null) {
                 return unitList;
