@@ -5,6 +5,7 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Product;
 
 
+import com.store.onlinestore.model.service.ProductGroupService;
 import com.store.onlinestore.model.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,8 +30,8 @@ public class ProductTestServlet extends HttpServlet {
                             .description("sabz")
                             .status(true)
                             .brand("golnar")
-                            .unitId(111L)
-                            .productGroupId(1111L)
+                            .unitId(null)
+                            .productGroupId(null)
                             .price(10000)
                             .image("/img/0001.jpg")
                             .dateOfModified(Time.valueOf(LocalTime.now()))
@@ -45,8 +46,8 @@ public class ProductTestServlet extends HttpServlet {
                             .description("zard")
                             .status(true)
                             .brand("amrica")
-                            .unitId(222L)
-                            .productGroupId(2222L)
+                            .unitId(null)
+                            .productGroupId(null)
                             .price(20000)
                             .image("/img/0002.jpg")
                             .dateOfModified(Time.valueOf(LocalTime.now()))
