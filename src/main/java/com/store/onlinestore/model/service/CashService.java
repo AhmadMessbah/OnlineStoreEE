@@ -1,7 +1,6 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.Cash;
-import com.store.onlinestore.model.entity.Check;
+import com.store.onlinestore.model.entity.CashPayment;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -14,33 +13,33 @@ public class CashService {
     private CashService(){
     }
 
-    public Cash save(Cash cash) throws Exception {
-        try (CrudRepository<Cash, Long> repository = new CrudRepository<>()) {
-            return repository.save(cash);
+    public CashPayment save(CashPayment cashPayment) throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            return repository.save(cashPayment);
         }
     }
 
-    public Cash edit(Cash cash) throws Exception {
-        try (CrudRepository<Cash, Long> repository = new CrudRepository<>()) {
-            return repository.edit(cash);
+    public CashPayment edit(CashPayment cashPayment) throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            return repository.edit(cashPayment);
         }
     }
 
-    public Cash remove(Long id) throws Exception {
-        try (CrudRepository<Cash, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Cash.class);
+    public CashPayment remove(Long id) throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            return repository.remove(id, CashPayment.class);
         }
     }
 
-    public List<Cash> findAll() throws Exception {
-        try (CrudRepository<Cash, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Cash.class);
+    public List<CashPayment> findAll() throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            return repository.findAll(CashPayment.class);
         }
     }
 
-    public Cash findById(Long id) throws Exception {
-        try (CrudRepository<Cash, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Cash.class);
+    public CashPayment findById(Long id) throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            return repository.findById(id, CashPayment.class);
         }
     }
 }
