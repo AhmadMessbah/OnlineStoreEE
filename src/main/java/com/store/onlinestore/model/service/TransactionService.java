@@ -1,8 +1,7 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.TransactionNotFoundException;
-import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.entity.TransactionInventory;
+import com.store.onlinestore.model.entity.InventoryTransaction;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -15,43 +14,43 @@ public class TransactionService {
     private static TransactionService service = new TransactionService();
 
     private TransactionService(){}
-    public TransactionInventory save(TransactionInventory transactionInventory) throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
-            return repository.save(transactionInventory);
+    public InventoryTransaction save(InventoryTransaction inventoryTransaction) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            return repository.save(inventoryTransaction);
         }
     }
-    public TransactionInventory edit(TransactionInventory transactionInventory) throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
-            return repository.edit(transactionInventory);
+    public InventoryTransaction edit(InventoryTransaction inventoryTransaction) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            return repository.edit(inventoryTransaction);
         }
     }
-    public TransactionInventory remove(Long id) throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id , TransactionInventory.class) != null){
-                return repository.remove(id, TransactionInventory.class);
+    public InventoryTransaction remove(Long id) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            if (repository.findById(id , InventoryTransaction.class) != null){
+                return repository.remove(id, InventoryTransaction.class);
             }
             throw new TransactionNotFoundException();
         }
     }
 
-    public List<TransactionInventory> findAll() throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(TransactionInventory.class);
+    public List<InventoryTransaction> findAll() throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            return repository.findAll(InventoryTransaction.class);
         }
     }
-    public List<TransactionInventory> findByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
+    public List<InventoryTransaction> findByNameAndFamily(String name, String family) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name+"%");
             params.put("family", family+"%");
-            return repository.executeQuery("TransactionInventory.FindByNameAndFamily", params, TransactionInventory.class);
+            return repository.executeQuery("TransactionInventory.FindByNameAndFamily", params, InventoryTransaction.class);
         }
     }
-    public TransactionInventory findByPhoneNumber(String phoneNumber) throws Exception {
-        try (CrudRepository<TransactionInventory, Long> repository = new CrudRepository<>()) {
+    public InventoryTransaction findByPhoneNumber(String phoneNumber) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("phoneNumber", phoneNumber);
-            List<TransactionInventory> result = repository.executeQuery("TransactionInventory.FindByPhoneNumber", params, TransactionInventory.class);
+            List<InventoryTransaction> result = repository.executeQuery("TransactionInventory.FindByPhoneNumber", params, InventoryTransaction.class);
             if (result.isEmpty()) {
                 return null;
             } else {

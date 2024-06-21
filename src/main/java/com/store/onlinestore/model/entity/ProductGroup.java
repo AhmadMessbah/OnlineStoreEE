@@ -40,9 +40,10 @@ public class ProductGroup {
     private boolean status;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "product_group_relation_tbl")
     private ProductGroup parentGroup;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "parentGroup")
     private List<ProductGroup> childGroupList;
 
 }

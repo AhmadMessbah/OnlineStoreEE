@@ -2,9 +2,6 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.entity.Product;
-import com.store.onlinestore.model.entity.TransactionInventory;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
