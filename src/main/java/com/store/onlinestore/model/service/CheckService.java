@@ -45,19 +45,6 @@ public class CheckService {
         }
     }
 
-    public Check findByBankId(int number) throws Exception {
-        try (CrudRepository<Check, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("BankId", number);
-            List<Check> result = repository.executeQuery("Check.FindByBankId", params, Check.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
-    }
-
     public List<Check> findByNameAndFamily(String name, String family) throws Exception {
         try (CrudRepository<Check, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
