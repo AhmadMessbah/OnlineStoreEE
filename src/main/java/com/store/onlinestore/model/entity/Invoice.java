@@ -2,6 +2,7 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,13 +30,16 @@ import java.util.List;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "serial", length = 15)
+    @Column(name = "serial", length = 5)
+    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
     @ManyToOne
-    private Person customer;
+    @JoinColumn(name = "person_id")
+    private Customer customer;
 
     @Column(name = "date_time")
     private LocalDateTime localDateTime;
@@ -43,8 +47,12 @@ public class Invoice {
     @Column(name = "amount")
     private int amount;
 
+    @Column(name = "Comment")
+    private String comment;
+
 
     @OneToMany
+    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
 
@@ -57,14 +65,15 @@ public class Invoice {
     }
 
     //TODO Use payment Clas or use variable
-//    @Column(name = "discount")
-//    private int discount;
-//
-//    @Column(name = "pure_amount")
-//    private int pureAmount;
+    @Column(name = "discount")
+    private int discount;
 
-    @OneToOne
-    private PaymentTransaction payement;
+    @Column(name = "pure_amount")
+    private int pureAmount;
+
+//    @OneToOne
+//    @JoinColumn(name = "PaymentTransaction_id")
+//    private PaymentTransaction payement;
 
 
 }

@@ -5,7 +5,6 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.*;
 
 import com.store.onlinestore.model.service.InvoiceService;
-import com.store.onlinestore.model.service.ProductGroupService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,12 +21,12 @@ public class InvoiceTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Person person1 =
-                    Person
+            Customer customer =
+                    Customer
                             .builder()
                             .name("Arash")
                             .family("Oloomi")
-                            .phoneNumber("123456")
+//                            .phoneNumber("123456")
                             .email("a@a.com")
                             .image("/img/0001.jpg")
                             .build();
@@ -85,32 +84,32 @@ public class InvoiceTestServlet extends HttpServlet {
             Invoice invoice =
                     Invoice
                             .builder()
-                            .serial("ab-123")
-                            .customer(person1)
+                            .serial("A-00001")
+                            .customer(customer)
                             .invoiceItemList(invoiceItemList)
 //                            .discount(100)
                             .localDateTime(LocalDateTime.now())
                             .build();
 
             BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
-//            if(invoiceValidator.validate(invoice).isEmpty()) {
-//                System.out.println(InvoiceService.getService().save(invoice));
-//            }else{
-//                System.out.println(invoiceValidator.validate(invoice));
-//            }
-
             if(invoiceValidator.validate(invoice).isEmpty()) {
-                System.out.println(InvoiceService.getService().edit(invoice));
+                System.out.println(InvoiceService.getService().save(invoice));
             }else{
                 System.out.println(invoiceValidator.validate(invoice));
             }
 
-
-            System.out.println(InvoiceService.getService().findAll());
-            System.out.println(InvoiceService.getService().findById(1L));
-            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
-            System.out.println(InvoiceService.getService().findByCustomer(person1));
-            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
+//            if(invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().edit(invoice));
+//            }else{
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+//
+//
+//            System.out.println(InvoiceService.getService().findAll());
+//            System.out.println(InvoiceService.getService().findById(1L));
+//            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
+//            System.out.println(InvoiceService.getService().findByCustomer(person1));
+//            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
             //TODO
 //            System.out.println(InvoiceService.getService().findByRangeDate());
 
