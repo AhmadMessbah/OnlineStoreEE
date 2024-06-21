@@ -1,8 +1,5 @@
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.Invoice;
-import com.store.onlinestore.model.entity.InvoiceItem;
-import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.entity.Product;
+import com.store.onlinestore.model.entity.*;
 import com.store.onlinestore.model.service.InvoiceService;
 
 import java.time.LocalDateTime;
@@ -11,12 +8,12 @@ import java.util.List;
 
 public class InvoiceTest {
     public static void main(String[] args) throws Exception {
-        Person person1 =
-                Person
+        Customer customer =
+                Customer
                         .builder()
                         .name("Arash")
                         .family("Oloomi")
-                        .phoneNumber("123456")
+//                            .phoneNumber("123456")
                         .email("a@a.com")
                         .image("/img/0001.jpg")
                         .build();
@@ -75,7 +72,7 @@ public class InvoiceTest {
                 Invoice
                         .builder()
                         .serial("A-00001")
-                        .customer(person1)
+                        .customer(customer)
                         .invoiceItemList(invoiceItemList)
 //                            .discount(100)
                         .localDateTime(LocalDateTime.now())

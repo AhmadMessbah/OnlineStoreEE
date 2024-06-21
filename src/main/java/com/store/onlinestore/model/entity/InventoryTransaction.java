@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @SuperBuilder
 
-@Entity(name = "transaction")
-@Table(name = "transaction_tbl")
+@Entity(name = "inventory_transaction")
+@Table(name = "inventory_transaction_tbl")
 @NamedQueries({
         @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select p from personEntity p where p.name like :name and p.family like :family"),
         @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
@@ -36,6 +36,7 @@ public class InventoryTransaction {
     private ProductGroup group;
 
     @OneToMany
+    @JoinTable(name = "inventory_transaction_product_tbl")
     private List<Product> productList;
 
     @OneToOne

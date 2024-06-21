@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString
 @Entity(name = "roleEntity")
+@Table(name="role_tbl")
 @NamedQueries({
         @NamedQuery(name = "Role.FindById", query = "select r from roleEntity r where r.id = id")
 })
