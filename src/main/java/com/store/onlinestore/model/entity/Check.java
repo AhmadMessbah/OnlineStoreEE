@@ -20,9 +20,7 @@ import java.time.LocalDateTime;
 
 @NamedQueries({
         @NamedQuery(name = "Check.FindById", query = "select ch from checkEntity ch where ch.id = id"),
-        @NamedQuery(name = "Check.FindByNameAndFamily", query = "select ch from checkEntity ch where ch.name like : name and ch.family like : family"),
-        @NamedQuery(name = "Check.FindByBankId", query = "select ch from checkEntity ch where ch.bankId = bankId"),
-
+        @NamedQuery(name = "Check.FindByNameAndFamily", query = "select ch from checkEntity ch where ch.name like : name and ch.family like : family")
 })
 
 public class Check extends Payment {
