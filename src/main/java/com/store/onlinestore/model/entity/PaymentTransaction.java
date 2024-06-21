@@ -10,6 +10,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "payment_transactions")
+// todo : javase polymorphism
+// todo : transaction dateTime
 public class PaymentTransaction <T extends Payment> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
