@@ -39,9 +39,6 @@ public class Check extends Payment {
     @Pattern(regexp = "^[a-zA-Z\\s]{2,30}$", message = "Invalid Family")
     private String family;
 
-    @Column(name = "bank_id")
-    private long bankId;
-
     @Column(name = "name_pay_to", length = 30)
     @Pattern(regexp = "^[a-zA-Z\\s]{2,30}$", message = "Invalid Name")
     private String namePayTo;
