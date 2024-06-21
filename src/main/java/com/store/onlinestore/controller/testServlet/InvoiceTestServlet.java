@@ -21,8 +21,8 @@ public class InvoiceTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Person person1 =
-                    Person
+            Customer customer =
+                    Customer
                             .builder()
                             .name("Arash")
                             .family("Oloomi")
