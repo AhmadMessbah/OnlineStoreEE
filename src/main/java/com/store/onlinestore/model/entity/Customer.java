@@ -17,10 +17,10 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity(name = "customerEntity")
 @Table(name="customer_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Customer.FindByUsername", query = "select c from customerEntity c where c.userName like :username ),
-                @NamedQuery(name = "Customer.findByUsernameAndPassword", query = "select c from customerEntity c where c.userName =:username and c.password =:password")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "Customer.FindByUsername", query = "select c from customerEntity c where c.userName like :username ),
+//                @NamedQuery(name = "Customer.findByUsernameAndPassword", query = "select c from customerEntity c where c.userName =:username and c.password =:password")
+//})
 public class Customer {
 
     @Id
