@@ -50,8 +50,8 @@ public class Product {
     @Column(name = "price")
     private Integer price;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Attachment> attachmentList;
+//    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<Attachment> attachmentList;
 
     @Column(name = "date_of_modified")
     private Date dateOfModified;
