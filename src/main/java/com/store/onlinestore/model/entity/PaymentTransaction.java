@@ -12,11 +12,13 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "payment_transactions")
 // todo : javase polymorphism
 // todo : transaction dateTime
-public class PaymentTransaction <T extends Payment> {
+public class PaymentTransaction { //<T extends Payment> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "payment")
-    private T payment;
+
+//    @OneToOne
+//    @Column(name = "payment")
+//    private Payment payment;
 }
