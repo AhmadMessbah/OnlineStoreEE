@@ -1,6 +1,5 @@
 package com.store.onlinestore.model.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,27 +7,21 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import jakarta.persistence.*;
-
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
 @ToString
+@Entity(name = "roleEntity")
+@NamedQueries({
+        @NamedQuery(name = "Role.FindById", query = "select r from roleEntity r where r.id = id")
+})
 
-@Entity(name="invoiceItemEntity")
-@Table(name="invoice_item_tbl")
-public class InvoiceItem {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
-
-    @ManyToOne
-    private Product product;
-
-    @Column(name = "count")
-    private int count;
-
-    @Column(name = "price")
-    private int price;
+    @Column(name = "role")
+    private String role;
 }

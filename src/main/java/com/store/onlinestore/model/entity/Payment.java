@@ -16,4 +16,5 @@ public abstract class Payment {
     private float pureAmount;
     private LocalDateTime dateOfPayment;
 
+
 }

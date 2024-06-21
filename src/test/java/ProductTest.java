@@ -1,5 +1,4 @@
 import com.store.onlinestore.model.entity.Product;
-import com.store.onlinestore.model.service.ProductService;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -13,13 +12,13 @@ public class ProductTest {
                         .description("sabz")
                         .status(true)
                         .brand("golnar")
-                        .unitId(111L)
-                        .productGroupId(1111L)
+                        .unitId(null)
+                        .productGroupId(null)
                         .price(10000)
-                        .image("/img/0001.jpg")
+//                        .image("/img/0001.jpg")
                         .dateOfModified(Time.valueOf(LocalTime.now()))
                         .barcode("021655632")
-                        .inStock(0)
+//                        .inStock(0)
                         .build();
 
         Product product2 =
@@ -29,13 +28,13 @@ public class ProductTest {
                         .description("zard")
                         .status(true)
                         .brand("amrica")
-                        .unitId(222L)
-                        .productGroupId(2222L)
+                        .unitId(null)
+                        .productGroupId(null)
                         .price(20000)
-                        .image("/img/0002.jpg")
+//                        .image("/img/0002.jpg")
                         .dateOfModified(Time.valueOf(LocalTime.now()))
                         .barcode("54684")
-                        .inStock(1)
+//                        .inStock(1)
                         .build();
 //        todo:dar in folder kar nemikone va error JSON Binding provider org.eclipse.yasson.JsonBindingProvider not found
 //        System.out.println(ProductService.getService().save(product2));

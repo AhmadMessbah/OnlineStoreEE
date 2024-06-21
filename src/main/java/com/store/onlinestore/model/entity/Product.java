@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -24,29 +25,40 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name", length = 60)
     @Pattern(regexp = "^[a-zA-Z\\s]{3,60}$", message = "Invalid Name")
     private String name;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "is_active")
     private boolean status;
+
     @Column(name = "brand")
     private String brand;
-    @Column(name = "unit_id")
-    private Long unitId;
-    @Column(name = "product_group_id")
-    private Long productGroupId;
+
+    @OneToOne
+    @JoinColumn(name = "unit_id")
+    private ProductUnit unitId;
+
+    @ManyToOne
+    @JoinColumn(name = "product_group_id")
+    private ProductGroup productGroupId;
+
     @Column(name = "price")
     private Integer price;
-    @Column(name = "image", length = 50)
-    private String image;
+
+//    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<Attachment> attachmentList;
+
     @Column(name = "date_of_modified")
     private Date dateOfModified;
-    @Column(name = "barcode",unique = true)
+
+    @Column(name = "barcode", unique = true)
     private String barcode;
-    @Column(name = "in_stock")
-    private Integer inStock;
+
 
     @ManyToOne
     private Inventory inventory;

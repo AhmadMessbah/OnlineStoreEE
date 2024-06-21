@@ -8,8 +8,6 @@
     <properties>
       <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
       <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-<!--      <property name="hibernate.connection.username" value="system"/>-->
-<!--      <property name="hibernate.connection.password" value="root"/>-->
       <property name="hibernate.connection.username" value="javaee"/>
       <property name="hibernate.connection.password" value="java123"/>
       <property name="hibernate.c3p0.min_size" value="5"/>
