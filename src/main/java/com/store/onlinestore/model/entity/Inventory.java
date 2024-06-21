@@ -42,7 +42,7 @@ public class Inventory {
     @Column(name = "registerProductDate")
     private LocalDateTime registerDate;
 
-    @OneToMany
+    @OneToMany   // todo : OneToOne
     private List<Product> productList;
 
     @OneToMany

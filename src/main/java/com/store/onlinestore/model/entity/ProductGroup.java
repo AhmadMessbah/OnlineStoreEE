@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -36,5 +38,11 @@ public class ProductGroup {
 
     @Column(name = "is_active")
     private boolean status;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private ProductGroup parentGroup;
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ProductGroup> childGroupList;
 
 }

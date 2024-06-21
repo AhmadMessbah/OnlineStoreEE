@@ -2,7 +2,6 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
-import jdk.jfr.Name;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +34,5 @@ public class ProductUnit {
 
     @Column(name = "description")
     private String description;
-
 
 }
