@@ -20,12 +20,12 @@ import java.util.List;
 
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = customer.id"),
-        @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
-        @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
-        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :localDateTime and :localDateTime")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = customer.id"),
+//        @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
+//        @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
+//        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :localDateTime and :localDateTime")
+//})
 
 public class Invoice {
     @Id
@@ -38,7 +38,7 @@ public class Invoice {
     private String serial;
 
     @ManyToOne
-//    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "date_time")
@@ -47,11 +47,11 @@ public class Invoice {
     @Column(name = "amount")
     private int amount;
 
-    @Column(name = "Comment")
-    private String comment;
+    @Column(name = "description")
+    private String description;
 
     @OneToMany
-//    @JoinColumn(name= "invoiceItem_id")
+    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
 
@@ -62,13 +62,13 @@ public class Invoice {
         );
         return amount;
     }
-
-    //TODO Use payment Clas or use variable
-    @Column(name = "discount")
-    private int discount;
-
-    @Column(name = "pure_amount")
-    private int pureAmount;
+//
+//    //TODO Use payment Clas or use variable
+//    @Column(name = "discount")
+//    private int discount;
+//
+//    @Column(name = "pure_amount")
+//    private int pureAmount;
 
 //    @OneToOne
 //    @JoinColumn(name = "PaymentTransaction_id")

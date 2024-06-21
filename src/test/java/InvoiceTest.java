@@ -72,8 +72,8 @@ public class InvoiceTest {
                 Invoice
                         .builder()
                         .serial("A-00001")
-                        .customer(customer)
-                        .invoiceItemList(invoiceItemList)
+//                        .customer(customer)
+//                        .invoiceItemList(invoiceItemList)
 //                            .discount(100)
                         .localDateTime(LocalDateTime.now())
                         .build();

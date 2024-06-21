@@ -31,6 +31,6 @@ public class Cash extends Payment {
     @Column(name = "cash_tendered")
     private float cashTendered;
 
-    @Column(name = "date")
+    @Column(name = "date_time")
     private LocalDateTime localDateTime;
 }

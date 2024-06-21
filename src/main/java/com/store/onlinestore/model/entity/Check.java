@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NamedQueries({
         @NamedQuery(name = "Check.FindById", query = "select ch from checkEntity ch where ch.id = id"),
         @NamedQuery(name = "Check.FindByNameAndFamily", query = "select ch from checkEntity ch where ch.name like : name and ch.family like : family"),
-        @NamedQuery(name = "Check.FindByBankId", query = "select ch from checkEntity ch where ch.bankId = bankId"),
+//        @NamedQuery(name = "Check.FindByBankId", query = "select ch from checkEntity ch where ch.bankId = bankId"),
 
 })
 
@@ -47,7 +47,7 @@ public class Check extends Payment {
     @Pattern(regexp = "^[a-zA-Z\\s]{2,30}$", message = "Invalid Family")
     private String familyPayTo;
 
-    @Column(name = "date")
+    @Column(name = "date_time")
     private LocalDateTime localDateTime;
 
 
