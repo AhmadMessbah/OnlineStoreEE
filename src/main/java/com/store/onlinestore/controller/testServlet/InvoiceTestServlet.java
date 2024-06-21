@@ -26,7 +26,7 @@ public class InvoiceTestServlet extends HttpServlet {
                             .builder()
                             .name("Arash")
                             .family("Oloomi")
-                            .phoneNumber("123456")
+//                            .phoneNumber("123456")
                             .email("a@a.com")
                             .image("/img/0001.jpg")
                             .build();
@@ -85,7 +85,7 @@ public class InvoiceTestServlet extends HttpServlet {
                     Invoice
                             .builder()
                             .serial("A-00001")
-                            .customer(person1)
+                            .customer(customer)
                             .invoiceItemList(invoiceItemList)
 //                            .discount(100)
                             .localDateTime(LocalDateTime.now())
