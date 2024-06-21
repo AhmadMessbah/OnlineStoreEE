@@ -43,18 +43,9 @@ public class Invoice {
     @Column(name = "amount")
     private int amount;
 
-//TODO Use payment Clas or use variable
-    @Column(name = "discount")
-    private int discount;
-
-    @Column(name = "pure_amount")
-    private int pureAmount;
-
-
 
     @OneToMany
     private List<InvoiceItem> invoiceItemList;
-
 
 
     public int getAmount() {
@@ -65,9 +56,16 @@ public class Invoice {
         return amount;
     }
 
-    public int getPureAmount(){
-        pureAmount = getAmount() - discount;
-        return pureAmount;
-    }
+    //TODO Use payment Clas or use variable
+//    @Column(name = "discount")
+//    private int discount;
+//
+//    @Column(name = "pure_amount")
+//    private int pureAmount;
+
+    @OneToOne
+    private PaymentTransaction payement;
+
+
 }
 
