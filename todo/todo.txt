@@ -19,3 +19,10 @@ Service :
 
 Servlet :
     -TestServlet
+
+
+***
+افرادی که در پروژه فعالیتی انجام نداده اند حذف خواهند شد.
+Customer ...
+Payment ...
+Delivery ...
