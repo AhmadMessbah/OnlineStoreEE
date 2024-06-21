@@ -23,9 +23,8 @@ public class AdminTestServlet extends HttpServlet {
                             .builder()
                             .name("leva")
                             .family("ziaee")
+                            .username("levaziaei")
                             .password("admin123")
-                            .email("a@a.com")
-                            .image("/img/0001.jpg")
                             .build();
 
 
