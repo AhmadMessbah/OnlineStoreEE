@@ -88,7 +88,7 @@ public class InvoiceTestServlet extends HttpServlet {
                             .serial("ab-123")
                             .customer(person1)
                             .invoiceItemList(invoiceItemList)
-                            .discount(100)
+//                            .discount(100)
                             .localDateTime(LocalDateTime.now())
                             .build();
 
