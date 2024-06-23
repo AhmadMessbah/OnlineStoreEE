@@ -2,6 +2,7 @@ package com.store.onlinestore.controller.testServlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Customer;
+import com.store.onlinestore.model.entity.enums.UserState;
 import com.store.onlinestore.model.service.CustomerService;
 
 import javax.servlet.ServletException;
@@ -21,9 +22,9 @@ public class CustomerTestServlet extends HttpServlet {
                             .builder()
                             .name("aaaa")
                             .family("bbbb")
+                            .username("cccc")
                             .password("123456789")
-                            .email("aaa@gmail.com")
-
+                            .status(UserState.Active)
                             .build();
 
             BeanValidator<Customer> personValidator = new BeanValidator<>();

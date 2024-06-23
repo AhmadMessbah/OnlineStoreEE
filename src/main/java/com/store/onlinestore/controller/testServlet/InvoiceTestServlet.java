@@ -21,15 +21,15 @@ public class InvoiceTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Customer customer =
-                    Customer
-                            .builder()
-                            .name("Arash")
-                            .family("Oloomi")
-//                            .phoneNumber("123456")
-                            .email("a@a.com")
-                            .image("/img/0001.jpg")
-                            .build();
+//            Customer customer =
+//                    Customer
+//                            .builder()
+//                            .name("Arash")
+//                            .family("Oloomi")
+////                            .phoneNumber("123456")
+////                            .email("a@a.com")
+//                            .image("/img/0001.jpg")
+//                            .build();
 
             Product product1 =
                     Product

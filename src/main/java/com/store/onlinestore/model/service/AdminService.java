@@ -1,10 +1,13 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Admin;
+import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdminService {
     @Getter
@@ -42,7 +45,27 @@ public class AdminService {
             return repository.findById(id, Admin.class);
         }
     }
+    public List<Admin> findByNameAndFamily(String name, String family) throws Exception {
+        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", name+"%");
+            params.put("family", family+"%");
+            return repository.executeQuery("Admin.FindByNameAndFamily", params, Admin.class);
+        }
+    }
 
-
+    public Admin findByUsername(String username) throws Exception {
+        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("username", username);
+            List<Admin> result = repository.executeQuery("Admin.FindByPhoneNumber", params, Admin.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
 }
+
 

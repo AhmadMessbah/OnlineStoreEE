@@ -8,15 +8,15 @@ import java.util.List;
 
 public class InvoiceTest {
     public static void main(String[] args) throws Exception {
-        Customer customer =
-                Customer
-                        .builder()
-                        .name("Arash")
-                        .family("Oloomi")
-//                            .phoneNumber("123456")
-                        .email("a@a.com")
-                        .image("/img/0001.jpg")
-                        .build();
+//        Customer customer =
+//                Customer
+//                        .builder()
+//                        .name("Arash")
+//                        .family("Oloomi")
+////                            .phoneNumber("123456")
+//                        .email("a@a.com")
+//                        .image("/img/0001.jpg")
+//                        .build();
 
         Product product1 =
                 Product

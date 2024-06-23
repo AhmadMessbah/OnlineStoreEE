@@ -1,6 +1,7 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Customer;
+import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -53,12 +54,34 @@ public class CustomerService {
         }
     }
 
+    public List<Customer> findByNameAndFamily(String name, String family) throws Exception {
+        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", name+"%");
+            params.put("family", family+"%");
+            return repository.executeQuery("Customer.FindByNameAndFamily", params, Customer.class);
+        }
+    }
+
     public List<Customer> findByUsernameAndPassword(String username, String password) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("username", username+"%");
             params.put("password", password+"%");
             return repository.executeQuery("Customer.FindByUsernameAndPassword", params, Customer.class);
+        }
+    }
+
+    public Customer findByPhoneNumber(String phoneNumber) throws Exception {
+        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("phoneNumber", phoneNumber);
+            List<Customer> result = repository.executeQuery("Customer.FindByPhoneNumber", params, Customer.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
         }
     }
 }
