@@ -20,19 +20,19 @@ import javax.json.bind.annotation.JsonbTransient;
 @MappedSuperclass
 public abstract class User {
 
-    @Column(name="name", length = 30)
+    @Column(name="name", length = 30, nullable = false)
     //@Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
     private String name;
 
-    @Column(name="family", length = 30)
+    @Column(name="family", length = 30, nullable = false)
     //@Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Family")
     private String family;
 
-    @Column(name="username", length = 30)
+    @Column(name="username", length = 30 ,unique = true ,nullable = false)
     //@Pattern(regexp = "^[a-zA-Z\\d\\S\\._]{3,30}$" ,message = "Invalid username")
     private String username;
 
-    @Column(name="password", length = 15)
+    @Column(name="password", length = 15, nullable = false)
   //  @Pattern(regexp = "^[\\w\\S]{3,30}$" ,message = "Invalid Password")
     private String password;
 

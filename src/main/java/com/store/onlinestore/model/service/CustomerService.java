@@ -1,10 +1,8 @@
 package com.store.onlinestore.model.service;
-
+import com.store.onlinestore.controller.exception.CustomerNotFoundException;
 import com.store.onlinestore.model.entity.Customer;
-import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +34,21 @@ public class CustomerService {
 
     public List<Customer> findAll() throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Customer.class);
+            List<Customer> customerList = repository.findAll(Customer.class);
+            if (!customerList.isEmpty()) {
+                return customerList;
+            }
+            throw new CustomerNotFoundException();
         }
     }
 
     public Customer findById(Long id) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Customer.class);
+            Customer customer = repository.findById(id, Customer.class);
+            if (customer != null) {
+                return customer;
+            }
+            throw new CustomerNotFoundException();
         }
     }
 
@@ -69,6 +75,14 @@ public class CustomerService {
             params.put("username", username+"%");
             params.put("password", password+"%");
             return repository.executeQuery("Customer.FindByUsernameAndPassword", params, Customer.class);
+        }
+    }
+
+    public List<Customer> findByEmail(String email) throws Exception {
+        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("email", email+"%");
+            return repository.executeQuery("Customer.FindByEmail", params, Customer.class);
         }
     }
 
