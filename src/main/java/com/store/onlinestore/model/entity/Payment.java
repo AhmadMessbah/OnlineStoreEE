@@ -1,7 +1,5 @@
 package com.store.onlinestore.model.entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,10 +12,13 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class Payment {
-    @ManyToOne
-    private Customer customer;
+    @Id
+    @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "price")
+    @Column(name = "payment_price")
     private float price;
 
     @Column(name="payment_date")
