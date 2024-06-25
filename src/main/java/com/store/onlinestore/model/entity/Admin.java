@@ -30,6 +30,7 @@ public class Admin extends User {
 
 
     @OneToOne
+    @JoinTable(name = "role_relation_tbl")
     private Role role ;
 }
 
