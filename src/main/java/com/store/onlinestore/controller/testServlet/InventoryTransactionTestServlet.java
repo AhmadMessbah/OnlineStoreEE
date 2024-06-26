@@ -49,8 +49,8 @@ public class InventoryTransactionTestServlet extends HttpServlet {
             }
 
             System.out.println(InventoryTransactionService.getService().findAll());
-            System.out.println(InventoryTransactionService.getService().findByDeliverPerson("ali","alipoor"));
-            System.out.println(InventoryTransactionService.getService().findByPhoneNumber("09177712424"));
+//            System.out.println(InventoryTransactionService.getService().findByDeliverPerson("ali","alipoor"));
+//            System.out.println(InventoryTransactionService.getService().findByPhoneNumber("09177712424"));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
