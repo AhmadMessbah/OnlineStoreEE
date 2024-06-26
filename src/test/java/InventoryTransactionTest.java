@@ -4,7 +4,7 @@ import com.store.onlinestore.model.service.InventoryTransactionService;
 
 import java.time.LocalDateTime;
 
-public class InventoryTranactionTest {
+public class InventoryTransactionTest {
     public static void main(String[] args) throws Exception {
 
         InventoryTransaction inventoryTransaction1 = InventoryTransaction.builder()
