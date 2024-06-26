@@ -1,14 +1,13 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.naming.Name;
-import java.sql.Statement;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class Inventory {
     private int id;
 
     @Column(name = "inventoryName")
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
     private String InventoryName;
 
     @Column(name = "productStock")

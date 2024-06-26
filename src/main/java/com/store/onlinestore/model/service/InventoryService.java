@@ -12,25 +12,28 @@ import java.util.Map;
 public class InventoryService {
     @Getter
     private static InventoryService service = new InventoryService();
-    
-    private InventoryService(){}
+
+    private InventoryService() {
+    }
 
     public Inventory save(Inventory inventory) throws Exception {
-        try (CrudRepository<Inventory , Long> repository = new CrudRepository<>()) {
+        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             return repository.save(inventory);
         }
     }
+
     public Inventory edit(Inventory inventory) throws Exception {
-        try (CrudRepository<Inventory , Long> repository = new CrudRepository<>()) {
+        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             return repository.edit(inventory);
         }
     }
+
     public Inventory remove(Long id) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id , Inventory.class) != null){
+            if (repository.findById(id, Inventory.class) != null) {
                 return repository.remove(id, Inventory.class);
             }
-                throw new InventoryNotFoundException();
+            throw new InventoryNotFoundException();
         }
     }
 
@@ -39,6 +42,7 @@ public class InventoryService {
             return repository.findAll(Inventory.class);
         }
     }
+
     // TODO: 6/20/2024 check service find By Product
 //    public List<Inventory> findByProduct(Product product) throws Exception {
 //        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
@@ -50,7 +54,7 @@ public class InventoryService {
     public List<Inventory> findByName(String name) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
+            params.put("name", name + "%");
             return repository.executeQuery("Inventory.FindByName", params, Inventory.class);
         }
     }
