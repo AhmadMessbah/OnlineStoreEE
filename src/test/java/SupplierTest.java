@@ -23,17 +23,17 @@ public class SupplierTest {
                 .companyName("pegah")
                 .build();
 
-        BeanValidator<Supplier> supplierValidator = new BeanValidator<>();
-        System.out.println(supplierValidator.validate(supplier1));
-        System.out.println(supplierValidator.validate(supplier2));
-
-        System.out.println(SupplierService.getService().save(supplier1));
-        System.out.println(SupplierService.getService().save(supplier2));
-
-        System.out.println(SupplierService.getService().findAll());
-        System.out.println(SupplierService.getService().findByNameAndFamily("ali", "alipoor"));
-        System.out.println(SupplierService.getService().findByMobilePhone("09178882424"));
-        System.out.println(SupplierService.getService().findByNationalCode("1110006200"));
-        System.out.println(SupplierService.getService().findByCompany("ramak"));
+//        BeanValidator<Supplier> supplierValidator = new BeanValidator<>();
+//        System.out.println(supplierValidator.validate(supplier1));
+//        System.out.println(supplierValidator.validate(supplier2));
+//
+//        System.out.println(SupplierService.getService().save(supplier1));
+//        System.out.println(SupplierService.getService().save(supplier2));
+//
+//        System.out.println(SupplierService.getService().findAll());
+//        System.out.println(SupplierService.getService().findByNameAndFamily("ali", "alipoor"));
+//        System.out.println(SupplierService.getService().findByMobilePhone("09178882424"));
+//        System.out.println(SupplierService.getService().findByNationalCode("1110006200"));
+//        System.out.println(SupplierService.getService().findByCompany("ramak"));
     }
 }

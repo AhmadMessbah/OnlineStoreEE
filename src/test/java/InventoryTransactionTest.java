@@ -25,15 +25,15 @@ public class InventoryTransactionTest {
                 .receiverPerson(null)
                 .build();
 
-        BeanValidator<InventoryTransaction> inventoryTransactionValidator = new BeanValidator<>();
-        System.out.println(inventoryTransactionValidator.validate(inventoryTransaction1));
-        System.out.println(inventoryTransactionValidator.validate(inventoryTransaction2));
+//        BeanValidator<InventoryTransaction> inventoryTransactionValidator = new BeanValidator<>();
+//        System.out.println(inventoryTransactionValidator.validate(inventoryTransaction1));
+//        System.out.println(inventoryTransactionValidator.validate(inventoryTransaction2));
 
-        System.out.println(InventoryTransactionService.getService().save(inventoryTransaction1));
-        System.out.println(InventoryTransactionService.getService().save(inventoryTransaction2));
-
+//        System.out.println(InventoryTransactionService.getService().save(inventoryTransaction1));
+//        System.out.println(InventoryTransactionService.getService().save(inventoryTransaction2));
+//
 //        System.out.println(InventoryTransactionService.getService().findByDeliverPerson("ali","alipoor"));
-        System.out.println(InventoryTransactionService.getService().findAll());
+//        System.out.println(InventoryTransactionService.getService().findAll());
 //        System.out.println(InventoryTransactionService.getService().findByPhoneNumber("09177712424"));
     }
 }

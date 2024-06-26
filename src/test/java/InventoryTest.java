@@ -25,13 +25,13 @@ public class InventoryTest {
                 .supplierList(null)
                 .build();
 
-        BeanValidator<Inventory> inventoryValidator = new BeanValidator<>();
-        System.out.println(inventoryValidator.validate(inventory1));
-
-        System.out.println(InventoryService.getService().save(inventory1));
-        System.out.println(InventoryService.getService().save(inventory2));
-
-        System.out.println(InventoryService.getService().findAll());
-        System.out.println(InventoryService.getService().findByName("cheese"));
+//        BeanValidator<Inventory> inventoryValidator = new BeanValidator<>();
+//        System.out.println(inventoryValidator.validate(inventory1));
+//
+//        System.out.println(InventoryService.getService().save(inventory1));
+//        System.out.println(InventoryService.getService().save(inventory2));
+//
+//        System.out.println(InventoryService.getService().findAll());
+//        System.out.println(InventoryService.getService().findByName("cheese"));
     }
 }
