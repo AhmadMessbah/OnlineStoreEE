@@ -1,14 +1,10 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.controller.exception.SupplierNotFoundException;
-import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,11 +66,11 @@ public class SupplierService {
             }
         }
     }
-    public Supplier fideByNationalCode(String nationalCode) throws Exception {
+    public Supplier findByNationalCode(String nationalCode) throws Exception {
         try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("nationalCode", nationalCode);
-            List<Supplier> result = repository.executeQuery("supplier.FideByNationalCode", params, Supplier.class);
+            List<Supplier> result = repository.executeQuery("supplier.findByNationalCode", params, Supplier.class);
             if (result.isEmpty()) {
                 return null;
             } else {
@@ -82,11 +78,12 @@ public class SupplierService {
             }
         }
     }
-    public Supplier findByCompany(String company) throws Exception {
+
+    public List<Supplier> findByCompany(String company) throws Exception {
         try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("company", company +"%");
-            return (Supplier) repository.executeQuery("findByCompany", params, Supplier.class);
+            params.put("company", company+"%");
+            return repository.executeQuery("supplier.findByCompany", params, Supplier.class);
         }
     }
 }
