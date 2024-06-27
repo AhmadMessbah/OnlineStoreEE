@@ -16,14 +16,15 @@ import lombok.experimental.SuperBuilder;
 @Entity(name = "roleEntity")
 @Table(name="role_tbl")
 @NamedQueries({
-        @NamedQuery(name = "Role.FindById", query = "select r from roleEntity r where r.id = id")
+        @NamedQuery(name = "Role.FindById", query = "select r from roleEntity r where r.id = :id"),
+        @NamedQuery(name = "Role.FindByRole", query = "select r from roleEntity r where r.role = :role")
 })
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-
     private Long id;
+
     @Column(name = "role")
     private String role;
 }

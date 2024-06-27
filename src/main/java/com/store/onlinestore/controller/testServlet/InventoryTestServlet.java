@@ -25,7 +25,6 @@ public class InventoryTestServlet extends HttpServlet {
                             .InventoryName("anbar")
                             .productStock(10)
                             .totalStock(5)
-                            .registerDate(LocalDateTime.now())
                             // TODO: 6/26/2024 checked
 //                        .supplierList()
 //                        .productList()
