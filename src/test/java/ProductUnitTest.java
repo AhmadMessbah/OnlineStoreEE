@@ -4,13 +4,13 @@ import com.store.onlinestore.model.service.ProductUnitService;
 public class ProductUnitTest {
     public static void main(String[] args) throws Exception{
         ProductUnit productUnit1 = ProductUnit.builder()
-                .name("rice")
+                .name("eee")
                 .symbol("kg")
                 .description("aaaa")
                 .build();
 
         ProductUnit productUnit2 = ProductUnit.builder()
-                .name("milk")
+                .name("rrr")
                 .symbol("ml")
                 .description("ssss")
                 .build();

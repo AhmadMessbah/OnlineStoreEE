@@ -2,9 +2,7 @@ package com.store.onlinestore.controller.testServlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Admin;
-import com.store.onlinestore.model.entity.ProductGroup;
 import com.store.onlinestore.model.service.AdminService;
-import com.store.onlinestore.model.service.ProductGroupService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

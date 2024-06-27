@@ -23,7 +23,7 @@ public class ProductGroupService {
         try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", productGroup.getName());
-            if (repository.executeQuery("ProductGroup.FindByName", params, ProductGroup.class).isEmpty()){
+            if (repository.executeQuery("ProductGroup.FindByName", params, ProductGroup.class).isEmpty()) {
                 return repository.save(productGroup);
 
             }
@@ -31,50 +31,50 @@ public class ProductGroupService {
         }
     }
 
-    public ProductGroup edit(ProductGroup productGroup) throws Exception{
-        try(CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()){
-            if (repository.findById(productGroup.getId(), ProductGroup.class) != null){
-               return repository.edit(productGroup);
+    public ProductGroup edit(ProductGroup productGroup) throws Exception {
+        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
+            if (repository.findById(productGroup.getId(), ProductGroup.class) != null) {
+                return repository.edit(productGroup);
             }
             throw new ProductGroupNotFoundException();
         }
     }
 
-    public ProductGroup remove(Long id) throws Exception{
-        try(CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()){
-            if (repository.findById(id, ProductGroup.class) != null){
+    public ProductGroup remove(Long id) throws Exception {
+        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
+            if (repository.findById(id, ProductGroup.class) != null) {
                 return repository.remove(id, ProductGroup.class);
             }
             throw new ProductGroupNotFoundException();
         }
     }
 
-    public List<ProductGroup> findAll() throws Exception{
-        try(CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()){
+    public List<ProductGroup> findAll() throws Exception {
+        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
             List<ProductGroup> productGroupList = repository.findAll(ProductGroup.class);
-            if (!productGroupList.isEmpty()){
+            if (!productGroupList.isEmpty()) {
                 return productGroupList;
             }
             throw new ProductGroupNotFoundException();
         }
     }
 
-    public ProductGroup findById(Long id) throws Exception{
-        try(CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()){
+    public ProductGroup findById(Long id) throws Exception {
+        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
             ProductGroup productGroup = repository.findById(id, ProductGroup.class);
-            if (productGroup != null){
+            if (productGroup != null) {
                 return productGroup;
             }
             throw new ProductGroupNotFoundException();
         }
     }
 
-    public ProductGroup findByName(String name) throws Exception{
+    public ProductGroup findByName(String name) throws Exception {
         try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name);
             List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByName", params, ProductGroup.class);
-            if (!productGroupList.isEmpty()){
+            if (!productGroupList.isEmpty()) {
                 return productGroupList.get(0);
 
             }
@@ -82,14 +82,26 @@ public class ProductGroupService {
         }
     }
 
-    public List<ProductGroup> findByStatus(boolean status) throws Exception{
+    public List<ProductGroup> findByStatus(boolean status) throws Exception {
         try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", status);
+            params.put("status", status);
             List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByStatus", params, ProductGroup.class);
-            if (!productGroupList.isEmpty()){
+            if (!productGroupList.isEmpty()) {
                 return productGroupList;
 
+            }
+            throw new ProductGroupNotFoundException();
+        }
+    }
+
+    public List<ProductGroup> findByParentName(String name) throws Exception {
+        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", name);
+            List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByParentName", params, ProductGroup.class);
+            if (!productGroupList.isEmpty()) {
+                return productGroupList;
             }
             throw new ProductGroupNotFoundException();
         }
