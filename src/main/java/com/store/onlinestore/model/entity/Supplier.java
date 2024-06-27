@@ -1,7 +1,7 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ import javax.naming.Name;
         @NamedQuery(name = "supplier.FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
         @NamedQuery(name = "supplier.FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobailphone"),
         @NamedQuery(name = "FideByNationalCode", query = "select p from supplierEntity p where p.nationalCode like :nationalCode"),
-        @NamedQuery(name = "findByCompany", query = "select p from supplierEntity p where p.companyName=:company")
+        @NamedQuery(name = "findByCompany", query = "select p from supplierEntity p where p.companyName like :company")
 })
 public class Supplier {
     @Id

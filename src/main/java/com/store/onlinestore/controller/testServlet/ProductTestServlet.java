@@ -16,43 +16,42 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @WebServlet("/product.test")
 public class ProductTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
+        try {
             Product product1 =
                     Product
                             .builder()
-                            .name("sabon")
-                            .description("sabz")
+                            .name("car")
+                            .description("black")
                             .status(true)
-                            .brand("golnar")
+                            .brand("benz")
                             .unitId(null)
                             .productGroupId(null)
                             .price(10000)
-//                            .image("/img/0001.jpg")
-                            .dateOfModified(Time.valueOf(LocalTime.now()))
+                            .dateOfModified(LocalDateTime.now())
                             .barcode("021655632")
-//                            .inStock(0)
+                            .inventoryId(null)
                             .build();
 
             Product product2 =
                     Product
                             .builder()
-                            .name("mooz")
-                            .description("zard")
+                            .name("laptop")
+                            .description("xs55")
                             .status(true)
-                            .brand("amrica")
+                            .brand("asus")
                             .unitId(null)
                             .productGroupId(null)
                             .price(20000)
-                       //     .image("/img/0002.jpg")
-                            .dateOfModified(Time.valueOf(LocalTime.now()))
+                            .dateOfModified(LocalDateTime.now())
                             .barcode("54684")
-                      //      .inStock(1)
+                            .inventoryId(null)
                             .build();
 
             BeanValidator<Product> productValidator = new BeanValidator<>();
@@ -72,16 +71,16 @@ public class ProductTestServlet extends HttpServlet {
 //                System.out.println(productValidator.validate(product2));
 //            }
 
+
             System.out.println(ProductService.getService().findAll());
             System.out.println(ProductService.getService().FindByBarcode("54684"));
 
 
-            System.out.println(ProductService.getService().findByNameAndBrand("m","z"));
-        }catch (Exception e){
+            System.out.println(ProductService.getService().findByNameAndBrand("c", "b"));
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
 
 
 }

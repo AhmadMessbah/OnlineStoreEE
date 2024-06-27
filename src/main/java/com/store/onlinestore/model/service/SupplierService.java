@@ -82,4 +82,11 @@ public class SupplierService {
             }
         }
     }
+    public Supplier findByCompany(String company) throws Exception {
+        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("company", company +"%");
+            return (Supplier) repository.executeQuery("findByCompany", params, Supplier.class);
+        }
+    }
 }
