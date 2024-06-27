@@ -2,10 +2,12 @@ package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 
 
 import java.time.LocalDateTime;
@@ -22,7 +24,8 @@ import java.util.List;
 @NamedQueries({
         // TODO: 6/20/2024 check product list 
 //        @NamedQuery(name = "Inventory.FindByproduct", query = "select p from inventoryEntity p where p.productList like :product "),
-        @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.InventoryName like :name")
+        @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.InventoryName like :name"),
+        @NamedQuery(name = "findByInventoryNumber", query = "select p from inventoryEntity p where p.inventoryNumber=:inventoryNumber")
 })
 public class Inventory {
 
@@ -35,14 +38,21 @@ public class Inventory {
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
     private String InventoryName;
 
+    @Column(name = "inventoryDescription")
+    private String description;
+
+    @Column(name = "inventoryNumber")
+//    @Pattern(regexp = "^//d")
+    private String inventoryNumber;
+
+    @Column(name = "inventoryType")
+    private String inventoryType;
+
     @Column(name = "productStock")
     private int productStock;
 
     @Column(name = "totalStock")
     private int totalStock;
-
-    @Column(name = "registerProductDate")
-    private LocalDateTime registerDate;
 
     @OneToMany   // todo : OneToOne
     @JoinTable(name = "inventory_product_tbl")
@@ -51,6 +61,9 @@ public class Inventory {
     @OneToMany
     @JoinTable(name = "inventory_supplier_tbl")
     private List<Supplier> supplierList;
+
+    @ManyToOne
+    private Stock stock;
 
     public void addProduct(Product product) {
         if (productList == null) {

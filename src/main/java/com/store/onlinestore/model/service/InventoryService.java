@@ -2,6 +2,7 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
+import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -43,6 +44,12 @@ public class InventoryService {
         }
     }
 
+    public Inventory findById(Long id) throws Exception {
+        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
+            return repository.findById(id, Inventory.class);
+        }
+    }
+
     // TODO: 6/20/2024 check service find By Product
 //    public List<Inventory> findByProduct(Product product) throws Exception {
 //        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
@@ -55,7 +62,15 @@ public class InventoryService {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name + "%");
-            return repository.executeQuery("Inventory.FindByName", params, Inventory.class);
+            return repository.executeQuery("findByInventoryName", params, Inventory.class);
+        }
+    }
+
+    public Supplier findByInventoryNumber(String inventoryNumber) throws Exception {
+        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("inventoryNumber", inventoryNumber + "%");
+            return (Supplier) repository.executeQuery("findByCompany", params, Inventory.class);
         }
     }
 }
