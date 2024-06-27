@@ -63,12 +63,10 @@ public class InvoiceService {
     }
 
     public Invoice findBySerial(String serial) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("serial", serial);
-            List<Invoice> result = repository.executeQuery("Invoice.FindBySerial", params, Invoice.class);
-            if (!result.isEmpty()) {
-                return result.get(0);
+        try (CrudRepository<Invoice, String> repository = new CrudRepository<>()) {
+            Invoice invoice = repository.findById(serial, Invoice.class);
+            if (invoice != null) {
+                return invoice;
             }
             throw new InvoiceNotFoundException();
         }
@@ -77,7 +75,7 @@ public class InvoiceService {
     public List<Invoice> findByCustomer(Long customerId) throws Exception {
         try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("customer", customerId);
+            params.put("customerId", customerId);
             List<Invoice> invoiceList = repository.executeQuery("Invoice.FindByCustomer", params, Invoice.class);
             if (!invoiceList.isEmpty()) {
                 return invoiceList;

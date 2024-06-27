@@ -101,7 +101,7 @@ public class InvoiceTestServlet extends HttpServlet {
 //                System.out.println(invoiceValidator.validate(invoice));
 //            }
 ////
-//
+            //TODO failed to lazily initialize a collection of role: com.store.onlinestore.model.entity.Invoice.invoiceItemList: could not initialize proxy - no Session
 //            System.out.println(InvoiceService.getService().findAll());
 //            System.out.println(InvoiceService.getService().findById(1L));
 //            System.out.println(InvoiceService.getService().findBySerial("ab-123"));

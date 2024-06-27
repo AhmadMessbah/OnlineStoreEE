@@ -66,6 +66,7 @@
 //        invoice.setAmount(amount);
 //        invoice.setPureAmount(pureAmount);
 //
+//TODO هیچ کدوم اجرا نشد
 //        BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
 //            if (invoiceValidator.validate(invoice).isEmpty()) {
 //                System.out.println(InvoiceService.getService().save(invoice));
