@@ -20,12 +20,12 @@ import java.util.List;
 
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
-//@NamedQueries({
-//        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = customer.id"),
-//        @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
-//        @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
-//        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :localDateTime and :localDateTime")
-//})
+@NamedQueries({
+        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = customer.id"),
+        @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
+        @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
+        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :localDateTime and :localDateTime")
+})
 
 public class Invoice {
     @Id
@@ -33,11 +33,11 @@ public class Invoice {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "serial", length = 5)
+    @Column(name = "serial", length = 10)
 //    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
-    @ManyToOne
+    @OneToOne  //TODO سوال در مورد روابط
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -47,13 +47,12 @@ public class Invoice {
     @Column(name = "amount")
     private int amount;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "invoice_comment")
+    private String invoiceComment;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
-
 
     @Column(name = "discount")
     private int discount;
@@ -71,6 +70,11 @@ public class Invoice {
                 item -> amount += item.getCount() * item.getPrice()
         );
         return amount;
+    }
+
+    public int getPureAmount(){
+        pureAmount = getAmount() - discount;
+        return pureAmount;
     }
 }
 

@@ -2,7 +2,6 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.InvoiceNotFoundException;
 import com.store.onlinestore.model.entity.Invoice;
-import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -75,10 +74,10 @@ public class InvoiceService {
         }
     }
 
-    public List<Invoice> findByCustomer(Person customer) throws Exception {
+    public List<Invoice> findByCustomer(Long customerId) throws Exception {
         try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("customer", customer.getId());
+            params.put("customer", customerId);
             List<Invoice> invoiceList = repository.executeQuery("Invoice.FindByCustomer", params, Invoice.class);
             if (!invoiceList.isEmpty()) {
                 return invoiceList;
