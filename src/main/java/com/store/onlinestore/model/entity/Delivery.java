@@ -67,8 +67,9 @@ public class Delivery extends Base {
     private LocalDateTime returnedDateTime;
 
     // todo : attachment signature
-    @Column(name = "signature_link")
-    private String signature;
+//    @Column(name = "signature_link")
+//    private String signature;
+
 
     @Column(name = "description")
 //    @Pattern(regexp = "^[a-zA-Z0-9&@$_\\-\\s]{5,255}$",message = "Invalid description")
