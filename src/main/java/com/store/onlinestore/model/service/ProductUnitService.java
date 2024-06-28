@@ -56,4 +56,15 @@ public class ProductUnitService {
             throw new Exception();
         }
     }
+    public List<ProductUnit> findBySymbol(String symbol) throws Exception {
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("symbol", symbol );
+            List<ProductUnit> unitList = unitRepository.executeQuery("ProductUnit.FindBySymbol", params, ProductUnit.class);
+            if (unitList != null) {
+                return unitList;
+            }
+            throw new Exception();
+        }
+    }
 }

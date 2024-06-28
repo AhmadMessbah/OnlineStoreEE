@@ -1,9 +1,9 @@
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.CardPayment;
-import com.store.onlinestore.model.service.CardService;
+import com.store.onlinestore.model.service.CardPaymentService;
 import java.time.LocalDateTime;
 
-public class CardTest {
+public class CardPaymentTest {
 
     public static void main(String[] args) throws Exception {
 
@@ -11,14 +11,14 @@ public class CardTest {
                 CardPayment
                         .builder()
                         .cardNumber(1451547777L)
-                        .dateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         CardPayment cardPayment2 =
                 CardPayment
                         .builder()
                         .cardNumber(5022222L)
-                        .dateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         BeanValidator<CardPayment> cardValidator = new BeanValidator<>();
@@ -26,12 +26,12 @@ public class CardTest {
         System.out.println(cardValidator.validate(cardPayment1));
         System.out.println(cardValidator.validate(cardPayment2));
 
-        System.out.println(CardService.getService().save(cardPayment1));
-        System.out.println(CardService.getService().save(cardPayment2));
+        System.out.println(CardPaymentService.getService().save(cardPayment1));
+        System.out.println(CardPaymentService.getService().save(cardPayment2));
 
-        System.out.println(CardService.getService().findAll());
+        System.out.println(CardPaymentService.getService().findAll());
 
-        System.out.println(CardService.getService().FindByCardNumber(5022222));
+        System.out.println(CardPaymentService.getService().FindByCardNumber(5022222));
     }
 
 }

@@ -1,18 +1,15 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "managerEntity")
 @Table(name="manager_tbl")
@@ -31,16 +28,7 @@ public class Manager extends User{
     @Column(name = "id")
     private Long id;
 
-    @Column(name="phone_number", length = 15, unique = true)
-//    @Pattern(regexp = "^(09|\\+989)\\d{9}$" ,message = "Invalid PhoneNumber")
-    private String phoneNumber;
-
-    @Column(name="email", length = 50)
-//    @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
-    private String email;
-
     @OneToOne
-    @JoinTable(name = "role_relation_tbl")
     private Role role ;
 }
 

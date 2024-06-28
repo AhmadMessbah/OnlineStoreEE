@@ -12,11 +12,6 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class Payment extends Base {
-    @Id
-    @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "payment_price")
     private float price;

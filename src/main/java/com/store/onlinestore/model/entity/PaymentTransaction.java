@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "payment_transaction_tbl")
 // todo : javase polymorphism
 // todo : transaction dateTime
-public class PaymentTransaction {
+public class PaymentTransaction extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -26,9 +26,11 @@ public class PaymentTransaction {
     private List<CashPayment> cashPaymentList;
 
     @OneToMany
+    @JoinColumn(name = "payment_transaction_card")
     private List<CardPayment> cardPaymentList;
 
     @OneToMany
+    @JoinColumn(name = "payment_transaction_check")
     private List<CheckPayment> checkPaymentList;
 
 }
