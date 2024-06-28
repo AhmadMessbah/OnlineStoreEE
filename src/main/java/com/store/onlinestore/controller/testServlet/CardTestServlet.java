@@ -21,13 +21,13 @@ public class CardTestServlet extends HttpServlet {
                     CardPayment
                             .builder()
                             .cardNumber(1451547777L)
-                            .localDateTime(LocalDateTime.now())
+                            .dateTime(LocalDateTime.now())
                             .build();
             CardPayment cardPayment2 =
                     CardPayment
                             .builder()
                             .cardNumber(5022222L)
-                            .localDateTime(LocalDateTime.now())
+                            .dateTime(LocalDateTime.now())
                             .build();
 
             BeanValidator<CardPayment> cardValidator = new BeanValidator<>();

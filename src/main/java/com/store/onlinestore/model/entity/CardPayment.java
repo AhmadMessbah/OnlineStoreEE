@@ -30,7 +30,7 @@ public class CardPayment extends Payment {
     private Long cardNumber;
 
     @Column(name = "date_time")
-    private LocalDateTime localDateTime;
+    private LocalDateTime dateTime;
 }
 
 

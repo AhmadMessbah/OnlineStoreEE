@@ -1,7 +1,9 @@
 package com.store.onlinestore.model.service;
+
 import com.store.onlinestore.model.entity.CardPayment;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,7 @@ public class CardService {
             return repository.findById(id, CardPayment.class);
         }
     }
+
     public CardPayment FindByCardNumber(long cardNumber) throws Exception {
         try (CrudRepository<CardPayment, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
@@ -56,5 +59,17 @@ public class CardService {
         }
     }
 
+    public CardPayment FindByDateTime(LocalDateTime dateTime) throws Exception {
+        try (CrudRepository<CardPayment, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("DateTime", dateTime);
+            List<CardPayment> result = repository.executeQuery( "Check.FindByDateTime", params, CardPayment.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
 }
 
