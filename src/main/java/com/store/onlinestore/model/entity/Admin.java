@@ -1,18 +1,15 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "adminEntity")
 @Table(name="admin_tbl")
@@ -28,9 +25,7 @@ public class Admin extends User {
     @Column(name = "id")
     private Long id;
 
-
     @OneToOne
-    @JoinTable(name = "role_relation_tbl")
     private Role role ;
 }
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
+
 @Entity(name = "productEntity")
 @Table(name = "product_tbl")
 @NamedQueries({
@@ -21,7 +21,7 @@ import java.util.List;
         @NamedQuery(name = "Product.FindByBarcode", query = "select p from productEntity p where p.barcode =:barcode"),
         @NamedQuery(name = "Product.FindByBrand", query = "select p from productEntity p where p.brand like :brand")
 })
-public class Product {
+public class Product extends Base {
     @Id
     @SequenceGenerator(name = "productSeq", sequenceName = "product_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSeq")
@@ -50,15 +50,13 @@ public class Product {
     @JoinColumn(name = "product_group_id")
     private ProductGroup productGroupId;
 
-    @Column(name = "price")
-//    @Pattern(regexp = "^\\d{3,15}$", message = "Invalid Price")
-    private Integer price;
-
 //    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    private List<Attachment> attachmentList;
 
     @Column(name = "date_of_modified")
     private LocalDateTime dateOfModified;
+//    @PrePersist
+
 
     @Column(name = "barcode", unique = true)
 //    @Pattern(regexp = "^\\d{3,30}$", message = "Invalid Barcode")

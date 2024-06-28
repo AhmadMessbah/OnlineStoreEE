@@ -40,37 +40,37 @@ public class DeliveryTestServlet extends HttpServlet {
                     .build();
             BeanValidator<Delivery> deliveryValidator = new BeanValidator<>();
             if (!(deliveryValidator.validate(delivery1).isEmpty())) {
-                DeliveryService.getDeliveryService().deliverySave(delivery1);
+                DeliveryService.getDeliveryService().save(delivery1);
             } else {
                 System.out.println(deliveryValidator.validate(delivery1));
             }
             if (!(deliveryValidator.validate(delivery2).isEmpty())) {
-                DeliveryService.getDeliveryService().deliverySave(delivery2);
+                DeliveryService.getDeliveryService().save(delivery2);
             } else {
                 System.out.println(deliveryValidator.validate(delivery2));
             }
             if (!(deliveryValidator.validate(delivery3).isEmpty())) {
-                DeliveryService.getDeliveryService().deliverySave(delivery3);
+                DeliveryService.getDeliveryService().save(delivery3);
             } else {
                 System.out.println(deliveryValidator.validate(delivery3));
             }
             if (!(deliveryValidator.validate(delivery4).isEmpty())) {
-                DeliveryService.getDeliveryService().deliverySave(delivery4);
+                DeliveryService.getDeliveryService().save(delivery4);
             } else {
                 System.out.println(deliveryValidator.validate(delivery4));
             }
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindAll());
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindById(1L));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByDeliveryStatus(DeliveryStatus.SENDING));
+            System.out.println(DeliveryService.getDeliveryService().findAll());
+            System.out.println(DeliveryService.getDeliveryService().findById(1L));
+            System.out.println(DeliveryService.getDeliveryService().findByDeliveryStatus(DeliveryStatus.SENDING));
          //   System.out.println(DeliveryService.getDeliveryService().deliveryFindByNameAndFamily("ali", "alipour"));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByOrderId("asdfghjkl"));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByReceiverName("Mohammad"));
+            System.out.println(DeliveryService.getDeliveryService().findByOrderId("asdfghjkl"));
+            System.out.println(DeliveryService.getDeliveryService().findByReceiverName("Mohammad"));
             if (!(deliveryValidator.validate(delivery1).isEmpty())) {
-                DeliveryService.getDeliveryService().deliveryEdit(delivery1);
+                DeliveryService.getDeliveryService().edit(delivery1);
             } else {
                 System.out.println(deliveryValidator.validate(delivery1));
             }
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindAll());
+            System.out.println(DeliveryService.getDeliveryService().findAll());
 //            DeliveryService.getDeliveryService().deliverySave(delivery1);
 //            DeliveryService.getDeliveryService().deliverySave(delivery2);
 //            DeliveryService.getDeliveryService().deliverySave(delivery3);
