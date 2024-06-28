@@ -4,14 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "roleEntity")
 @Table(name="role_tbl")
@@ -25,6 +23,6 @@ public class Role {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "role")
+    @Column(name = "role", unique = true, nullable = false)
     private String role;
 }

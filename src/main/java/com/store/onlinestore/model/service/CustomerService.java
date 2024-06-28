@@ -1,8 +1,10 @@
 package com.store.onlinestore.model.service;
+
 import com.store.onlinestore.controller.exception.CustomerNotFoundException;
 import com.store.onlinestore.model.entity.Customer;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class CustomerService {
 
     public Customer save(Customer customer) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
+            customer.setRole(RoleService.getService().FindByRole("customer"));
             return repository.save(customer);
         }
     }
