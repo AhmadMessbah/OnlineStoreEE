@@ -2,14 +2,13 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -50,7 +49,7 @@ public class Invoice extends Base {
     private String invoiceComment;
 
     @OneToMany(mappedBy = "invoice")
-    @JoinColumn(name= "invoiceItem_id")
+//    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
     @Column(name = "discount")
@@ -74,6 +73,13 @@ public class Invoice extends Base {
     public int getPureAmount(){
         pureAmount = getAmount() - discount;
         return pureAmount;
+    }
+
+    public void addItem(InvoiceItem item){
+        if(invoiceItemList == null){
+            invoiceItemList = new ArrayList<>();
+        }
+        invoiceItemList.add(item);
     }
 }
 

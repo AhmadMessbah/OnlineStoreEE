@@ -5,12 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
-import jakarta.persistence.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -33,7 +28,7 @@ public class InvoiceItem extends Base{
     @Column(name = "price")
     private int price;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 }
