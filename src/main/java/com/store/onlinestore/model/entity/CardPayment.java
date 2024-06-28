@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "Card.FindByBankName", query = "select c from cardEntity c where c.bankName = bankName")
 })
 
-public class CardPayment extends Payment {
+public class CardPayment extends Payment{
     @Id
     @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
