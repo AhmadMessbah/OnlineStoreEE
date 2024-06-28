@@ -62,9 +62,7 @@ public class DeliveryTestServlet extends HttpServlet {
             System.out.println(DeliveryService.getDeliveryService().deliveryFindAll());
             System.out.println(DeliveryService.getDeliveryService().deliveryFindById(1L));
             System.out.println(DeliveryService.getDeliveryService().deliveryFindByDeliveryStatus(DeliveryStatus.SENDING));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByName("ali"));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByFamily("alipour"));
-            System.out.println(DeliveryService.getDeliveryService().deliveryFindByNameAndFamily("ali", "alipour"));
+         //   System.out.println(DeliveryService.getDeliveryService().deliveryFindByNameAndFamily("ali", "alipour"));
             System.out.println(DeliveryService.getDeliveryService().deliveryFindByOrderId("asdfghjkl"));
             System.out.println(DeliveryService.getDeliveryService().deliveryFindByReceiverName("Mohammad"));
             if (!(deliveryValidator.validate(delivery1).isEmpty())) {
