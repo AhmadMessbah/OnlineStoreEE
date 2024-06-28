@@ -13,15 +13,16 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
+
 
 @NamedQueries({
-    @NamedQuery(name = "ProductUnit.FindByName", query = "select u from productUnitEntity u where u.name like :name")
+    @NamedQuery(name = "ProductUnit.FindByName", query = "select u from productUnitEntity u where u.name like :name"),
+    @NamedQuery(name = "ProductUnit.FindBySymbol", query = "select u from productUnitEntity u where u.symbol =:symbol")
 })
 
 @Entity(name = "productUnitEntity")
 @Table(name = "product_unit_tbl")
-public class ProductUnit {
+public class ProductUnit extends Base {
     @Id
     @SequenceGenerator(name = "productUnitSeq", sequenceName = "product-unit-seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productUnitSeq")

@@ -27,7 +27,6 @@ public class ProductService {
         }
     }
 
-    //    todo : convert to logical remove
     public Product remove(Long id) throws Exception {
         try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
             return repository.remove(id, Product.class);
