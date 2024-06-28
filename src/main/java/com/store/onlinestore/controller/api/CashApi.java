@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/cash")
 
-public class CashApi {
+public class  CashApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {

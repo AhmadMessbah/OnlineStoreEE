@@ -21,9 +21,9 @@ import java.util.List;
         @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select p from personEntity p where p.name like :name and p.family like :family"),
         @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
 })
-public class InventoryTransaction {
+public class InventoryTransaction extends Base{
     @Id
-    @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_Transaction_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_transaction_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventoryTransactionSeq")
     private Long id;
 

@@ -29,8 +29,6 @@ public class CardPayment extends Payment {
     @Column(name = "card_number" ,length = 20, unique = true)
     private Long cardNumber;
 
-    @Column(name = "date_time")
-    private LocalDateTime localDateTime;
 }
 
 

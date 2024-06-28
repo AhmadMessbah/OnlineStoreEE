@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 
 @MappedSuperclass
-public abstract class Payment {
+public abstract class Payment extends Base {
     @Id
     @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
@@ -22,7 +22,7 @@ public abstract class Payment {
     private float price;
 
     @Column(name="payment_date")
-    private LocalDateTime dateOfPayment;
+    private LocalDateTime paymentDateTime;
 
     @Column(name="description")
     private String description;

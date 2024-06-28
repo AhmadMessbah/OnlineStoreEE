@@ -3,11 +3,13 @@ package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.CheckPayment;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CheckService {
+
     @Getter
     private static CheckService service = new CheckService();
 
@@ -44,13 +46,29 @@ public class CheckService {
         }
     }
 
-    public List<CheckPayment> findByNameAndFamily(String name, String family) throws Exception {
+    public CheckPayment FindByCheckNumber(long checkNumber) throws Exception {
         try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
-            return repository.executeQuery("Check.FindByNameAndFamily", params, CheckPayment.class);
+            params.put("checkNumber", checkNumber);
+            List<CheckPayment> result = repository.executeQuery( "Check.FindByCheckNumber", params, CheckPayment.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
         }
     }
 
+    public CheckPayment FindByDateTime(LocalDateTime dateTime) throws Exception {
+        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("DateTime", dateTime);
+            List<CheckPayment> result = repository.executeQuery( "Check.FindByDateTime", params, CheckPayment.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
 }

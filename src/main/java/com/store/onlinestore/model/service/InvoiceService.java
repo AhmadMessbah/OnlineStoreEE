@@ -72,7 +72,7 @@ public class InvoiceService {
         }
     }
 
-    public List<Invoice> findByCustomer(Long customerId) throws Exception {
+    public List<Invoice> findByCustomerId(Long customerId) throws Exception {
         try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("customerId", customerId);
@@ -83,6 +83,8 @@ public class InvoiceService {
             throw new InvoiceNotFoundException();
         }
     }
+
+//  todo :  findByNameAndFamily
 
     public List<Invoice> findByDate(LocalDateTime localDateTime) throws Exception {
         try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {

@@ -1,6 +1,5 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.CheckPayment;
 import com.store.onlinestore.model.entity.Role;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;

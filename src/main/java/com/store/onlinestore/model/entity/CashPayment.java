@@ -1,3 +1,4 @@
+
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
@@ -6,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,17 +19,13 @@ import java.time.LocalDateTime;
 @Table(name = "cash_tbl")
 
 @NamedQueries({
-        @NamedQuery(name = "Cash.FindById", query = "select c from checkEntity c where c.id = id"),
+        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.dateTime = dateTime")
 })
 
 public class CashPayment extends Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
 
-    @Column(name = "cash_tendered")
-    private float cashTendered;
+    @ManyToOne
+    private Customer customer;
 
     @Column(name = "date_time")
     private LocalDateTime localDateTime;

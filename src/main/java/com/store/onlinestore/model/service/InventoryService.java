@@ -50,14 +50,14 @@ public class InventoryService {
         }
     }
 
-    // TODO: 6/20/2024 check service find By Product
-//    public List<Inventory> findByProduct(Product product) throws Exception {
-//        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-//            Map<String, Object> params = new HashMap<>();
-//            params.put("product", product+"%");
-//            return repository.executeQuery("Inventory.FindByproduct", params, Inventory.class);
-//        }
-//    }
+
+    public List<Inventory> findByProductID(Long productId) throws Exception {
+        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("productId", productId+"%");
+            return repository.executeQuery("findByProductId", params, Inventory.class);
+        }
+    }
     public List<Inventory> findByName(String name) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();

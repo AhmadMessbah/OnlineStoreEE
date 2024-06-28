@@ -3,12 +3,14 @@ package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.Delivery;
 import com.store.onlinestore.model.entity.enums.DeliveryStatus;
 import com.store.onlinestore.model.repository.CrudRepository;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DeliveryService {
+    @Getter
     private static DeliveryService deliveryService = new DeliveryService();
 
     private DeliveryService() {
@@ -57,29 +59,9 @@ public class DeliveryService {
         }
     }
 
-    public List<Delivery> deliveryFindByName(String name) throws Exception {
-        try (CrudRepository<Delivery, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("customerName", name + "%");
-            return repository.executeQuery("Delivery.FindByName", params, Delivery.class);
-        }
-    }
-
-    public List<Delivery> deliveryFindByFamily(String familyName) throws Exception {
-        try (CrudRepository<Delivery, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("customerFamily", familyName + "%");
-            return repository.executeQuery("Delivery.FindByFamily", params, Delivery.class);
-        }
-    }
 
     public List<Delivery> deliveryFindByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<Delivery, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("customerName", name + "%");
-            params.put("customerFamily", family + "%");
-            return repository.executeQuery("Delivery.FindByNameAndFamily", params, Delivery.class);
-        }
+        InvoiceService.getService().
     }
 
     public List<Delivery> deliveryFindByReceiverName(String receiverName) throws Exception {
