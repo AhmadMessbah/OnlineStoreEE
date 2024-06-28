@@ -19,6 +19,10 @@ public class InventoryService {
 
     public Inventory save(Inventory inventory) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
+            Inventory retrivedInventory = findByName(inventory.getProduct().getName());
+            if (retrivedInventory.getProductStock() != 0) {
+                inventory.setProductStock(retrivedInventory.getProductStock() + inventory.getProductStock());
+            }
             return repository.save(inventory);
         }
     }
@@ -50,27 +54,20 @@ public class InventoryService {
         }
     }
 
-
-    public List<Inventory> findByProductID(Long productId) throws Exception {
+    public Inventory findByProductID(Long productId) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("productId", productId+"%");
-            return repository.executeQuery("findByProductId", params, Inventory.class);
+            List<Inventory> inventoryList= repository.executeQuery("findByProductId", params, Inventory.class);
+            return inventoryList.get(0);
         }
     }
-    public List<Inventory> findByName(String name) throws Exception {
+    public Inventory findByName(String name) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name + "%");
-            return repository.executeQuery("findByInventoryName", params, Inventory.class);
-        }
-    }
-
-    public Supplier findByInventoryNumber(String inventoryNumber) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("inventoryNumber", inventoryNumber + "%");
-            return (Supplier) repository.executeQuery("findByCompany", params, Inventory.class);
+            List<Inventory> inventoryList= repository.executeQuery("findByInventoryName", params, Inventory.class);
+            return inventoryList.get(0);
         }
     }
 }
