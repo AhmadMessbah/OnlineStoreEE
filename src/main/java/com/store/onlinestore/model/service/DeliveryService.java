@@ -3,12 +3,14 @@ package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.Delivery;
 import com.store.onlinestore.model.entity.enums.DeliveryStatus;
 import com.store.onlinestore.model.repository.CrudRepository;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DeliveryService {
+    @Getter
     private static DeliveryService deliveryService = new DeliveryService();
 
     private DeliveryService() {

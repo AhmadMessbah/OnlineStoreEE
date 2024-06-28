@@ -3,12 +3,14 @@ package com.store.onlinestore.model.entity;
 import com.store.onlinestore.model.entity.enums.DeliveryMethod;
 import com.store.onlinestore.model.entity.enums.DeliveryStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.File;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -46,20 +48,19 @@ public class Delivery {
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid Customer Name")
     private final String customerName = invoice.getCustomer().getName();
     @Column(name = "customer_family", length = 30)
-//    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid ")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid Customer Family")
     private final String customerFamily = invoice.getCustomer().getFamily();
-    //    todo: Dar Class Customer Bayad Bakhshe address Tarif Beshe
+    //    todo: Dar Class Customer Bayad Bakhsh address Tarif Beshe
 //    private final String Address=invoice.getCustomer().getAddress().getFullAddress();
 //    private final String postalCode = invoice.getCustomer().getAddress().getPostalCode();
     @Column(name = "receiver_name", length = 30)
-//    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid ")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid Receiver Name")
     private String receiverName;
     @Column(name = "delivery_method", length = 15)
-//    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$",message = "Invalid delivery method")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private DeliveryMethod deliveryMethod;
     @Column(name = "status", length = 15)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
     @Column(name = "sending_date_time")
     private LocalDateTime sendingDateTime;
@@ -67,10 +68,10 @@ public class Delivery {
     private LocalDateTime deliveredDateTime;
     @Column(name = "returned_date_time")
     private LocalDateTime returnedDateTime;
-    @Column(name = "signature_link")
+    @Column(name = "signiture_link")
     private String signature;
     @Column(name = "description")
-//    @Pattern(regexp = "^{5,255}$",message = "Invalid description")
+//    @Pattern(regexp = "^[a-zA-Z0-9&@$_\\-\\s]{5,255}$",message = "Invalid description")
     private String description;
 
 }

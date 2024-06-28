@@ -2,12 +2,14 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Address;
 import com.store.onlinestore.model.repository.CrudRepository;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AddressService {
+    @Getter
     private static AddressService service = new AddressService();
 
     private AddressService() {
