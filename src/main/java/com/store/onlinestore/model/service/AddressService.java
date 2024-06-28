@@ -15,38 +15,38 @@ public class AddressService {
     private AddressService() {
     }
 
-    public Address addressSave(Address address) throws Exception {
+    public Address save(Address address) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             return repository.save(address);
         }
     }
 
 
-    public Address addressEdit(Address address) throws Exception {
+    public Address edit(Address address) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             return repository.edit(address);
         }
     }
 
-    public Address addressRemove(Long id) throws Exception {
+    public Address remove(Long id) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             return repository.remove(id, Address.class);
         }
     }
 
-    public List<Address> addressFindAll() throws Exception {
+    public List<Address> findAll() throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             return repository.findAll(Address.class);
         }
     }
 
-    public Address addressFindById(Long id) throws Exception {
+    public Address findById(Long id) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             return repository.findById(id, Address.class);
         }
     }
 
-    public Address addressFindByPostalCode(String postalCode) throws Exception {
+    public Address findByPostalCode(String postalCode) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             Map<String, Object> param = new HashMap<>();
             param.put("postalCode", postalCode);
@@ -59,7 +59,7 @@ public class AddressService {
         }
     }
 
-    public List<Address> addressFindByCountryAndState(String countryName, String stateName) throws Exception {
+    public List<Address> findByCountryAndState(String countryName, String stateName) throws Exception {
         try (CrudRepository<Address, Long> repository = new CrudRepository()) {
             Map<String, Object> param = new HashMap<>();
             param.put("countryName", countryName);

@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name="addressEntity")
 @Table(name="address_tbl")
-public class Address {
+public class Address extends Base{
     @Id
     @SequenceGenerator(name = "addressSeq", sequenceName = "address_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.AUTO)

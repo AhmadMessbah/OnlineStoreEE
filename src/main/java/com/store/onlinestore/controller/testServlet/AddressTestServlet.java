@@ -59,30 +59,30 @@ public class AddressTestServlet extends HttpServlet {
 
             BeanValidator<Address> addressValidator = new BeanValidator<>();
             if (!(addressValidator.validate(address1).isEmpty())) {
-                AddressService.getService().addressSave(address1);
+                AddressService.getService().save(address1);
             } else {
                 System.out.println(addressValidator.validate(address1));
             }
             if (!(addressValidator.validate(address2).isEmpty())) {
-                AddressService.getService().addressSave(address2);
+                AddressService.getService().save(address2);
             } else {
                 System.out.println(addressValidator.validate(address2));
             }
             if (!(addressValidator.validate(address3).isEmpty())) {
-                AddressService.getService().addressSave(address3);
+                AddressService.getService().save(address3);
             } else {
                 System.out.println(addressValidator.validate(address3));
             }
-            System.out.println(AddressService.getService().addressFindAll());
-            System.out.println(AddressService.getService().addressFindById(1L));
-            System.out.println(AddressService.getService().addressFindByPostalCode("4646464646"));
-            System.out.println(AddressService.getService().addressFindByCountryAndState("USA", "Texas"));
+            System.out.println(AddressService.getService().findAll());
+            System.out.println(AddressService.getService().findById(1L));
+            System.out.println(AddressService.getService().findByPostalCode("4646464646"));
+            System.out.println(AddressService.getService().findByCountryAndState("USA", "Texas"));
             if (!(addressValidator.validate(address3).isEmpty())) {
-                AddressService.getService().addressEdit(address3);
+                AddressService.getService().edit(address3);
             } else {
                 System.out.println(addressValidator.validate(address3));
             }
-            System.out.println(AddressService.getService().addressFindAll());
+            System.out.println(AddressService.getService().findAll());
 //            AddressService.getService().addressSave(address1);
 //            AddressService.getService().addressSave(address2);
 //            AddressService.getService().addressFindAll();
