@@ -26,7 +26,7 @@ public class CardTestServlet extends HttpServlet {
             CardPayment cardPayment2 =
                     CardPayment
                             .builder()
-                            .cardNumber(5022222l)
+                            .cardNumber(5022222L)
                             .localDateTime(LocalDateTime.now())
                             .build();
 
