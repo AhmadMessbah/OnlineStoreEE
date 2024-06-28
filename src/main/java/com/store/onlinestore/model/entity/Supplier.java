@@ -51,4 +51,9 @@ public class Supplier {
     @Column(name = "companyName")
 //    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,50}$" ,message = "Invalid Company Name")
     private String companyName;
+
+
+    @OneToOne
+    @JoinTable(name = "role_relation_tbl")
+    private Role role ;
 }

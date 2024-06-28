@@ -23,7 +23,7 @@ import java.util.List;
 })
 public class InventoryTransaction {
     @Id
-    @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_Transaction_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_transaction_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventoryTransactionSeq")
     private Long id;
 

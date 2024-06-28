@@ -37,7 +37,7 @@ public class Invoice {
 //    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
-    @OneToOne  //TODO سوال در مورد روابط
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

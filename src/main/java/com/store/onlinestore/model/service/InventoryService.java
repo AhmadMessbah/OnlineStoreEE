@@ -50,7 +50,7 @@ public class InventoryService {
         }
     }
 
-    // TODO: 6/20/2024 check service find By Product
+    // TODO: 6/20/2024 check service find By ProductId
 //    public List<Inventory> findByProduct(Product product) throws Exception {
 //        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
 //            Map<String, Object> params = new HashMap<>();
