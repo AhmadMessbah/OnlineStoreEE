@@ -50,11 +50,11 @@ public class Delivery extends Base {
     private String receiverName;
 
     @Column(name = "delivery_method", length = 15)
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private DeliveryMethod deliveryMethod;
 
     @Column(name = "status", length = 15)
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private DeliveryStatus deliveryStatus;
 
     @Column(name = "sending_date_time")
