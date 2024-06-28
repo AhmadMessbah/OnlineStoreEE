@@ -22,7 +22,7 @@ import javax.naming.Name;
         @NamedQuery(name = "FideByNationalCode", query = "select p from supplierEntity p where p.nationalCode like :nationalCode"),
         @NamedQuery(name = "findByCompany", query = "select p from supplierEntity p where p.companyName like :company")
 })
-public class Supplier {
+public class Supplier extends Base {
     @Id
     @SequenceGenerator(name = "supplierSeq", sequenceName = "supplier_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplierSeq")

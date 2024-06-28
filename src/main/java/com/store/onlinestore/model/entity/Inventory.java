@@ -23,11 +23,11 @@ import java.util.List;
 @Table(name = "inventory_tbl")
 @NamedQueries({
         // TODO: 6/20/2024 check product list 
-//        @NamedQuery(name = "Inventory.FindByproduct", query = "select p from inventoryEntity p where p.productList like :product "),
+        @NamedQuery(name = "findByProductId", query = "select p from inventoryEntity p where p.product.id=:productId "),
         @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.InventoryName like :name"),
         @NamedQuery(name = "findByInventoryNumber", query = "select p from inventoryEntity p where p.inventoryNumber=:inventoryNumber")
 })
-public class Inventory {
+public class Inventory extends Base {
 
     @Id
     @SequenceGenerator(name = "inventorySeq", sequenceName = "inventory_seq", initialValue = 1, allocationSize = 1)
@@ -54,23 +54,14 @@ public class Inventory {
     @Column(name = "totalStock")
     private int totalStock;
 
-    @OneToMany   // todo : OneToOne
+    @OneToOne
     @JoinTable(name = "inventory_product_tbl")
-    private List<Product> productList;
+    private Product product;
 
     @OneToMany
     @JoinTable(name = "inventory_supplier_tbl")
     private List<Supplier> supplierList;
 
-    @ManyToOne
-    private Stock stock;
-
-    public void addProduct(Product product) {
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        productList.add(product);
-    }
 
     public void addSupplier(Supplier supplier) {
         if (supplierList == null) {
