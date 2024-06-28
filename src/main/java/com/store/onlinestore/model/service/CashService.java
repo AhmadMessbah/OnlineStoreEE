@@ -3,10 +3,13 @@ package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.CashPayment;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
-
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CashService {
+
     @Getter
     private static CashService service = new CashService();
 
@@ -42,4 +45,18 @@ public class CashService {
             return repository.findById(id, CashPayment.class);
         }
     }
+
+    public CashPayment FindByDateTime(LocalDateTime dateTime) throws Exception {
+        try (CrudRepository<CashPayment, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("DateTime", dateTime);
+            List<CashPayment> result = repository.executeQuery( "Cash.FindByDateTime", params, CashPayment.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
 }
+
