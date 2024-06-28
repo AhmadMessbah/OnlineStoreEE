@@ -1,45 +1,97 @@
+import com.store.onlinestore.model.entity.Attachment;
 import com.store.onlinestore.model.entity.Product;
+import com.store.onlinestore.model.entity.ProductGroup;
+import com.store.onlinestore.model.entity.ProductUnit;
+import com.store.onlinestore.model.entity.enums.FileType;
+import com.store.onlinestore.model.service.ProductGroupService;
 import com.store.onlinestore.model.service.ProductService;
+import com.store.onlinestore.model.service.ProductUnitService;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class ProductTest {
     public static void main(String[] args) throws Exception {
-        Product product1 =
-                Product
+        Attachment attachment1 =
+                Attachment
                         .builder()
-                        .name("car")
-                        .description("black")
-                        .status(true)
-                        .brand("benz")
-                        .unitId(null)
-                        .productGroupId(null)
-                        .price(10000)
-                        .dateOfModified(LocalDateTime.now())
-                        .barcode("021655632")
-                        .inventoryId(null)
+                        .filename("attach1.jpg")
+                        .fileType(FileType.Jpg)
+                        .localDateTime(LocalDateTime.now())
                         .build();
 
-        Product product2 =
+        Attachment attachment2 =
+                Attachment
+                        .builder()
+                        .filename("attach2.jpg")
+                        .fileType(FileType.Jpg)
+                        .localDateTime(LocalDateTime.now())
+                        .build();
+
+        ProductUnit unit1 =
+                ProductUnit
+                        .builder()
+                        .name("adad")
+                        .build();
+
+        ProductUnit unit2 =
+                ProductUnit
+                        .builder()
+                        .name("Cm")
+                        .build();
+
+        ProductUnitService.getService().save(unit1);
+        ProductUnitService.getService().save(unit2);
+        System.out.println(ProductUnitService.getService().findAll());
+
+        ProductGroup root =
+                ProductGroup
+                        .builder()
+                        .name("mobile")
+                        .parentGroup(null)
+                        .status(true)
+                        .build();
+
+        ProductGroup child1 =
+                ProductGroup
+                        .builder()
+                        .name("samsung")
+                        .parentGroup(root)
+                        .status(true)
+                        .build();
+
+        ProductGroup child2 =
+                ProductGroup
+                        .builder()
+                        .name("apple")
+                        .parentGroup(root)
+                        .status(true)
+                        .build();
+
+        ProductGroup child3 =
+                ProductGroup
+                        .builder()
+                        .name("5S")
+                        .parentGroup(child2)
+                        .status(true)
+                        .build();
+
+        ProductGroupService.getService().save(root);
+        ProductGroupService.getService().save(child1);
+        ProductGroupService.getService().save(child2);
+        System.out.println(ProductGroupService.getService().save(child3));
+
+        Product product =
                 Product
                         .builder()
-                        .name("laptop")
-                        .description("xs55")
-                        .status(true)
-                        .brand("asus")
-                        .unitId(null)
-                        .productGroupId(null)
-                        .price(20000)
-                        .dateOfModified(LocalDateTime.now())
-                        .barcode("54684")
-                        .inventoryId(null)
+                        .name("mobile")
+                        .barcode("1234")
+                        .unit(unit1)
+                        .productGroup(child3)
                         .build();
-        System.out.println(ProductService.getService().save(product2));
-        System.out.println(ProductService.getService().save(product1));
-        System.out.println(ProductService.getService().findAll());
-        System.out.println(ProductService.getService().findByNameAndBrand("c","b"));
-        System.out.println(ProductService.getService().FindByBrand("a"));
+
+        product.addAttachment(attachment1);
+        product.addAttachment(attachment2);
+
+        System.out.println(ProductService.getService().save(product));
     }
 }
