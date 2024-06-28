@@ -2,6 +2,7 @@ package com.store.onlinestore.model.entity;
 
 import com.google.gson.Gson;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import java.util.List;
 @MappedSuperclass
 public class Base {
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.DETACH})
     private List<Attachment> attachmentList;
 
     private boolean deleted = false;
