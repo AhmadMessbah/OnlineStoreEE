@@ -16,7 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
