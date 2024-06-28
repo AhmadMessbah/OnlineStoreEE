@@ -7,8 +7,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -31,26 +29,12 @@ public class InventoryTransaction extends Base{
     private LocalDateTime registerDateTime;
 
     @OneToOne
-    private ProductUnit unit;
-
-    @OneToOne
-    private ProductGroup group;
-
-    @OneToMany
     @JoinTable(name = "inventory_transaction_product_tbl")
-    private List<Product> productList;
+    private Product product;
 
     @ManyToOne
     private Manager deliveryPerson;
 
     @ManyToOne
     private Customer receiverPerson;
-
-
-    public void addProduct(Product product) {
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        productList.add(product);
-    }
 }

@@ -7,10 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
-
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,25 +30,11 @@ public class Inventory extends Base {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventorySeq")
     private int id;
 
-    @Column(name = "inventoryName")
-//    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
-    private String InventoryName;
-
     @Column(name = "inventoryDescription")
     private String description;
 
-    @Column(name = "inventoryNumber")
-//    @Pattern(regexp = "^//d")
-    private String inventoryNumber;
-
-    @Column(name = "inventoryType")
-    private String inventoryType;
-
     @Column(name = "productStock")
     private int productStock;
-
-    @Column(name = "totalStock")
-    private int totalStock;
 
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")
