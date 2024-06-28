@@ -24,32 +24,30 @@ public class InvoiceTestServlet extends HttpServlet {
             Customer customer =
                     Customer
                             .builder()
-                            .name("Arash")
-                            .family("Oloomi")
-//                            .phoneNumber("123456")
-                            .email("a@a.com")
-                            .image("/img/0001.jpg")
+                            .id(1L)
+
                             .build();
 
             Product product1 =
                     Product
                             .builder()
-                            .name("mobile")
-                            .brand("samsung")
+                            .id(1L)
                             .build();
 
             Product product2 =
                     Product
                             .builder()
-                            .name("laptop")
-                            .brand("Asus")
+                            .id(1L)
                             .build();
 
-            Product product3 =
-                    Product
+            Invoice invoice =
+                    Invoice
                             .builder()
-                            .name("monitor")
-                            .brand("lg")
+//                            .id(2L)
+                            .serial("A-00001")
+                            .customer(customer)
+                            .localDateTime(LocalDateTime.now())
+                            .discount(150)
                             .build();
 
             InvoiceItem invoiceItem1 =
@@ -58,6 +56,7 @@ public class InvoiceTestServlet extends HttpServlet {
                             .product(product1)
                             .count(2)
                             .price(1000)
+                            .invoice(invoice)
                             .build();
 
             InvoiceItem invoiceItem2 =
@@ -66,55 +65,53 @@ public class InvoiceTestServlet extends HttpServlet {
                             .product(product2)
                             .count(3)
                             .price(2500)
-                            .build();
-
-            InvoiceItem invoiceItem3 =
-                    InvoiceItem
-                            .builder()
-                            .count(5)
-                            .price(500)
-                            .product(product3)
+                            .invoice(invoice)
                             .build();
 
             List<InvoiceItem> invoiceItemList = new ArrayList<>();
             invoiceItemList.add(invoiceItem1);
             invoiceItemList.add(invoiceItem2);
-            invoiceItemList.add(invoiceItem3);
+            invoice.setInvoiceItemList(invoiceItemList);
 
-            Invoice invoice =
-                    Invoice
-                            .builder()
-                            .serial("A-00001")
-                            .customer(customer)
-                            .invoiceItemList(invoiceItemList)
-//                            .discount(100)
-                            .localDateTime(LocalDateTime.now())
-                            .build();
+            int amount = invoice.getAmount();
+            int pureAmount = invoice.getPureAmount();
+
+            invoice.setAmount(amount);
+            invoice.setPureAmount(pureAmount);
 
             BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
-            if(invoiceValidator.validate(invoice).isEmpty()) {
-                System.out.println(InvoiceService.getService().save(invoice));
-            }else{
-                System.out.println(invoiceValidator.validate(invoice));
-            }
-
+//            if (invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().save(invoice));
+//            } else {
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+////
+//
+//
 //            if(invoiceValidator.validate(invoice).isEmpty()) {
 //                System.out.println(InvoiceService.getService().edit(invoice));
-//            }else{
+//            }else {
 //                System.out.println(invoiceValidator.validate(invoice));
 //            }
 //
 //
+//            if(invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().remove(1L));
+//            }else{
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+////
+            //TODO failed to lazily initialize a collection of role: com.store.onlinestore.model.entity.Invoice.invoiceItemList: could not initialize proxy - no Session
 //            System.out.println(InvoiceService.getService().findAll());
 //            System.out.println(InvoiceService.getService().findById(1L));
 //            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
-//            System.out.println(InvoiceService.getService().findByCustomer(person1));
+//            System.out.println(InvoiceService.getService().findByCustomer(2L));
 //            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
             //TODO
 //            System.out.println(InvoiceService.getService().findByRangeDate());
 
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

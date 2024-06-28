@@ -19,38 +19,24 @@ public class AdminTestServlet extends HttpServlet {
             Admin admin1 =
                     Admin
                             .builder()
-                            .name("ahmad")
-                            .family("messbah")
-                            .password("123456")
-                            .email("a@a.com")
-                            .image("/img/0001.jpg")
+                            .name("leva")
+                            .family("ziaee")
+                            .username("levaziaei")
+                            .password("admin123")
                             .build();
 
-            Admin admin2 =
-                    Admin
-                            .builder()
-                            .name("ahmad2")
-                            .family("messbah2")
-                            .password("1234562")
-                            .email("a2@a.com")
-                            .image("/img/0002.jpg")
-                            .build();
 
             BeanValidator<Admin> adminValidator = new BeanValidator<>();
             if(adminValidator.validate(admin1).isEmpty()) {
-                System.out.println(adminValidator.validate(admin1));
+                System.out.println(AdminService.getService().save(admin1));
             }else{
                 System.out.println(adminValidator.validate(admin1));
             }
 
-            if(adminValidator.validate(admin2).isEmpty()) {
-                System.out.println(adminValidator.validate(admin2));
-            }else{
-                System.out.println(adminValidator.validate(admin2));
-            }
-            System.out.println(AdminService.getService().findAll());
 
-        }catch (Exception e){
+
+            System.out.println(AdminService.getService().save(admin1));
+}catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

@@ -1,0 +1,29 @@
+Entity :
+    - @Entity/@Table
+    - sequence
+    - @Column
+    - validator (comment)
+    - named queries
+    - image type of Attachment/List<Attachment>
+    - relationship (@JoinTable, @JoinColumn)
+
+    *** No Exception
+    *** todo :
+
+
+Service :
+    - singleton
+    - save/edit/remove/findAll/findById
+    - named query ==> user executeQuery()
+
+
+Servlet :
+    -TestServlet
+
+
+***
+افرادی که در پروژه فعالیتی انجام نداده اند حذف خواهند شد.
+Customer ...
+Payment ...
+Delivery ...
+یاسمین خانی

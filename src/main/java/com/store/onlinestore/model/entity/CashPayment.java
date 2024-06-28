@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "Cash.FindById", query = "select c from checkEntity c where c.id = id"),
 })
 
-public class Cash extends Payment {
+public class CashPayment extends Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -31,6 +31,6 @@ public class Cash extends Payment {
     @Column(name = "cash_tendered")
     private float cashTendered;
 
-    @Column(name = "date")
+    @Column(name = "date_time")
     private LocalDateTime localDateTime;
 }

@@ -21,10 +21,10 @@ import java.util.List;
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
 @NamedQueries({
-        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = customer.id"),
+        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = :customerId"),
         @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
         @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
-        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :localDateTime and :localDateTime")
+        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime")
 })
 
 public class Invoice {
@@ -33,12 +33,12 @@ public class Invoice {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "serial", length = 5)
+    @Column(name = "serial", length = 10)
 //    @Pattern(regexp = "^[A-Z]{1}-[\\d]{5}$", message = "Invalid Serial")
     private String serial;
 
-    @ManyToOne
-//    @JoinColumn(name = "person_id")
+    @OneToOne  //TODO سوال در مورد روابط
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "date_time")
@@ -47,23 +47,13 @@ public class Invoice {
     @Column(name = "amount")
     private int amount;
 
-    @Column(name = "Comment")
-    private String comment;
+    @Column(name = "invoice_comment")
+    private String invoiceComment;
 
-    @OneToMany
-//    @JoinColumn(name= "invoiceItem_id")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
-
-    public int getAmount() {
-        amount = 0;
-        invoiceItemList.forEach(
-                item -> amount += item.getCount() * item.getPrice()
-        );
-        return amount;
-    }
-
-    //TODO Use payment Clas or use variable
     @Column(name = "discount")
     private int discount;
 
@@ -74,6 +64,17 @@ public class Invoice {
 //    @JoinColumn(name = "PaymentTransaction_id")
 //    private PaymentTransaction payement;
 
+    public int getAmount() {
+        amount = 0;
+        invoiceItemList.forEach(
+                item -> amount += item.getCount() * item.getPrice()
+        );
+        return amount;
+    }
 
+    public int getPureAmount(){
+        pureAmount = getAmount() - discount;
+        return pureAmount;
+    }
 }
 

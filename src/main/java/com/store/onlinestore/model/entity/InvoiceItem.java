@@ -10,6 +10,8 @@ import lombok.experimental.SuperBuilder;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class InvoiceItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     private Product product;
 
     @Column(name = "count")
@@ -31,4 +33,8 @@ public class InvoiceItem {
 
     @Column(name = "price")
     private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 }

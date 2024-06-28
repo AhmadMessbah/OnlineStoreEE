@@ -1,88 +1,103 @@
-import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.*;
-import com.store.onlinestore.model.service.InvoiceService;
+//import com.store.onlinestore.controller.validation.BeanValidator;
+//import com.store.onlinestore.model.entity.*;
+//import com.store.onlinestore.model.service.InvoiceService;
+//
+//import java.time.LocalDateTime;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class InvoiceTest {
+//    public static void main(String[] args) throws Exception {
+//        Customer customer =
+//                Customer
+//                        .builder()
+//                        .id(2L)
+//
+//                        .build();
+//
+//        Product product1 =
+//                Product
+//                        .builder()
+//                        .id(1L)
+//                        .build();
+//
+//        Product product2 =
+//                Product
+//                        .builder()
+//                        .id(1L)
+//                        .build();
+//
+//        Invoice invoice =
+//                Invoice
+//                        .builder()
+//                        .id(2L)
+//                        .serial("A-00001")
+//                        .customer(customer)
+//                        .localDateTime(LocalDateTime.now())
+//                        .discount(150)
+//                        .build();
+//
+//        InvoiceItem invoiceItem1 =
+//                InvoiceItem
+//                        .builder()
+//                        .product(product1)
+//                        .count(2)
+//                        .price(1000)
+//                        .invoice(invoice)
+//                        .build();
+//
+//        InvoiceItem invoiceItem2 =
+//                InvoiceItem
+//                        .builder()
+//                        .product(product2)
+//                        .count(3)
+//                        .price(2500)
+//                        .invoice(invoice)
+//                        .build();
+//
+//        List<InvoiceItem> invoiceItemList = new ArrayList<>();
+////            invoiceItemList.add(invoiceItem1);
+//        invoiceItemList.add(invoiceItem2);
+//        invoice.setInvoiceItemList(invoiceItemList);
+//
+//        int amount = invoice.getAmount();
+//        int pureAmount = invoice.getPureAmount();
+//
+//        invoice.setAmount(amount);
+//        invoice.setPureAmount(pureAmount);
+//
+//TODO هیچ کدوم اجرا نشد
+//        BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
+//            if (invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().save(invoice));
+//            } else {
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-public class InvoiceTest {
-    public static void main(String[] args) throws Exception {
-        Customer customer =
-                Customer
-                        .builder()
-                        .name("Arash")
-                        .family("Oloomi")
-//                            .phoneNumber("123456")
-                        .email("a@a.com")
-                        .image("/img/0001.jpg")
-                        .build();
-
-        Product product1 =
-                Product
-                        .builder()
-                        .name("mobile")
-                        .brand("samsung")
-                        .build();
-
-        Product product2 =
-                Product
-                        .builder()
-                        .name("laptop")
-                        .brand("Asus")
-                        .build();
-
-        Product product3 =
-                Product
-                        .builder()
-                        .name("monitor")
-                        .brand("lg")
-                        .build();
-
-        InvoiceItem invoiceItem1 =
-                InvoiceItem
-                        .builder()
-                        .product(product1)
-                        .count(2)
-                        .price(1000)
-                        .build();
-
-        InvoiceItem invoiceItem2 =
-                InvoiceItem
-                        .builder()
-                        .product(product2)
-                        .count(3)
-                        .price(2500)
-                        .build();
-
-        InvoiceItem invoiceItem3 =
-                InvoiceItem
-                        .builder()
-                        .count(5)
-                        .price(500)
-                        .product(product3)
-                        .build();
-
-        List<InvoiceItem> invoiceItemList = new ArrayList<>();
-        invoiceItemList.add(invoiceItem1);
-        invoiceItemList.add(invoiceItem2);
-        invoiceItemList.add(invoiceItem3);
-
-        Invoice invoice =
-                Invoice
-                        .builder()
-                        .serial("A-00001")
-                        .customer(customer)
-                        .invoiceItemList(invoiceItemList)
-//                            .discount(100)
-                        .localDateTime(LocalDateTime.now())
-                        .build();
-
-        BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
-//        System.out.println(invoiceValidator.validate(invoice));
-
-        System.out.println(InvoiceService.getService().save(invoice));
-
-    }
-}
-
+//
+//
+//            if(invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().edit(invoice));
+//            }else {
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+//
+//
+//            if(invoiceValidator.validate(invoice).isEmpty()) {
+//                System.out.println(InvoiceService.getService().remove(1L));
+//            }else{
+//                System.out.println(invoiceValidator.validate(invoice));
+//            }
+////
+//
+//            System.out.println(InvoiceService.getService().findAll());
+//            System.out.println(InvoiceService.getService().findById(53L));
+//            System.out.println(InvoiceService.getService().findBySerial("ab-123"));
+//            System.out.println(InvoiceService.getService().findByCustomer(customer.getId()));
+//            System.out.println(InvoiceService.getService().findByDate(LocalDateTime.now()));
+        //TODO
+//            System.out.println(InvoiceService.getService().findByRangeDate());
+//
+//    }
+//}
+//

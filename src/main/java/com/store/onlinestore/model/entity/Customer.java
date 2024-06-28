@@ -16,32 +16,35 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "customerEntity")
 @Table(name="customer_tbl")
-public class Customer {
+@NamedQueries({
+        @NamedQuery(name = "Customer.FindByNameAndFamily", query = "select p from customerEntity p where p.name like :name and p.family like :family"),
+        @NamedQuery(name = "Customer.FindByUsernameAndPassword", query = "select p from customerEntity p where p.username like :username and p.password like :password"),
+        @NamedQuery(name = "Customer.FindByUsername", query = "select p from customerEntity p where p.username like :username"),
+        @NamedQuery(name = "Customer.FindByEmail", query = "select p from customerEntity p where p.email like :email"),
+        @NamedQuery(name = "Customer.FindByPhoneNumber", query = "select p from customerEntity p where p.phoneNumber =:phoneNumber")
+})
+
+public class Customer extends User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "customerSeq", sequenceName = "customer_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customerSeq")
     @Column(name = "id")
     private Long id;
 
-    @Column(name="name", length = 30)
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
-    private String name;
-
-    @Column(name="family", length = 30)
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Family")
-    private String family;
-
-    @Column(name="password", length = 15)
-    @Pattern(regexp = "123admin" ,message = "Invalid Password")
-    private String password;
+    @Column(name="phone_number", length = 15, unique = true)
+//    @Pattern(regexp = "^(09|\\+989)\\d{9}$" ,message = "Invalid PhoneNumber")
+    private String phoneNumber;
 
     @Column(name="email", length = 50)
-    @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
+//    @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
     private String email;
 
-    @Column(name="image", length = 50)
-    private String image;
+//    @OneToOne
+//    @JoinTable(name = "address_relation_tbl")
+//    private Address address;
 
     @OneToOne
+    @JoinTable(name = "role_relation_tbl")
     private Role role ;
 }
 

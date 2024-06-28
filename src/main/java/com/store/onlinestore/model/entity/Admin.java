@@ -16,32 +16,21 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "adminEntity")
 @Table(name="admin_tbl")
-public class Admin {
+@NamedQueries({
+        @NamedQuery(name = "Admin.FindByNameAndFamily", query = "select a from adminEntity a where a.name like :name and a.family like :family"),
+        @NamedQuery(name = "Admin.FindByUsername", query = "select a from adminEntity a where a.username =:username and a.password =:password")
+})
+
+public class Admin extends User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "adminSeq", sequenceName = "admin_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "adminSeq")
     @Column(name = "id")
     private Long id;
 
-    @Column(name="name", length = 30)
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
-    private String name;
-
-    @Column(name="family", length = 30)
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Family")
-    private String family;
-
-    @Column(name="password", length = 15)
-    @Pattern(regexp = "123admin" ,message = "Invalid Password")
-    private String password;
-
-    @Column(name="email", length = 50)
-    @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
-    private String email;
-
-    @Column(name="image", length = 50)
-    private String image;
 
     @OneToOne
+    @JoinTable(name = "role_relation_tbl")
     private Role role ;
 }
 

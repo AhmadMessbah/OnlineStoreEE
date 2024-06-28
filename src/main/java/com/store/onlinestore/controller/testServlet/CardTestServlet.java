@@ -1,6 +1,6 @@
 package com.store.onlinestore.controller.testServlet;
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.Card;
+import com.store.onlinestore.model.entity.CardPayment;
 import com.store.onlinestore.model.service.CardService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,33 +17,33 @@ public class CardTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            Card card1 =
-                    Card
+            CardPayment cardPayment1 =
+                    CardPayment
                             .builder()
                             .cardNumber(1451547777)
                             .cvv2(223)
                             .cardExpireDate(LocalDateTime.now())
                             .build();
- Card card2 =
-                    Card
+ CardPayment cardPayment2 =
+                    CardPayment
                             .builder()
                             .cardNumber(5022222)
                             .cvv2(123)
                             .cardExpireDate(LocalDateTime.now())
                             .build();
 
-            BeanValidator<Card> cardValidator = new BeanValidator<>();
-            if(cardValidator.validate(card1).isEmpty()) {
-                System.out.println(cardValidator.validate(card1));
+            BeanValidator<CardPayment> cardValidator = new BeanValidator<>();
+            if(cardValidator.validate(cardPayment1).isEmpty()) {
+                System.out.println(cardValidator.validate(cardPayment1));
             }else{
-                System.out.println(cardValidator.validate(card1));
+                System.out.println(cardValidator.validate(cardPayment1));
             }
 
 
-            if(cardValidator.validate(card2).isEmpty()) {
-                System.out.println(cardValidator.validate(card2));
+            if(cardValidator.validate(cardPayment2).isEmpty()) {
+                System.out.println(cardValidator.validate(cardPayment2));
             }else{
-                System.out.println(cardValidator.validate(card2));
+                System.out.println(cardValidator.validate(cardPayment2));
             }
 
             System.out.println(CardService.getService().findAll());

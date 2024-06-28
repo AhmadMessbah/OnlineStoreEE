@@ -15,6 +15,6 @@ public class ProductGroupApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(ProductGroupService.getService().findAll()).build();
+        return Response.ok().entity(ProductGroupService.getService().findAll().size()).build();
     }
 }
