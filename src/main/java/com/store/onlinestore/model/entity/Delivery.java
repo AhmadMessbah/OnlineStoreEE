@@ -31,7 +31,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "deliveryEntity")
 @Table(name = "delivery_tbl")
-public class Delivery {
+public class Delivery extends Base {
     @Id
     @SequenceGenerator(name = "deliverySeq", sequenceName = "delivery", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.AUTO)
