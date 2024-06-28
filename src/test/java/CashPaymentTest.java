@@ -10,13 +10,13 @@ public class CashPaymentTest {
         CashPayment cashPayment1 =
                CashPayment
                         .builder()
-                        .localDateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         CashPayment cashPayment2 =
                 CashPayment
                         .builder()
-                        .localDateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         BeanValidator<CashPayment> cardValidator = new BeanValidator<>();

@@ -11,14 +11,14 @@ public class CardPaymentTest {
                 CardPayment
                         .builder()
                         .cardNumber(1451547777L)
-                        .dateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         CardPayment cardPayment2 =
                 CardPayment
                         .builder()
                         .cardNumber(5022222L)
-                        .dateTime(LocalDateTime.now())
+                        .paymentDateTime(LocalDateTime.now())
                         .build();
 
         BeanValidator<CardPayment> cardValidator = new BeanValidator<>();
