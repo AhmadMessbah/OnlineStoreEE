@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @NamedQueries({
         @NamedQuery(name = "Address.FindByPostalCode",query = "SELECT oo FROM addressEntity oo WHERE oo.postalCode=:postalCode")

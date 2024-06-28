@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @NamedQueries(
         {
@@ -67,6 +66,7 @@ public class Delivery extends Base {
     @Column(name = "returned_date_time")
     private LocalDateTime returnedDateTime;
 
+    // todo : attachment signature
     @Column(name = "signature_link")
     private String signature;
 
