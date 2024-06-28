@@ -33,7 +33,7 @@ public class InvoiceItem extends Base{
     @Column(name = "price")
     private int price;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 }

@@ -49,7 +49,7 @@ public class Invoice extends Base {
     @Column(name = "invoice_comment")
     private String invoiceComment;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "invoice")
     @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
