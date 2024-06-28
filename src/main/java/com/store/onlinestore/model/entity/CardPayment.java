@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -33,11 +31,11 @@ public class CardPayment extends Payment {
     @Column(name="bank_name")
     private  String bankName;
 
-    @ManyToOne
-    private Customer customer;
-
     @Column(name = "card_number" ,length = 20, unique = true)
     private Long cardNumber;
+
+    @ManyToOne
+    private PaymentTransaction paymentTransaction;
 }
 
 

@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -29,9 +27,9 @@ public class CheckPayment extends Payment {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    private Customer customer;
-
     @Column(name = "check_number", length = 20, unique = true)
     private Long checkNumber;
+
+    @ManyToOne
+    private PaymentTransaction paymentTransaction;
 }
