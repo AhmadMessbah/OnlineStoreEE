@@ -27,7 +27,7 @@ import java.util.List;
         @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime")
 })
 
-public class Invoice {
+public class Invoice extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
