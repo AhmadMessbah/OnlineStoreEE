@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Table(name = "cash_tbl")
 
 @NamedQueries({
-        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.dateOfPayment = dateOfPayment")
+        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime")
 })
 
 public class CashPayment extends Payment {

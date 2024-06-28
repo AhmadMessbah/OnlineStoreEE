@@ -21,14 +21,14 @@ public class CheckTestServlet extends HttpServlet {
                 CheckPayment
                     .builder()
                     .checkNumber(123456789L)
-                    .dateTime(LocalDateTime.now())
+                    .paymentDateTime(LocalDateTime.now())
                     .build();
 
             CheckPayment checkPayment2 =
                 CheckPayment
                     .builder()
                     .checkNumber(987654321L)
-                    .dateTime(LocalDateTime.now())
+                    .paymentDateTime(LocalDateTime.now())
                     .build();
 
             BeanValidator<CheckPayment> checkValidator = new BeanValidator<>();

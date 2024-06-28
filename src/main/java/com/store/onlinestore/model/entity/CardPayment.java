@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 
 @NamedQueries({
         @NamedQuery(name = "Card.FindByCardNumber", query = "select c from cardEntity  c where c.cardNumber =cardNumber"),
-        @NamedQuery(name = "Card.FindByDateTime", query = "select c from checkEntity c where c.dateOfPayment = dateOfPayment")
+        @NamedQuery(name = "Card.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime")
 })
 
 public class CardPayment extends Payment {
