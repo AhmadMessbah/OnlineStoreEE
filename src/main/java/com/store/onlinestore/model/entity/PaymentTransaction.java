@@ -22,6 +22,7 @@ public class PaymentTransaction {
     private int id;
 
     @OneToMany
+    @JoinTable(name = "payment_transaction_cash")
     private List<CashPayment> cashPaymentList;
 
     @OneToMany

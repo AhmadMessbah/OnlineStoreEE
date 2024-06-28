@@ -36,7 +36,6 @@ public class ProductTest {
                         .barcode("54684")
                         .inventoryId(null)
                         .build();
-//        todo:dar in folder kar nemikone va error JSON Binding provider org.eclipse.yasson.JsonBindingProvider not found
         System.out.println(ProductService.getService().save(product2));
         System.out.println(ProductService.getService().save(product1));
         System.out.println(ProductService.getService().findAll());

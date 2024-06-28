@@ -67,6 +67,8 @@ public class AddressService {
             return repository.executeQuery("Address.FindByCountryAndState", param, Address.class);
         }
     }
+
+//    todo : findByCity, findByText
 }
 
 

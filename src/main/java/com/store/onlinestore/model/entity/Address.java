@@ -62,8 +62,6 @@ public class Address {
     private String postalCode;
 
     public String getFullAddress (){
-        String address = countryName+" - "+stateName+" - "+cityName+" - "+villageName+" - "+regionName
-                +" - "+streetName+" - "+ platesNumber+" - "+floorNumber+" - "+homeUnit;
-        return address;
+        return String.format("%s - %s - %s - %s %s",  countryName,stateName,cityName,villageName,regionName);
     }
 }

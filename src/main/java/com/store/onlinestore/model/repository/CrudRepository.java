@@ -1,12 +1,13 @@
 package com.store.onlinestore.model.repository;
 
+import com.store.onlinestore.model.entity.Base;
 import com.store.onlinestore.model.utils.JpaProvider;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Map;
 
-public class CrudRepository<T, I> implements AutoCloseable {
+public class CrudRepository<T extends Base, I> implements AutoCloseable {
     private EntityManager entityManager;
 
     public T save(T t) {
@@ -32,7 +33,8 @@ public class CrudRepository<T, I> implements AutoCloseable {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         T t = entityManager.find(tClass, id);
-        entityManager.remove(t);
+//        entityManager.remove(t);
+        t.deleted = true;
         entityTransaction.commit();
         return t;
     }
@@ -40,7 +42,7 @@ public class CrudRepository<T, I> implements AutoCloseable {
     public List<T> findAll(Class<T> tClass) {
         entityManager = JpaProvider.getJpa().getEntityManager();
 
-        TypedQuery<T> query = entityManager.createQuery(String.format("select oo from %s oo", tClass.getAnnotation(Entity.class).name()), tClass);
+        TypedQuery<T> query = entityManager.createQuery(String.format("select oo from %s oo where oo.deleted=false", tClass.getAnnotation(Entity.class).name()), tClass);
         return query.getResultList();
     }
 
