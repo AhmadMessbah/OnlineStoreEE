@@ -2,7 +2,7 @@ package com.store.onlinestore.controller.testServlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.CheckPayment;
-import com.store.onlinestore.model.service.CheckService;
+import com.store.onlinestore.model.service.CheckPaymentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 @WebServlet("/Check.test")
-public class CheckTestServlet extends HttpServlet {
+public class CheckPaymentTestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,14 +21,14 @@ public class CheckTestServlet extends HttpServlet {
                 CheckPayment
                     .builder()
                     .checkNumber(123456789L)
-                    .dateTime(LocalDateTime.now())
+                    .paymentDateTime(LocalDateTime.now())
                     .build();
 
             CheckPayment checkPayment2 =
                 CheckPayment
                     .builder()
                     .checkNumber(987654321L)
-                    .dateTime(LocalDateTime.now())
+                    .paymentDateTime(LocalDateTime.now())
                     .build();
 
             BeanValidator<CheckPayment> checkValidator = new BeanValidator<>();
@@ -45,9 +45,9 @@ public class CheckTestServlet extends HttpServlet {
                 System.out.println(checkValidator.validate(checkPayment2));
             }
 
-            System.out.println(CheckService.getService().findAll());
+            System.out.println(CheckPaymentService.getService().findAll());
 
-            System.out.println(CheckService.getService().FindByCheckNumber(123456789));
+            System.out.println(CheckPaymentService.getService().FindByCheckNumber(123456789));
 
         }catch (Exception e){
             System.out.println(e.getMessage());

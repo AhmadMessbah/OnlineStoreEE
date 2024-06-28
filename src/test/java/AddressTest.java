@@ -34,15 +34,15 @@ public class AddressTest {
                 .postalCode("4646464646")
                 .build();
 
-        addressService.addressSave(address1);
-        addressService.addressSave(address2);
-        System.out.println(addressService.addressFindAll());
-        System.out.println(addressService.addressFindById(1L));
-        System.out.println(addressService.addressFindByCountryAndState("Iran", "Tehran"));
-        System.out.println(addressService.addressFindByPostalCode("4646464646"));
-        addressService.addressRemove(2L);
-        addressService.addressRemove(1L);
-        System.out.println(addressService.addressFindAll());
+        addressService.save(address1);
+        addressService.save(address2);
+        System.out.println(addressService.findAll());
+        System.out.println(addressService.findById(1L));
+        System.out.println(addressService.findByCountryAndState("Iran", "Tehran"));
+        System.out.println(addressService.findByPostalCode("4646464646"));
+        addressService.remove(2L);
+        addressService.remove(1L);
+        System.out.println(addressService.findAll());
 
     }
 }

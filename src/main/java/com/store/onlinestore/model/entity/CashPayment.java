@@ -13,20 +13,23 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "cashEntity")
 @Table(name = "cash_tbl")
 
 @NamedQueries({
-        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.dateTime = dateTime")
+        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime"),
+        @NamedQuery(name = "Cash.FindById", query = "select c from checkEntity c where c.id = id"),
+
 })
 
 public class CashPayment extends Payment {
+    @Id
+    @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
     private Customer customer;
-
-    @Column(name = "date_time")
-    private LocalDateTime localDateTime;
 }
