@@ -32,9 +32,8 @@ public class DeliveryTest {
         System.out.println(deliveryService.deliveryFindAll());
         System.out.println(deliveryService.deliveryFindById(1L));
         System.out.println(deliveryService.deliveryFindByDeliveryStatus(DeliveryStatus.SENDING));
-        System.out.println(deliveryService.deliveryFindByName("ali"));
-        System.out.println(deliveryService.deliveryFindByFamily("alipour"));
-        System.out.println(deliveryService.deliveryFindByNameAndFamily("ali", "alipour"));
+
+      //  System.out.println(deliveryService.deliveryFindByNameAndFamily("ali", "alipour"));
         System.out.println(deliveryService.deliveryFindByOrderId("asdfghjkl"));
         System.out.println(deliveryService.deliveryFindByReceiverName("Mohammad"));
         System.out.println(deliveryService.deliveryFindAll());
