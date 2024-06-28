@@ -19,17 +19,19 @@ import java.time.LocalDateTime;
 
 @NamedQueries({
         @NamedQuery(name = "Check.FindByCheckNumber", query = "select ch from checkEntity ch where ch.checkNumber = checkNumber"),
-        @NamedQuery(name = "Check.FindByDateTime", query = "select ch from checkEntity ch where ch.dateTime = dateTime")
+        @NamedQuery(name = "Check.FindByDateTime", query = "select ch from checkEntity ch where ch.dateOfPayment = dateOfPayment")
 })
 
 public class CheckPayment extends Payment {
+    @Id
+    @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentSeq")
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
     private Customer customer;
 
     @Column(name = "check_number", length = 20, unique = true)
     private Long checkNumber;
-
-    @Column(name = "date_time")
-    private LocalDateTime dateTime;
 }

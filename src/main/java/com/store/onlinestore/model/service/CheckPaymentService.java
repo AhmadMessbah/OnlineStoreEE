@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CheckService {
+public class CheckPaymentService {
 
     @Getter
-    private static CheckService service = new CheckService();
+    private static CheckPaymentService service = new CheckPaymentService();
 
-    CheckService() {
+    CheckPaymentService() {
     }
 
     public CheckPayment save(CheckPayment checkPayment) throws Exception {
