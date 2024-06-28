@@ -1,6 +1,7 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Delivery;
+import com.store.onlinestore.model.entity.enums.DeliveryMethod;
 import com.store.onlinestore.model.entity.enums.DeliveryStatus;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
@@ -78,6 +79,13 @@ public class DeliveryService {
             Map<String, Object> params = new HashMap<>();
             params.put("deliveryStatus", status);
             return repository.executeQuery("Delivery.FindByDeliveryStatus", params, Delivery.class);
+        }
+    }
+    public  List<Delivery> findByDeliveryMethod (DeliveryMethod deliveryMethod) throws Exception{
+        try (CrudRepository<Delivery, Object> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("deliveryMethod", deliveryMethod);
+            return repository.executeQuery("Delivery.FindByDeliveryMethod", params, Delivery.class);
         }
     }
 
