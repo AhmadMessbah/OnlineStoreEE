@@ -26,9 +26,11 @@ public class PaymentTransaction extends Base {
     private List<CashPayment> cashPaymentList;
 
     @OneToMany
+    @JoinColumn(name = "payment_transaction_card")
     private List<CardPayment> cardPaymentList;
 
     @OneToMany
+    @JoinColumn(name = "payment_transaction_check")
     private List<CheckPayment> checkPaymentList;
 
 }
