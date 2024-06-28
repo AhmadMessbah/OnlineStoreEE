@@ -51,9 +51,6 @@ public class Inventory extends Base {
     @Column(name = "productStock")
     private int productStock;
 
-    @Column(name = "totalStock")
-    private int totalStock;
-
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")
     private Product product;
