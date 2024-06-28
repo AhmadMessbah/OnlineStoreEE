@@ -22,13 +22,13 @@ public class CashPaymentTestServlet extends HttpServlet {
             CashPayment cashPayment1 =
                     CashPayment
                             .builder()
-                            .localDateTime(LocalDateTime.now())
+                            .paymentDateTime(LocalDateTime.now())
                             .build();
 
             CashPayment cashPayment2 =
                     CashPayment
                             .builder()
-                            .localDateTime(LocalDateTime.now())
+                            .paymentDateTime(LocalDateTime.now())
                             .build();
 
             BeanValidator<CashPayment> cashValidator = new BeanValidator<>();
