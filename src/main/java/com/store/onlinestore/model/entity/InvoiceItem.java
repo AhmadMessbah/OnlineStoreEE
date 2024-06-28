@@ -5,22 +5,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
-import jakarta.persistence.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name="invoiceItemEntity")
 @Table(name="invoice_item_tbl")
-public class InvoiceItem {
+public class InvoiceItem extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -5,7 +5,7 @@ import com.store.onlinestore.model.service.*;
 
 import java.time.LocalDateTime;
 
-public class InvoiceTest {
+public class InventoryTest {
     public static void main(String[] args) throws Exception {
         Role customerRole = Role.builder().role("customer").build();
         System.out.println(RoleService.getService().save(customerRole));

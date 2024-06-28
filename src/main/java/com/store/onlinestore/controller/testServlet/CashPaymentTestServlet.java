@@ -2,7 +2,7 @@ package com.store.onlinestore.controller.testServlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.CashPayment;
-import com.store.onlinestore.model.service.CardService;
+import com.store.onlinestore.model.service.CardPaymentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @WebServlet("/Cash.test")
 
-public class CashTestServlet extends HttpServlet {
+public class CashPaymentTestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,13 +22,13 @@ public class CashTestServlet extends HttpServlet {
             CashPayment cashPayment1 =
                     CashPayment
                             .builder()
-                            .localDateTime(LocalDateTime.now())
+                            .paymentDateTime(LocalDateTime.now())
                             .build();
 
             CashPayment cashPayment2 =
                     CashPayment
                             .builder()
-                            .localDateTime(LocalDateTime.now())
+                            .paymentDateTime(LocalDateTime.now())
                             .build();
 
             BeanValidator<CashPayment> cashValidator = new BeanValidator<>();
@@ -45,7 +45,7 @@ public class CashTestServlet extends HttpServlet {
                 System.out.println(cashValidator.validate(cashPayment2));
             }
 
-            System.out.println(CardService.getService().findAll());
+            System.out.println(CardPaymentService.getService().findAll());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

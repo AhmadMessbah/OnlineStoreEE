@@ -34,7 +34,7 @@ public class CrudRepository<T extends Base, I> implements AutoCloseable {
         entityTransaction.begin();
         T t = entityManager.find(tClass, id);
 //        entityManager.remove(t);
-        t.deleted = true;
+        t.setDeleted(true);
         entityTransaction.commit();
         return t;
     }

@@ -3,17 +3,18 @@ package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.CardPayment;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CardService {
+public class CardPaymentService {
 
     @Getter
-    private static CardService service = new CardService();
+    private static CardPaymentService service = new CardPaymentService();
 
-    private CardService() {
+    private CardPaymentService() {
     }
 
     public CardPayment save(CardPayment CardPayment)  throws Exception {

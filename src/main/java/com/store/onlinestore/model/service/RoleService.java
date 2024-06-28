@@ -48,7 +48,8 @@ public class RoleService {
 
     public Role FindByRole(String role) throws Exception {
         try (CrudRepository<Role, String> repository = new CrudRepository<>()) {
-            Map<String, Object> params = null;
+            Map<String, Object> params = new HashMap<>();
+            params.put("role", role);
             List<Role> result = repository.executeQuery( "Role.FindByRole", params, Role.class);
             if (result.isEmpty()) {
                 return null;

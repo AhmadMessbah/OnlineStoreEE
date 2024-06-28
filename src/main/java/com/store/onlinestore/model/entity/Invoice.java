@@ -2,21 +2,19 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
@@ -27,7 +25,7 @@ import java.util.List;
         @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime")
 })
 
-public class Invoice {
+public class Invoice extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -50,8 +48,8 @@ public class Invoice {
     @Column(name = "invoice_comment")
     private String invoiceComment;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    @JoinColumn(name= "invoiceItem_id")
+    @OneToMany(mappedBy = "invoice")
+//    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 
     @Column(name = "discount")
@@ -75,6 +73,13 @@ public class Invoice {
     public int getPureAmount(){
         pureAmount = getAmount() - discount;
         return pureAmount;
+    }
+
+    public void addItem(InvoiceItem item){
+        if(invoiceItemList == null){
+            invoiceItemList = new ArrayList<>();
+        }
+        invoiceItemList.add(item);
     }
 }
 

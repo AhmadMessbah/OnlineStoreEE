@@ -2,11 +2,9 @@ package com.store.onlinestore.model.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
+
 
 @Entity(name = "productGroupEntity")
 @Table(name="product_group_tbl")
@@ -26,7 +24,7 @@ import java.util.List;
         @NamedQuery(name = "ProductGroup.FindByParentName", query = "select p from productGroupEntity p where p.parentGroup.name =:name")
 
 })
-public class ProductGroup {
+public class ProductGroup extends Base{
     @Id
     @SequenceGenerator(name = "productGroupSeq", sequenceName = "product_group_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productGroupSeq")
@@ -43,15 +41,10 @@ public class ProductGroup {
     @Column(name = "is_active")
     private boolean status;
 
-    // TODO: ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) روی این حالت باشد این خطا را میدهد cascade اگر
-    // TODO: Converting `org.hibernate.PersistentObjectException` to JPA `PersistenceException` : detached entity passed to persist: com.store.onlinestore.model.entity.ProductGroup
     @ManyToOne
-    @JoinTable(name = "product_group_relation_tbl")
     private ProductGroup parentGroup;
 
-    // TODO: نباشد این خطا را میدهد fetch = FetchType.EAGER اگر
-    // TODO: failed to lazily initialize a collection of role: com.store.onlinestore.model.entity.ProductGroup.childGroupList: could not initialize proxy - no Session
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, mappedBy = "parentGroup")
+    @OneToMany( fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "parentGroup")
     private List<ProductGroup> childGroupList;
 
 
