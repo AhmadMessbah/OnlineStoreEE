@@ -54,7 +54,6 @@ public class InventoryTransactionService {
             } else {
                 return result.get(0);
             }
-
         }
     }
 

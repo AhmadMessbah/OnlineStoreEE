@@ -28,6 +28,9 @@ public class InventoryTransaction extends Base{
     @Column(name = "registerDateTime")
     private LocalDateTime registerDateTime;
 
+    @Column(name = "transaction_type")
+    private String transactionType;
+
     @OneToOne
     @JoinTable(name = "inventory_transaction_product_tbl")
     private Product product;
