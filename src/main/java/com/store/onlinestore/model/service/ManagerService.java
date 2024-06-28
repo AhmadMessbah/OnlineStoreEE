@@ -1,7 +1,9 @@
 package com.store.onlinestore.model.service;
+
 import com.store.onlinestore.model.entity.Manager;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ public class ManagerService {
 
     public Manager save(Manager manager) throws Exception {
         try (CrudRepository<Manager, Long> repository = new CrudRepository<>()) {
+            manager.setRole(RoleService.getService().FindByRole("manager"));
             return repository.save(manager);
         }
     }

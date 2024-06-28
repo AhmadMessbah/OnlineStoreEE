@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
+
 
 @Entity(name = "productGroupEntity")
 @Table(name="product_group_tbl")
