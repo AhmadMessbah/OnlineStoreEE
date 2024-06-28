@@ -59,10 +59,11 @@ public class DeliveryService {
         }
     }
 
+//todo: Dar Class Invoice Bayad FindByNameAndFamily tarif beshe
 
-    public List<Delivery> deliveryFindByNameAndFamily(String name, String family) throws Exception {
-        InvoiceService.getService().
-    }
+//    public List<Delivery> deliveryFindByNameAndFamily(String name, String family) throws Exception {
+//        InvoiceService.getService().
+//    }
 
     public List<Delivery> deliveryFindByReceiverName(String receiverName) throws Exception {
         try (CrudRepository<Delivery, Object> repository = new CrudRepository<>()) {
