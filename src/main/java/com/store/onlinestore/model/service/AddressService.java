@@ -4,6 +4,7 @@ import com.store.onlinestore.model.entity.Address;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,29 @@ public class AddressService {
             param.put("countryName", countryName);
             param.put("stateName", stateName);
             return repository.executeQuery("Address.FindByCountryAndState", param, Address.class);
+        }
+    }
+    public List<Address> findByCity (String cityName) throws Exception{
+        try (CrudRepository<Address, Long> repository = new CrudRepository()) {
+            Map<String, Object> param = new HashMap<>();
+            param.put("cityName", cityName);
+            return repository.executeQuery("Address.FindByCity", param, Address.class);
+        }
+
+    }
+    public List<Address> findByText (String text) throws  Exception{
+        try (CrudRepository<Address, Long> repository = new CrudRepository()) {
+            Map<String, Object> param = new HashMap<>();
+            param.put("countryName", text+"%");
+            param.put("stateName", text+"%");
+            param.put("cityName", text+"%");
+            param.put("villageName", text+"%");
+            param.put("regionName", text+"%");
+            param.put("streetName", text+"%");
+            param.put("platesNumber", text+"%");
+            param.put("floorNumber", text+"%");
+            param.put("homeUnit", text+"%");
+            return repository.executeQuery("Address.FindByText", param, Address.class);
         }
     }
 

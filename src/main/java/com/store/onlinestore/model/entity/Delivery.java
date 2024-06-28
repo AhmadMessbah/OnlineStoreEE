@@ -20,12 +20,12 @@ import java.time.LocalDateTime;
 
 @NamedQueries(
         {
-                @NamedQuery(name = "Delivery.FindByOrderId", query = "SELECT O FROM deliveryEntity O WHERE O.orderId=orderId")
-                , @NamedQuery(name = "Delivery.FindByName", query = "SELECT O FROM deliveryEntity O WHERE O.invoice.customer.name LIKE :customerName")
-                , @NamedQuery(name = "Delivery.FindByFamily", query = "SELECT O FROM deliveryEntity O WHERE O.invoice.customer.family LIKE :customerFamily")
-                , @NamedQuery(name = "Delivery.FindByNameAndFamily", query = "SELECT O FROM deliveryEntity O WHERE O.invoice.customer.name LIKE :customerName AND O.invoice.customer.family LIKE : customerFamily")
-                , @NamedQuery(name = "Delivery.FindByReceiverName", query = "SELECT O FROM deliveryEntity O WHERE O.receiverName=receiverName")
-                , @NamedQuery(name = "Delivery.FindByDeliveryStatus", query = "SELECT O FROM deliveryEntity O WHERE O.deliveryStatus=deliveryStatus")
+                @NamedQuery(name = "Delivery.FindByOrderId", query = "SELECT oo FROM deliveryEntity oo WHERE oo.orderId=orderId")
+                , @NamedQuery(name = "Delivery.FindByName", query = "SELECT oo FROM deliveryEntity oo WHERE oo.invoice.customer.name LIKE :customerName")
+                , @NamedQuery(name = "Delivery.FindByFamily", query = "SELECT oo FROM deliveryEntity oo WHERE oo.invoice.customer.family LIKE :customerFamily")
+                , @NamedQuery(name = "Delivery.FindByNameAndFamily", query = "SELECT oo FROM deliveryEntity oo WHERE oo.invoice.customer.name LIKE :customerName AND oo.invoice.customer.family LIKE : customerFamily")
+                , @NamedQuery(name = "Delivery.FindByReceiverName", query = "SELECT oo FROM deliveryEntity oo WHERE oo.receiverName=receiverName")
+                , @NamedQuery(name = "Delivery.FindByDeliveryStatus", query = "SELECT oo FROM deliveryEntity oo WHERE oo.deliveryStatus=deliveryStatus")
         }
 )
 
