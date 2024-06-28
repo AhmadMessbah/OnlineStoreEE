@@ -50,11 +50,11 @@ public class Delivery extends Base {
     private String receiverName;
 
     @Column(name = "delivery_method", length = 15)
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private DeliveryMethod deliveryMethod;
 
     @Column(name = "status", length = 15)
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private DeliveryStatus deliveryStatus;
 
     @Column(name = "sending_date_time")
@@ -67,8 +67,9 @@ public class Delivery extends Base {
     private LocalDateTime returnedDateTime;
 
     // todo : attachment signature
-    @Column(name = "signature_link")
-    private String signature;
+//    @Column(name = "signature_link")
+//    private String signature;
+
 
     @Column(name = "description")
 //    @Pattern(regexp = "^[a-zA-Z0-9&@$_\\-\\s]{5,255}$",message = "Invalid description")
