@@ -1,6 +1,5 @@
 package com.store.onlinestore.controller.api;
 
-import com.store.onlinestore.model.service.RoleService;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
