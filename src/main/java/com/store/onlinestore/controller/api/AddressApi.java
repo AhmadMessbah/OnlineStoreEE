@@ -12,7 +12,7 @@ public class AddressApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll()throws Exception{
-        return Response.ok().entity(AddressService.getService().addressFindAll()).build();
+        return Response.ok().entity(AddressService.getService().findAll()).build();
     }
 
 }

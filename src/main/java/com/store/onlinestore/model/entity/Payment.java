@@ -1,9 +1,12 @@
 package com.store.onlinestore.model.entity;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
 import java.time.LocalDateTime;
 @NoArgsConstructor
 @Setter
@@ -12,7 +15,6 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class Payment extends Base {
-
     @Column(name = "payment_price")
     private float price;
 

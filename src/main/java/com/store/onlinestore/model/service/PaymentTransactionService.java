@@ -2,6 +2,7 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.PaymentTransactionNotFoundException;
 import com.store.onlinestore.model.entity.Base;
+import com.store.onlinestore.model.entity.PaymentTransaction;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -12,22 +13,22 @@ public class PaymentTransactionService extends Base {
     private PaymentTransactionService() {
     }
 
-    public PaymentTransactionService save(PaymentTransactionService paymentTransactionService) throws Exception {
-        try (CrudRepository<PaymentTransactionService, Long> repository = new CrudRepository<>()) {
-            return repository.save(paymentTransactionService);
+    public PaymentTransaction save(PaymentTransaction paymentTransaction) throws Exception {
+        try (CrudRepository<PaymentTransaction, Long> repository = new CrudRepository<>()) {
+            return repository.save(paymentTransaction);
         }
     }
 
-    public PaymentTransactionService edit(PaymentTransactionService paymentTransactionService) throws Exception {
-        try (CrudRepository<PaymentTransactionService, Long> repository = new CrudRepository<>()) {
-            return repository.save(paymentTransactionService);
+    public PaymentTransaction edit(PaymentTransaction PaymentTransaction) throws Exception {
+        try (CrudRepository<PaymentTransaction, Long> repository = new CrudRepository<>()) {
+            return repository.save(PaymentTransaction);
         }
     }
 
-    public PaymentTransactionService remove(Long id) throws Exception {
-        try (CrudRepository<PaymentTransactionService, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id , PaymentTransactionService.class) != null) {
-                return repository.remove(id, PaymentTransactionService.class);
+    public PaymentTransaction remove(Long id) throws Exception {
+        try (CrudRepository<PaymentTransaction, Long> repository = new CrudRepository<>()) {
+            if (repository.findById(id , PaymentTransaction.class) != null) {
+                return repository.remove(id, PaymentTransaction.class);
             }
             throw new PaymentTransactionNotFoundException();
         }

@@ -31,12 +31,10 @@ public class ProductTestServlet extends HttpServlet {
                             .description("black")
                             .status(true)
                             .brand("benz")
-                            .unitId(null)
-                            .productGroupId(null)
-                            .price(10000)
+                            .unit(null)
+                            .productGroup(null)
                             .dateOfModified(LocalDateTime.now())
                             .barcode("021655632")
-                            .inventoryId(null)
                             .build();
 
             Product product2 =
@@ -46,12 +44,10 @@ public class ProductTestServlet extends HttpServlet {
                             .description("xs55")
                             .status(true)
                             .brand("asus")
-                            .unitId(null)
-                            .productGroupId(null)
-                            .price(20000)
+                            .unit(null)
+                            .productGroup(null)
                             .dateOfModified(LocalDateTime.now())
                             .barcode("54684")
-                            .inventoryId(null)
                             .build();
 
             BeanValidator<Product> productValidator = new BeanValidator<>();
