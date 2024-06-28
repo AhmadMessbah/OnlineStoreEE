@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 
 @Entity(name = "cashEntity")
 @Table(name = "cash_tbl")
 
 @NamedQueries({
-        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime")
+        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime"),
+        @NamedQuery(name = "Cash.FindById", query = "select c from checkEntity c where c.id = id"),
+
 })
 
 public class CashPayment extends Payment {
