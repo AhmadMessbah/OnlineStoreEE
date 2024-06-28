@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
         ,@NamedQuery(name = "Address.FindByCountryAndState", query = "SELECT oo FROM addressEntity oo WHERE oo.countryName=:countryName AND oo.stateName=:stateName ")
         ,@NamedQuery(name = "Address.FindByCity", query ="SELECT oo FROM addressEntity oo WHERE  oo.cityName=:cityName" )
         ,@NamedQuery(name = "Address.FindByText",query = "SELECT oo FROM  addressEntity  oo" +
-        " WHERE oo.countryName LIKE: countryName OR oo.stateName LIKE: stateName OR oo.cityName LIKE:  cityName OR oo.villageName LIKE: villageName" +
+        " WHERE oo.countryName LIKE: countryName OR oo.stateName LIKE: stateName OR oo.cityName LIKE: cityName OR oo.villageName LIKE: villageName" +
         " OR oo.regionName LIKE: regionName OR oo.streetName LIKE: streetName OR oo.platesNumber LIKE:  platesNumber" +
         " OR oo.floorNumber LIKE:  floorNumber OR oo.homeUnit LIKE: homeUnit")
 }
