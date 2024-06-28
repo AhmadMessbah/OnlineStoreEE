@@ -5,7 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,12 +23,13 @@ import java.util.List;
 })
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "productSeq", sequenceName = "product_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSeq")
     @Column(name = "id")
     private Long id;
 
     @Column(name = "name", length = 60)
-    @Pattern(regexp = "^[a-zA-Z\\s]{3,60}$", message = "Invalid Name")
+//    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,60}$", message = "Invalid Name")
     private String name;
 
     @Column(name = "description")
@@ -37,30 +39,33 @@ public class Product {
     private boolean status;
 
     @Column(name = "brand")
+//    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,60}$", message = "Invalid Brand")
     private String brand;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "unit_id")
     private ProductUnit unitId;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "product_group_id")
     private ProductGroup productGroupId;
 
     @Column(name = "price")
+//    @Pattern(regexp = "^\\d{3,15}$", message = "Invalid Price")
     private Integer price;
 
 //    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    private List<Attachment> attachmentList;
 
     @Column(name = "date_of_modified")
-    private Date dateOfModified;
+    private LocalDateTime dateOfModified;
 
     @Column(name = "barcode", unique = true)
+//    @Pattern(regexp = "^\\d{3,30}$", message = "Invalid Barcode")
     private String barcode;
 
 
-//    todo :
-    @ManyToOne
-    private Inventory inventory;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventoryId;
 }

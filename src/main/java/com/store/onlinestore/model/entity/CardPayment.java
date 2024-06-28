@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -14,21 +15,22 @@ import java.time.LocalDateTime;
 @ToString
 @Entity(name = "cardEntity")
 @Table(name = "card_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Card.FindByCardNumber", query = "select c from cardEntity  c where c.cardNumber =cardNumber")
-})
-public class CardPayment extends Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
-    @Column(name = "cardNumber" ,unique = true)
-    private long cardNumber;
-    @Column(name = "cvv2")
-    private int cvv2;
 
-    @Column(name = "card_expire_date")
-    private LocalDateTime cardExpireDate;
+@NamedQueries({
+        @NamedQuery(name = "Card.FindByCardNumber", query = "select c from cardEntity  c where c.cardNumber =cardNumber"),
+        @NamedQuery(name = "Card.FindByDateTime", query = "select c from checkEntity c where c.dateTime = dateTime")
+})
+
+public class CardPayment extends Payment {
+
+    @ManyToOne
+    private Customer customer;
+
+    @Column(name = "card_number" ,length = 20, unique = true)
+    private Long cardNumber;
+
+    @Column(name = "date_time")
+    private LocalDateTime localDateTime;
 }
 
 
