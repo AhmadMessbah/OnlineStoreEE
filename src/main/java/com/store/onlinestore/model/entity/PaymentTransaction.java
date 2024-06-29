@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -13,24 +14,46 @@ import java.util.List;
 @SuperBuilder
 @Entity(name="paymentTransaction")
 @Table(name = "payment_transaction_tbl")
-// todo : javase polymorphism
-// todo : transaction dateTime
 public class PaymentTransaction extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
-    @OneToMany
-    @JoinTable(name = "payment_transaction_cash")
+    @ManyToOne
+    private Customer customer;
+
+//    todo : relation not saved
+    @OneToMany(mappedBy = "paymentTransaction")
+//    @JoinTable(name = "payment_transaction_cash")
     private List<CashPayment> cashPaymentList;
 
-    @OneToMany
-    @JoinColumn(name = "payment_transaction_card")
+    @OneToMany(mappedBy = "paymentTransaction")
+//    @JoinTable(name = "payment_transaction_card")
     private List<CardPayment> cardPaymentList;
 
-    @OneToMany
-    @JoinColumn(name = "payment_transaction_check")
+    @OneToMany(mappedBy = "paymentTransaction")
+//    @JoinTable(name = "payment_transaction_check")
     private List<CheckPayment> checkPaymentList;
 
+    public void addCashPayment(CashPayment cashPayment) {
+        if (cashPaymentList == null) {
+            cashPaymentList = new ArrayList<>();
+        }
+        cashPaymentList.add(cashPayment);
+    }
+
+    public void addCardPayment(CardPayment cardPayment) {
+        if (cardPaymentList == null) {
+            cardPaymentList = new ArrayList<>();
+        }
+        cardPaymentList.add(cardPayment);
+    }
+
+    public void addCheckPayment(CheckPayment checkPayment) {
+        if (checkPaymentList == null) {
+            checkPaymentList = new ArrayList<>();
+        }
+        checkPaymentList.add(checkPayment);
+    }
 }

@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.UniqueElements;
         @NamedQuery(name = "Person.FindByPhoneNumber", query = "select p from personEntity p where p.phoneNumber =:phoneNumber")
 })
 
-public class Person {
+public class Person extends Base {
     @Id
     @SequenceGenerator(name = "personSeq", sequenceName = "person_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeq")

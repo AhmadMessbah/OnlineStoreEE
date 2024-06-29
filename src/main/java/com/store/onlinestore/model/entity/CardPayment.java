@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -18,8 +16,9 @@ import java.time.LocalDateTime;
 
 @NamedQueries({
         @NamedQuery(name = "Card.FindByCardNumber", query = "select c from cardEntity  c where c.cardNumber =cardNumber"),
-        @NamedQuery(name = "Card.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime"),
-        @NamedQuery(name = "Card.FindById", query = "select c from checkEntity c where c.id = id")
+        @NamedQuery(name = "Card.FindByDateTime", query = "select c from cardEntity c where c.paymentDateTime = paymentDateTime"),
+        @NamedQuery(name = "Card.FindById", query = "select c from cardEntity c where c.id = id"),
+        @NamedQuery(name = "Card.FindByBankName", query = "select c from cardEntity c where c.bankName = bankName")
 })
 
 public class CardPayment extends Payment {
@@ -29,11 +28,14 @@ public class CardPayment extends Payment {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    private Customer customer;
+    @Column(name="bank_name")
+    private  String bankName;
 
     @Column(name = "card_number" ,length = 20, unique = true)
     private Long cardNumber;
+
+    @ManyToOne
+    private PaymentTransaction paymentTransaction;
 }
 
 
