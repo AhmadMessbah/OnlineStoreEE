@@ -1,7 +1,10 @@
 import com.store.onlinestore.model.entity.*;
 import com.store.onlinestore.model.entity.enums.FileType;
 import com.store.onlinestore.model.entity.enums.UserState;
-import com.store.onlinestore.model.service.*;
+import com.store.onlinestore.model.service.AdminService;
+import com.store.onlinestore.model.service.CustomerService;
+import com.store.onlinestore.model.service.ManagerService;
+import com.store.onlinestore.model.service.RoleService;
 
 import java.time.LocalDateTime;
 
@@ -34,14 +37,14 @@ public class PersonsTest {
         Role managerRole = Role.builder().role("manager").build();
         System.out.println(RoleService.getService().save(managerRole));
 
-        Address address = Address
+   /**     Address address = Address
                 .builder()
                 .countryName("Iran")
                 .stateName("Tehran")
                 .cityName("Tehran")
                 .build();
-        System.out.println(AddressService.getService().save(address));
-
+        System.out.println(AddressService.getService().addressSave(address));
+*/
         Admin admin =
                 builder()
                         .name("leva")
