@@ -1,5 +1,6 @@
 package com.store.onlinestore.model.service;
 
+import com.store.onlinestore.controller.exception.InventoryNotEnoughException;
 import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
 import com.store.onlinestore.model.entity.InventoryTransaction;
@@ -21,8 +22,13 @@ public class InventoryService {
     public Inventory save(Inventory inventory) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Inventory retrivedInventory = findByName(inventory.getProduct().getName());
-            if (retrivedInventory.getProductStock() != 0) {
-                inventory.setProductStock(retrivedInventory.getProductStock() + inventory.getProductStock());
+            if (retrivedInventory != null) {
+                int count = retrivedInventory.getProductStock() + inventory.getProductStock();
+                if (count > 0) {
+                    retrivedInventory.setProductStock(count);
+                    return edit(retrivedInventory);
+                }
+                throw new InventoryNotEnoughException();
             }
             return repository.save(inventory);
         }
@@ -58,8 +64,8 @@ public class InventoryService {
     public Inventory findByProductID(Long productId) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("productId", productId+"%");
-            List<Inventory> result= repository.executeQuery("findByProductId", params, Inventory.class);
+            params.put("productId", productId + "%");
+            List<Inventory> result = repository.executeQuery("findByProductId", params, Inventory.class);
             if (result.isEmpty()) {
                 return null;
             } else {
@@ -68,11 +74,12 @@ public class InventoryService {
 
         }
     }
+
     public Inventory findByName(String name) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name + "%");
-            List<Inventory> result= repository.executeQuery("findByInventoryName", params, Inventory.class);
+            List<Inventory> result = repository.executeQuery("findByInventoryName", params, Inventory.class);
             if (result.isEmpty()) {
                 return null;
             } else {

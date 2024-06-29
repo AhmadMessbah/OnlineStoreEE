@@ -18,7 +18,6 @@ import java.util.List;
 @Entity(name = "inventoryEntity")
 @Table(name = "inventory_tbl")
 @NamedQueries({
-        // TODO: 6/20/2024 check product list 
         @NamedQuery(name = "findByProductId", query = "select p from productEntity p where p.id=:id "),
         @NamedQuery(name = "findByInventoryName", query = "select p from productEntity p where p.name like :name")
 })
@@ -43,12 +42,10 @@ public class Inventory extends Base {
     @JoinTable(name = "inventory_supplier_tbl")
     private List<Supplier> supplierList;
 
-
     public void addSupplier(Supplier supplier) {
         if (supplierList == null) {
             supplierList = new ArrayList<>();
         }
         supplierList.add(supplier);
     }
-
 }
