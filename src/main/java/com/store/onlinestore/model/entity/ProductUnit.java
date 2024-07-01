@@ -38,4 +38,5 @@ public class ProductUnit extends Base {
     @Column(name = "description")
     private String description;
 
+
 }

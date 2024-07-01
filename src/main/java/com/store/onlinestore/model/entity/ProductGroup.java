@@ -56,4 +56,5 @@ public class ProductGroup extends Base{
         childGroupList.add(childGroup);
     }
 
+
 }
