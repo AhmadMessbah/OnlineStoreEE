@@ -19,9 +19,9 @@ import java.util.List;
 @Entity(name = "productGroupEntity")
 @Table(name="product_group_tbl")
 @NamedQueries({
-        @NamedQuery(name = "ProductGroup.FindByName", query = "select p from productGroupEntity  p where p.name like :name "),
-        @NamedQuery(name = "ProductGroup.FindByStatus", query = "select p from productGroupEntity p where p.status =:status"),
-        @NamedQuery(name = "ProductGroup.FindByParentName", query = "select p from productGroupEntity p where p.parentGroup.name =:name")
+        @NamedQuery(name = "ProductGroup.FindByName", query = "select p from productGroupEntity  p where p.name like :name and p.deleted=false"),
+        @NamedQuery(name = "ProductGroup.FindByStatus", query = "select p from productGroupEntity p where p.status =:status and p.deleted=false"),
+        @NamedQuery(name = "ProductGroup.FindByParentName", query = "select p from productGroupEntity p where p.parentGroup.name =:name and p.deleted=false")
 
 })
 public class ProductGroup extends Base{
@@ -42,6 +42,7 @@ public class ProductGroup extends Base{
     private boolean status;
 
     @ManyToOne
+    @JoinTable(name = "product_group_relation_tbl")
     private ProductGroup parentGroup;
 
     @OneToMany( fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "parentGroup")

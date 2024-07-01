@@ -14,8 +14,8 @@ import lombok.experimental.SuperBuilder;
 
 
 @NamedQueries({
-    @NamedQuery(name = "ProductUnit.FindByName", query = "select u from productUnitEntity u where u.name like :name"),
-    @NamedQuery(name = "ProductUnit.FindBySymbol", query = "select u from productUnitEntity u where u.symbol =:symbol")
+    @NamedQuery(name = "ProductUnit.FindByName", query = "select u from productUnitEntity u where u.name like :name and u.deleted=false"),
+    @NamedQuery(name = "ProductUnit.FindBySymbol", query = "select u from productUnitEntity u where u.symbol =:symbol and u.deleted=false")
 })
 
 @Entity(name = "productUnitEntity")
