@@ -7,8 +7,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -18,10 +17,11 @@ import java.util.List;
 @Entity(name = "inventory_transaction")
 @Table(name = "inventory_transaction_tbl")
 @NamedQueries({
-        @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select p from personEntity p where p.name like :name and p.family like :family"),
+        @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select d from personEntity d where d.name like :name and d.family like :family"),
+        @NamedQuery(name = "TransactionInventory.FindByReceiverPerson", query = "select r from personEntity r where r.name like :name and r.family like :family"),
         @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
 })
-public class InventoryTransaction extends Base{
+public class InventoryTransaction extends Base {
     @Id
     @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_transaction_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventoryTransactionSeq")
@@ -31,14 +31,8 @@ public class InventoryTransaction extends Base{
     private LocalDateTime registerDateTime;
 
     @OneToOne
-    private ProductUnit unit;
-
-    @OneToOne
-    private ProductGroup group;
-
-    @OneToMany
     @JoinTable(name = "inventory_transaction_product_tbl")
-    private List<Product> productList;
+    private Product product;
 
     @ManyToOne
     private Manager deliveryPerson;
@@ -46,11 +40,8 @@ public class InventoryTransaction extends Base{
     @ManyToOne
     private Customer receiverPerson;
 
-
-    public void addProduct(Product product) {
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        productList.add(product);
+    @PrePersist
+    protected void beforeInsert() {
+        registerDateTime = LocalDateTime.now();
     }
 }

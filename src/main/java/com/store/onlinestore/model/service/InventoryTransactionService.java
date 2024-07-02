@@ -9,24 +9,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionService {
+public class InventoryTransactionService {
     @Getter
-    private static TransactionService service = new TransactionService();
+    private static InventoryTransactionService service = new InventoryTransactionService();
 
-    private TransactionService(){}
+    private InventoryTransactionService() {
+    }
+
     public InventoryTransaction save(InventoryTransaction inventoryTransaction) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             return repository.save(inventoryTransaction);
         }
     }
+
     public InventoryTransaction edit(InventoryTransaction inventoryTransaction) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             return repository.edit(inventoryTransaction);
         }
     }
+
     public InventoryTransaction remove(Long id) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id , InventoryTransaction.class) != null){
+            if (repository.findById(id, InventoryTransaction.class) != null) {
                 return repository.remove(id, InventoryTransaction.class);
             }
             throw new TransactionNotFoundException();
@@ -38,14 +42,25 @@ public class TransactionService {
             return repository.findAll(InventoryTransaction.class);
         }
     }
-    public List<InventoryTransaction> findByNameAndFamily(String name, String family) throws Exception {
+
+    public List<InventoryTransaction> findByDeliverPerson(String name, String family) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
-            return repository.executeQuery("TransactionInventory.FindByNameAndFamily", params, InventoryTransaction.class);
+            params.put("name", name + "%");
+            params.put("family", family + "%");
+            return repository.executeQuery("TransactionInventory.FindByDeliverPerson", params, InventoryTransaction.class);
         }
     }
+
+    public List<InventoryTransaction> findByReceiverPerson(String name, String family) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", name + "%");
+            params.put("family", family + "%");
+            return repository.executeQuery("TransactionInventory.FindByReceiverPerson", params, InventoryTransaction.class);
+        }
+    }
+
     public InventoryTransaction findByPhoneNumber(String phoneNumber) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
