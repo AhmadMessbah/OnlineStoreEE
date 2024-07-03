@@ -14,12 +14,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @SuperBuilder
 
-@Entity(name = "inventory_transaction")
+@Entity(name = "inventoryTransactionEntity")
 @Table(name = "inventory_transaction_tbl")
 @NamedQueries({
-        @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select d from personEntity d where d.name like :name and d.family like :family"),
-        @NamedQuery(name = "TransactionInventory.FindByReceiverPerson", query = "select r from personEntity r where r.name like :name and r.family like :family"),
-        @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
+        @NamedQuery(name = "FindByDeliverPerson", query = "select d from inventoryTransactionEntity d where d.deliveryPerson.name like :name and d.deliveryPerson.family like :family"),
+        @NamedQuery(name = "FindByReceiverPerson", query = "select r from inventoryTransactionEntity r where r.receiverPerson.name like :name and r.receiverPerson.family like :family"),
+        @NamedQuery(name = "FindByRegisterDateTime" , query = "select oo from inventoryTransactionEntity oo where oo.registerDateTime=:registerDateTime"),
+        @NamedQuery(name = "findByProductId" , query = "select oo from inventoryTransactionEntity oo where oo.productId.id=:productId")
 })
 public class InventoryTransaction extends Base {
     @Id
@@ -32,7 +33,7 @@ public class InventoryTransaction extends Base {
 
     @OneToOne
     @JoinTable(name = "inventory_transaction_product_tbl")
-    private Product product;
+    private Product productId;
 
     @ManyToOne
     private Manager deliveryPerson;
