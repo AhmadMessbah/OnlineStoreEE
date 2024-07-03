@@ -5,6 +5,7 @@ import com.store.onlinestore.model.entity.InventoryTransaction;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,18 +62,18 @@ public class InventoryTransactionService {
         }
     }
 
-    public List<InventoryTransaction>  findByRegisterDateTime(String phone) throws Exception {
+    public List<InventoryTransaction>  findByRegisterDateTime(LocalDateTime dateTime) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("registerDateTime", phone + "%");
+            params.put("registerDateTime", dateTime + "%");
             return repository.executeQuery("InventoryTransaction.FindByRegisterDateTime", params, InventoryTransaction.class);
         }
     }
 
-    public InventoryTransaction findByProductId(String phone) throws Exception {
+    public InventoryTransaction findByProductId(Long productId) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("productId", phone + "%");
+            params.put("productId", productId + "%");
             List<InventoryTransaction> result = repository.executeQuery("InventoryTransaction.findByProductId", params, InventoryTransaction.class);
             if (result.isEmpty()) {
                 return null;
@@ -82,10 +83,10 @@ public class InventoryTransactionService {
         }
     }
 
-    public List<InventoryTransaction> findByTransactionType(String phone) throws Exception {
+    public List<InventoryTransaction> findByTransactionType(String transactionType) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("transactionType", phone + "%");
+            params.put("transactionType", transactionType + "%");
             return repository.executeQuery("InventoryTransaction.FindByTransactionType", params, InventoryTransaction.class);
         }
     }
