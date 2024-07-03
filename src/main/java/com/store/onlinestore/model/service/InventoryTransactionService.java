@@ -1,7 +1,6 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.TransactionNotFoundException;
-import com.store.onlinestore.model.entity.Inventory;
 import com.store.onlinestore.model.entity.InventoryTransaction;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
