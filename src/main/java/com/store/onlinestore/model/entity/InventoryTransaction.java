@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "FindByDeliverPerson", query = "select d from inventoryTransactionEntity d where d.deliveryPerson.name like :name and d.deliveryPerson.family like :family"),
         @NamedQuery(name = "FindByReceiverPerson", query = "select r from inventoryTransactionEntity r where r.receiverPerson.name like :name and r.receiverPerson.family like :family"),
         @NamedQuery(name = "FindByRegisterDateTime" , query = "select oo from inventoryTransactionEntity oo where oo.registerDateTime=:registerDateTime"),
+        @NamedQuery(name = "FindByTransactionType" , query = "select oo from inventoryTransactionEntity oo where oo.transactionType=:transactionType"),
         @NamedQuery(name = "findByProductId" , query = "select oo from inventoryTransactionEntity oo where oo.productId.id=:productId")
 })
 public class InventoryTransaction extends Base {
@@ -34,6 +35,9 @@ public class InventoryTransaction extends Base {
     @OneToOne
     @JoinTable(name = "inventory_transaction_product_tbl")
     private Product productId;
+
+    @Column(name = "transaction_type")
+    private String transactionType;
 
     @ManyToOne
     private Manager deliveryPerson;
