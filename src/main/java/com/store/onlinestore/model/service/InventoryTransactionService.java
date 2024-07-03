@@ -1,6 +1,6 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.InventoryTransactionNotFoundException;
+import com.store.onlinestore.controller.exception.TransactionNotFoundException;
 import com.store.onlinestore.model.entity.InventoryTransaction;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class InventoryTransactionService {
             if (repository.findById(id, InventoryTransaction.class) != null) {
                 return repository.remove(id, InventoryTransaction.class);
             }
-            throw new InventoryTransactionNotFoundException();
+            throw new TransactionNotFoundException();
         }
     }
 
@@ -43,25 +43,29 @@ public class InventoryTransactionService {
         }
     }
 
-    public InventoryTransaction findByDeliverPerson(String name, String family) throws Exception {
+    public List<InventoryTransaction> findByDeliverPerson(String name, String family) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("name", name + "%");
             params.put("family", family + "%");
-            List<InventoryTransaction> result = repository.executeQuery("InventoryTransaction.FindByDeliverPerson", params, InventoryTransaction.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
+            return repository.executeQuery("TransactionInventory.FindByDeliverPerson", params, InventoryTransaction.class);
         }
     }
 
-    public InventoryTransaction findByPhoneNumber(String phone) throws Exception {
+    public List<InventoryTransaction> findByReceiverPerson(String name, String family) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("phoneNumber", phone + "%");
-            List<InventoryTransaction> result = repository.executeQuery("InventoryTransaction.FindByPhoneNumber", params, InventoryTransaction.class);
+            params.put("name", name + "%");
+            params.put("family", family + "%");
+            return repository.executeQuery("TransactionInventory.FindByReceiverPerson", params, InventoryTransaction.class);
+        }
+    }
+
+    public InventoryTransaction findByPhoneNumber(String phoneNumber) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("phoneNumber", phoneNumber);
+            List<InventoryTransaction> result = repository.executeQuery("TransactionInventory.FindByPhoneNumber", params, InventoryTransaction.class);
             if (result.isEmpty()) {
                 return null;
             } else {

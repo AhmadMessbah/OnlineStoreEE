@@ -1,9 +1,7 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.InventoryNotEnoughException;
 import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.entity.InventoryTransaction;
 import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
@@ -21,15 +19,6 @@ public class InventoryService {
 
     public Inventory save(Inventory inventory) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            Inventory retrivedInventory = findByName(inventory.getProduct().getName());
-            if (retrivedInventory != null) {
-                int count = retrivedInventory.getProductStock() + inventory.getProductStock();
-                if (count > 0) {
-                    retrivedInventory.setProductStock(count);
-                    return edit(retrivedInventory);
-                }
-                throw new InventoryNotEnoughException();
-            }
             return repository.save(inventory);
         }
     }
@@ -61,31 +50,25 @@ public class InventoryService {
         }
     }
 
-    public Inventory findByProductID(Long productId) throws Exception {
+
+    public List<Inventory> findByProductID(Long productId) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("productId", productId + "%");
-            List<Inventory> result = repository.executeQuery("findByProductId", params, Inventory.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-
+            return repository.executeQuery("findByProductId", params, Inventory.class);
         }
     }
 
-    public Inventory findByName(String name) throws Exception {
+    public Inventory findByInventoryName(String inventoryName) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name + "%");
+            params.put("inventoryNumber", inventoryName + "%");
             List<Inventory> result = repository.executeQuery("findByInventoryName", params, Inventory.class);
             if (result.isEmpty()) {
                 return null;
             } else {
                 return result.get(0);
             }
-
         }
     }
 }
