@@ -7,21 +7,22 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @SuperBuilder
 
-@Entity(name = "inventory_transaction")
+@Entity(name = "inventoryTransactionEntity")
 @Table(name = "inventory_transaction_tbl")
 @NamedQueries({
-        @NamedQuery(name = "TransactionInventory.FindByDeliverPerson", query = "select p from personEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "TransactionInventory.FindByPhoneNumber", query = "select p from personEntity  p where p.phoneNumber=:phoneNumber")
+        @NamedQuery(name = "FindByDeliverPerson", query = "select d from inventoryTransactionEntity d where d.deliveryPerson.name like :name and d.deliveryPerson.family like :family"),
+        @NamedQuery(name = "FindByReceiverPerson", query = "select r from inventoryTransactionEntity r where r.receiverPerson.name like :name and r.receiverPerson.family like :family"),
+        @NamedQuery(name = "FindByRegisterDateTime" , query = "select oo from inventoryTransactionEntity oo where oo.registerDateTime=:registerDateTime"),
+        @NamedQuery(name = "findByProductId" , query = "select oo from inventoryTransactionEntity oo where oo.productId.id=:productId")
 })
-public class InventoryTransaction extends Base{
+public class InventoryTransaction extends Base {
     @Id
     @SequenceGenerator(name = "inventoryTransactionSeq", sequenceName = "inventory_transaction_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventoryTransactionSeq")
@@ -31,14 +32,8 @@ public class InventoryTransaction extends Base{
     private LocalDateTime registerDateTime;
 
     @OneToOne
-    private ProductUnit unit;
-
-    @OneToOne
-    private ProductGroup group;
-
-    @OneToMany
     @JoinTable(name = "inventory_transaction_product_tbl")
-    private List<Product> productList;
+    private Product productId;
 
     @ManyToOne
     private Manager deliveryPerson;
@@ -46,11 +41,8 @@ public class InventoryTransaction extends Base{
     @ManyToOne
     private Customer receiverPerson;
 
-
-    public void addProduct(Product product) {
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        productList.add(product);
+    @PrePersist
+    protected void beforeInsert() {
+        registerDateTime = LocalDateTime.now();
     }
 }

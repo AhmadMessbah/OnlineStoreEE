@@ -2,7 +2,6 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -54,23 +53,21 @@ public class InventoryService {
     public List<Inventory> findByProductID(Long productId) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("productId", productId+"%");
+            params.put("productId", productId + "%");
             return repository.executeQuery("findByProductId", params, Inventory.class);
         }
     }
-    public List<Inventory> findByName(String name) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name + "%");
-            return repository.executeQuery("findByInventoryName", params, Inventory.class);
-        }
-    }
 
-    public Supplier findByInventoryNumber(String inventoryNumber) throws Exception {
+    public Inventory findByInventoryName(String inventoryName) throws Exception {
         try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("inventoryNumber", inventoryNumber + "%");
-            return (Supplier) repository.executeQuery("findByCompany", params, Inventory.class);
+            params.put("inventoryNumber", inventoryName + "%");
+            List<Inventory> result = repository.executeQuery("findByInventoryName", params, Inventory.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
         }
     }
 }

@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +19,8 @@ import java.util.List;
 @Entity(name = "inventoryEntity")
 @Table(name = "inventory_tbl")
 @NamedQueries({
-        // TODO: 6/20/2024 check product list 
         @NamedQuery(name = "findByProductId", query = "select p from inventoryEntity p where p.product.id=:productId "),
-        @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.InventoryName like :name"),
-        @NamedQuery(name = "findByInventoryNumber", query = "select p from inventoryEntity p where p.inventoryNumber=:inventoryNumber")
+        @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.name like :name")
 })
 public class Inventory extends Base {
 
@@ -34,25 +29,18 @@ public class Inventory extends Base {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventorySeq")
     private int id;
 
-    @Column(name = "inventoryName")
+    @Column(name = "name")
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
-    private String InventoryName;
+    private String name;
 
-    @Column(name = "inventoryDescription")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "inventoryNumber")
-//    @Pattern(regexp = "^//d")
-    private String inventoryNumber;
+    @Column(name = "count")
+    private int count;
 
-    @Column(name = "inventoryType")
-    private String inventoryType;
-
-    @Column(name = "productStock")
-    private int productStock;
-
-    @Column(name = "totalStock")
-    private int totalStock;
+    @Column(name = "location")
+    private String loction;
 
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")
@@ -69,5 +57,4 @@ public class Inventory extends Base {
         }
         supplierList.add(supplier);
     }
-
 }

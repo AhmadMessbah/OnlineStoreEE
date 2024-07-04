@@ -22,12 +22,10 @@ public class InventoryTestServlet extends HttpServlet {
             Inventory inventory =
                     Inventory
                             .builder()
-                            .InventoryName("anbar")
+                            .description("Test Inventory Servlet")
                             .productStock(10)
-                            .totalStock(5)
-                            // TODO: 6/26/2024 checked
-//                        .supplierList()
-//                        .productList()
+                            .product(null)
+                            .supplierList(null)
                             .build();
 
             BeanValidator<Inventory> inventoryBeanValidator = new BeanValidator<>();
@@ -36,9 +34,6 @@ public class InventoryTestServlet extends HttpServlet {
             } else {
                 System.out.println(inventoryBeanValidator.validate(inventory));
             }
-
-
-            System.out.println(InventoryService.getService().findAll());
 
             System.out.println(InventoryService.getService().findAll());
         } catch (

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.naming.Name;
 
 @Getter
 @Setter
@@ -17,8 +16,8 @@ import javax.naming.Name;
 @Entity(name = "supplierEntity")
 @Table(name = "supplier_tbl")
 @NamedQueries({
-        @NamedQuery(name = "supplier.FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "supplier.FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobailphone"),
+        @NamedQuery(name = "FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
+        @NamedQuery(name = "FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobailphone"),
         @NamedQuery(name = "FideByNationalCode", query = "select p from supplierEntity p where p.nationalCode like :nationalCode"),
         @NamedQuery(name = "findByCompany", query = "select p from supplierEntity p where p.companyName like :company")
 })
@@ -28,11 +27,11 @@ public class Supplier extends Base {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplierSeq")
     private Long id;
 
-    @Column(name = "supplier_name")
+    @Column(name = "name")
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
     private String name;
 
-    @Column(name = "supplier_family")
+    @Column(name = "family")
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" , message = "Invalid Family")
     private String family;
 
@@ -48,7 +47,7 @@ public class Supplier extends Base {
 //    @Pattern(regexp = "^\\w{3,35}@(gmail|yahoo|microsoft)\\.com$" ,message = "Invalid Email")
     private String email;
 
-    @Column(name = "companyName")
+    @Column(name = "company_name")
 //    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,50}$" ,message = "Invalid Company Name")
     private String companyName;
 
