@@ -50,7 +50,7 @@ public class AdminService {
     public List<Admin> findByUsername(String username) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
+            params.put("username", username);
             return repository.executeQuery("Admin.FindByUsername", params, Admin.class);
         }
     }
@@ -58,8 +58,8 @@ public class AdminService {
     public List<Admin> findByNameAndFamily(String name, String family) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
+            params.put("name", name + "%");
+            params.put("family", family + "%");
             return repository.executeQuery("Admin.FindByNameAndFamily", params, Admin.class);
         }
     }
@@ -67,15 +67,15 @@ public class AdminService {
     public List<Admin> findByUsernameAndPassword(String username, String password) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
-            params.put("password", password+"%");
+            params.put("username", username);
+            params.put("password", password);
             return repository.executeQuery("Admin.FindByUsernameAndPassword", params, Admin.class);
         }
     }
     public List<Admin> findByEmail(String email) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("email", email+"%");
+            params.put("email", email);
             return repository.executeQuery("Admin.FindByEmail", params, Admin.class);
         }
     }
@@ -94,6 +94,6 @@ public class AdminService {
     }
 }
 
-//    todo : findByUsernameAndPassword, phoneNumber, email, roleName
+
 
 

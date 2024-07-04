@@ -58,7 +58,7 @@ public class CustomerService {
     public List<Customer> findByUsername(String username) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
+            params.put("username", username);
             return repository.executeQuery("Customer.FindByUsername", params, Customer.class);
         }
     }
@@ -66,8 +66,8 @@ public class CustomerService {
     public List<Customer> findByNameAndFamily(String name, String family) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
+            params.put("name", name+ "%");
+            params.put("family", family + "%");
             return repository.executeQuery("Customer.FindByNameAndFamily", params, Customer.class);
         }
     }
@@ -75,8 +75,8 @@ public class CustomerService {
     public List<Customer> findByUsernameAndPassword(String username, String password) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
-            params.put("password", password+"%");
+            params.put("username", username);
+            params.put("password", password);
             return repository.executeQuery("Customer.FindByUsernameAndPassword", params, Customer.class);
         }
     }

@@ -49,7 +49,7 @@ public class ManagerService {
     public List<Manager> findByUsername(String username) throws Exception {
         try (CrudRepository<Manager, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
+            params.put("username", username);
             return repository.executeQuery("Manager.FindByUsername", params, Manager.class);
         }
     }
@@ -66,8 +66,8 @@ public class ManagerService {
     public List<Manager> findByUsernameAndPassword(String username, String password) throws Exception {
         try (CrudRepository<Manager, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
-            params.put("password", password+"%");
+            params.put("username", username);
+            params.put("password", password);
             return repository.executeQuery("Manager.FindByUsernameAndPassword", params, Manager.class);
         }
     }
