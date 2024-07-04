@@ -1,7 +1,6 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Manager;
-import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 

@@ -59,6 +59,7 @@ public class PersonsTest {
         admin.addAttachment(attachment2);
 
         System.out.println(AdminService.getService().save(admin));
+        //System.out.println(AdminService.getService().findAll());
 
         Customer customer =
                 Customer
@@ -76,6 +77,7 @@ public class PersonsTest {
 
 
         System.out.println(CustomerService.getService().save(customer));
+     //   System.out.println(CustomerService.getService().findAll());
 
         Manager manager =
                 Manager
@@ -92,5 +94,7 @@ public class PersonsTest {
                         .build();
 
         System.out.println(ManagerService.getService().save(manager));
+       // System.out.println(ManagerService.getService().findAll());
+
     }
 }
