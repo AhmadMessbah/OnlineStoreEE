@@ -1,7 +1,6 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.CustomerNotFoundException;
-import com.store.onlinestore.model.entity.Admin;
 import com.store.onlinestore.model.entity.Customer;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;

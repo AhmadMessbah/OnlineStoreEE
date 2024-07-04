@@ -1,9 +1,6 @@
 package com.store.onlinestore.model.service;
 import com.store.onlinestore.controller.exception.AdminNotFoundException;
-import com.store.onlinestore.controller.exception.ProductGroupNotFoundException;
 import com.store.onlinestore.model.entity.Admin;
-import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.entity.ProductGroup;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
