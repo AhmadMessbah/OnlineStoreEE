@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
         @NamedQuery(name = "Manager.FindByPhoneNumber", query = "select p from managerEntity p where p.phoneNumber =:phoneNumber")
 })
 
+
 public class Manager extends User{
     @Id
     @SequenceGenerator(name = "managerSeq", sequenceName = "manager_seq", allocationSize = 1)
