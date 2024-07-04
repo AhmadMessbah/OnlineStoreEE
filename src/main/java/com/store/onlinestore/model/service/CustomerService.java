@@ -2,6 +2,7 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.CustomerNotFoundException;
 import com.store.onlinestore.model.entity.Customer;
+import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -101,4 +102,15 @@ public class CustomerService {
             }
         }
     }
+    public Customer fideByNationalCode(String nationalCode) throws Exception {
+        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("nationalCode", nationalCode);
+            List<Customer> result = repository.executeQuery("FideByNationalCode", params, Customer.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }}
 }

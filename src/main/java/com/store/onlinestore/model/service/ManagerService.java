@@ -1,6 +1,7 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Manager;
+import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -91,5 +92,15 @@ public class ManagerService {
                 return result.get(0);
             }
         }
-    }
-}
+    }  public Manager fideByNationalCode(String nationalCode) throws Exception {
+        try (CrudRepository<Manager, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("nationalCode", nationalCode);
+            List<Manager> result = repository.executeQuery("FideByNationalCode", params, Manager.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+}}

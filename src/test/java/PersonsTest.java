@@ -51,6 +51,7 @@ public class PersonsTest {
                         .family("ziaei")
                         .username("Levaziaeii")
                         .password("admin123")
+                        .nationalCode("0111234575")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
@@ -68,6 +69,7 @@ public class PersonsTest {
                         .password("123456789")
                         .email("aaa@gmail.com")
                         .phoneNumber("09121234567")
+                        .nationalCode("0111234575")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
@@ -84,6 +86,7 @@ public class PersonsTest {
                         .password("123456789")
                         .email("aaa@gmail.com")
                         .phoneNumber("09121234567")
+                        .nationalCode("0111234575")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
