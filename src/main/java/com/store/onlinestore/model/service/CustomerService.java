@@ -1,6 +1,7 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.CustomerNotFoundException;
+import com.store.onlinestore.model.entity.Admin;
 import com.store.onlinestore.model.entity.Customer;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
@@ -37,14 +38,9 @@ public class CustomerService {
 
     public List<Customer> findAll() throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            List<Customer> customerList = repository.findAll(Customer.class);
-            if (!customerList.isEmpty()) {
-                return customerList;
-            }
-            throw new CustomerNotFoundException();
+            return repository.findAll(Customer.class);
         }
     }
-
     public Customer findById(Long id) throws Exception {
         try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
             Customer customer = repository.findById(id, Customer.class);

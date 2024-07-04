@@ -47,20 +47,23 @@ public class PersonsTest {
 */
         Admin admin =
                 builder()
-                        .name("leva")
-                        .family("ziaei")
-                        .username("Levaziaeii")
+                        .name("lea")
+                        .family("zzz")
+                        .username("liii")
                         .password("admin123")
-                        .nationalCode("0111234575")
+                        .email("levaziaee1@gmail.com")
+                        .phoneNumber("09123347103")
+                        .nationalCode("1234567890")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
         admin.addAttachment(attachment1);
         admin.addAttachment(attachment2);
 
-        System.out.println(AdminService.getService().save(admin));
-        //System.out.println(AdminService.getService().findAll());
-
+  System.out.println(AdminService.getService().save(admin));
+//System.out.println(AdminService.getService().edit(admin));
+     //   System.out.println(AdminService.getService().findAll());
+      //   System.out.println(AdminService.getService().remove(1L));
         Customer customer =
                 Customer
                         .builder()
@@ -69,15 +72,16 @@ public class PersonsTest {
                         .username("cccc")
                         .password("123456789")
                         .email("aaa@gmail.com")
-                        .phoneNumber("09121234567")
-                        .nationalCode("0111234575")
+                        .phoneNumber("0912124567")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
 
 
-        System.out.println(CustomerService.getService().save(customer));
-     //   System.out.println(CustomerService.getService().findAll());
+  //      System.out.println(CustomerService.getService().save(customer));
+    //    System.out.println(CustomerService.getService().findAll());
+     //  System.out.println(CustomerService.getService().edit(customer));
+   //      System.out.println(CustomerService.getService().remove(1L));
 
         Manager manager =
                 Manager
@@ -87,14 +91,15 @@ public class PersonsTest {
                         .username("cccc")
                         .password("123456789")
                         .email("aaa@gmail.com")
-                        .phoneNumber("09121234567")
-                        .nationalCode("0111234575")
+                        .phoneNumber("0912134567")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
 
-        System.out.println(ManagerService.getService().save(manager));
-       // System.out.println(ManagerService.getService().findAll());
+       // System.out.println(ManagerService.getService().save(manager));
+      //  System.out.println(ManagerService.getService().findAll());
+   //    System.out.println(ManagerService.getService().edit(manager));
+    //     System.out.println(ManagerService.getService().remove(1L));
 
     }
 }
