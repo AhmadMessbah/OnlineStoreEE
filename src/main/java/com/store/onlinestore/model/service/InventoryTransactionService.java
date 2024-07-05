@@ -88,7 +88,7 @@ public class InventoryTransactionService {
     public InventoryTransaction fideByManagerNationalCode(String nationalCode) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("nationalCode", nationalCode);
+            params.put("nationalCode", nationalCode + "%");
             List<InventoryTransaction> result = repository.executeQuery("FindByManagerNationalCode", params, InventoryTransaction.class);
             if (result.isEmpty()) {
                 return null;
@@ -101,7 +101,7 @@ public class InventoryTransactionService {
     public InventoryTransaction findByReceiverNationalCode(String nationalCode) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("nationalCode", nationalCode);
+            params.put("nationalCode", nationalCode + "%");
             List<InventoryTransaction> result = repository.executeQuery("FindByReceiverNationalCode", params, InventoryTransaction.class);
             if (result.isEmpty()) {
                 return null;
