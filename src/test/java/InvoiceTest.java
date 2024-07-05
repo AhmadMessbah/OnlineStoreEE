@@ -165,6 +165,32 @@ public class InvoiceTest {
 
         InvoiceService.getService().edit(invoice);
 
+        System.out.println(InvoiceService.getService().findAll());
+        //todo WARNING: An illegal reflective access operation has occurred
+        //WARNING: Illegal reflective access by com.google.gson.internal.reflect.ReflectionHelper (file:/C:/Users/Arash/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar) to field java.time.LocalDateTime.date
+        //WARNING: Please consider reporting this to the maintainers of com.google.gson.internal.reflect.ReflectionHelper
+        //WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+        //WARNING: All illegal access operations will be denied in a future release
+        //Exception in thread "main" org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.store.onlinestore.model.entity.Invoice.invoiceItemList: could not initialize proxy - no Session
+        //	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635)
+        //	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:218)
+        //	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:615)
+        //	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:136)
+        //	at org.hibernate.collection.spi.PersistentBag.iterator(PersistentBag.java:366)
+        //	at com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter.write(CollectionTypeAdapterFactory.java:98)
+        //	at com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter.write(CollectionTypeAdapterFactory.java:59)
+        //	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.write(TypeAdapterRuntimeTypeWrapper.java:73)
+        //	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2.write(ReflectiveTypeAdapterFactory.java:247)
+        //	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.write(ReflectiveTypeAdapterFactory.java:490)
+        //	at com.google.gson.Gson.toJson(Gson.java:944)
+        //	at com.google.gson.Gson.toJson(Gson.java:899)
+        //	at com.google.gson.Gson.toJson(Gson.java:848)
+        //	at com.google.gson.Gson.toJson(Gson.java:825)
+        //	at com.store.onlinestore.model.entity.Base.toString(Base.java:37)
+        //	at java.base/java.lang.String.valueOf(String.java:2951)
+        //	at java.base/java.io.PrintStream.println(PrintStream.java:897)
+        //	at InvoiceTest.main(InvoiceTest.java:169)
+
     }
 }
 
