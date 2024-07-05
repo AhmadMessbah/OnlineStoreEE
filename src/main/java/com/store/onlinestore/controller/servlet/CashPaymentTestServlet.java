@@ -1,4 +1,4 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.CashPayment;

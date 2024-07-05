@@ -1,6 +1,4 @@
-package com.store.onlinestore.controller.testServlet;
-
-import com.store.onlinestore.controller.validation.BeanValidator;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.model.entity.ProductGroup;
 

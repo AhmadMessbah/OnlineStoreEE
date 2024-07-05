@@ -1,7 +1,6 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.model.entity.ProductUnit;
-import com.store.onlinestore.model.service.ProductUnitService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

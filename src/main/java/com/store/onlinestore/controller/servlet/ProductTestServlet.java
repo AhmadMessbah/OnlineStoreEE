@@ -1,11 +1,10 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 
 import com.store.onlinestore.model.entity.Product;
 
 
-import com.store.onlinestore.model.service.ProductGroupService;
 import com.store.onlinestore.model.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,9 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @WebServlet("/product.test")
 public class ProductTestServlet extends HttpServlet {

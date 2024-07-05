@@ -1,9 +1,9 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.Customer;
+import com.store.onlinestore.model.entity.Manager;
 import com.store.onlinestore.model.entity.enums.UserState;
-import com.store.onlinestore.model.service.CustomerService;
+import com.store.onlinestore.model.service.ManagerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,13 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/customer.test")
-public class CustomerTestServlet extends HttpServlet {
+@WebServlet("/manager.test")
+public class ManagerTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            Customer customer =
-                    Customer
+            Manager manager =
+                    Manager
                             .builder()
                             .name("aaaa")
                             .family("bbbb")
@@ -29,17 +29,17 @@ public class CustomerTestServlet extends HttpServlet {
                             .status(UserState.Active)
                             .build();
 
-            BeanValidator<Customer> CustomerValidator = new BeanValidator<>();
-            if(CustomerValidator.validate(customer).isEmpty()) {
-                System.out.println(CustomerValidator.validate(customer));
+            BeanValidator<Manager> managerValidator = new BeanValidator<>();
+            if(managerValidator.validate(manager).isEmpty()) {
+                System.out.println(managerValidator.validate(manager));
             }else{
-                System.out.println(CustomerValidator.validate(customer));
+                System.out.println(managerValidator.validate(manager));
             }
 
 
-            System.out.println(CustomerService.getService().findAll());
+            System.out.println(ManagerService.getService().findAll());
 
-            System.out.println(CustomerService.getService().findByUsername("a"));
+            System.out.println(ManagerService.getService().findByUsername("a"));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

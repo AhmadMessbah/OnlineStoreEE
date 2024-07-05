@@ -1,4 +1,4 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Inventory;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @WebServlet("/inventory.test")
 public class InventoryTestServlet extends HttpServlet {

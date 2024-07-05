@@ -1,10 +1,8 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.InvoiceItem;
-import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.service.InvoiceItemService;
-import com.store.onlinestore.model.service.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

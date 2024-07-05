@@ -18,7 +18,6 @@ import org.hibernate.validator.constraints.UniqueElements;
 @Entity(name = "personEntity")
 @Table(name="person_tbl")
 
-
 public class Person extends Base {
     @Id
     @SequenceGenerator(name = "personSeq", sequenceName = "person_seq", allocationSize = 1)

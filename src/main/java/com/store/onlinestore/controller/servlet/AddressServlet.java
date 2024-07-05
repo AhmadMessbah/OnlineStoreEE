@@ -1,4 +1,4 @@
-package com.store.onlinestore.controller.testServlet;
+package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Address;
@@ -11,14 +11,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/address.test")
-public class AddressTestServlet extends HttpServlet {
+@WebServlet("/address.do")
+public class AddressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Address address1 = Address
                     .builder()
-                    .countryName("$%German")
+                    .countryName(req.getParameter("country"))
                     .stateName("_tehran-")
                     .cityName("by=")
                     .villageName("razi conan}{")
