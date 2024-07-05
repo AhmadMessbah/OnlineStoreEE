@@ -3,18 +3,15 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-  <persistence-unit name="store" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <properties>
-      <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
-      <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-      <property name="hibernate.connection.username" value="javaee"/>
-      <property name="hibernate.connection.password" value="java123"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="20"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="store" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>jdbc/JtaDataSource</jta-data-source>
+        <non-jta-data-source>jdbc/NonJtaDataSource</non-jta-data-source>
+
+        <properties>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+    </persistence-unit>
 </persistence>

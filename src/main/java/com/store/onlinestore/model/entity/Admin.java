@@ -15,10 +15,10 @@ import lombok.experimental.SuperBuilder;
 @Table(name="admin_tbl")
 @NamedQueries({
         @NamedQuery(name = "Admin.FindByNameAndFamily", query = "select a from adminEntity  a where a.name like :name and a.family like :family"),
-        @NamedQuery(name = "Admin.FindByUsernameAndPassword", query = "select a from adminEntity a where a.username like :username and a.password like :password"),
-        @NamedQuery(name = "Admin.FindByUsername", query = "select a from adminEntity a where a.username like :username"),
+        @NamedQuery(name = "Admin.FindByUsernameAndPassword", query = "select a from adminEntity a where a.username=:username and a.password=:password"),
+        @NamedQuery(name = "Admin.FindByUsername", query = "select a from adminEntity a where a.username=:username"),
         @NamedQuery(name = "Admin.FindByEmail", query = "select a from adminEntity a where a.email like :email"),
-        @NamedQuery(name = "Admin.FideByNationalCode", query = "select a from adminEntity a where a.nationalCode like :nationalCode"),
+        @NamedQuery(name = "Admin.FindByNationalCode", query = "select a from adminEntity a where a.nationalCode=:nationalCode"),
         @NamedQuery(name = "Admin.FindByPhoneNumber", query = "select a from adminEntity a where a.phoneNumber =:phoneNumber")
 })
 

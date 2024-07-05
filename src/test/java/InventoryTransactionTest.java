@@ -9,18 +9,18 @@ public class InventoryTransactionTest {
 
         InventoryTransaction inventoryTransaction1 = InventoryTransaction.builder()
                 .registerDateTime(LocalDateTime.of(2024, 6, 22, 7, 7))
-                .unit(null)
-                .group(null)
-                .productList(null)
+//                .unit(null)
+//                .group(null)
+//                .productList(null)
                 .deliveryPerson(null)
                 .receiverPerson(null)
                 .build();
 
         InventoryTransaction inventoryTransaction2 = InventoryTransaction.builder()
                 .registerDateTime(LocalDateTime.of(2024, 6, 23, 7, 10))
-                .unit(null)
-                .group(null)
-                .productList(null)
+//                .unit(null)
+//                .group(null)
+//                .productList(null)
                 .deliveryPerson(null)
                 .receiverPerson(null)
                 .build();

@@ -23,7 +23,7 @@ public class InventoryTestServlet extends HttpServlet {
                     Inventory
                             .builder()
                             .description("Test Inventory Servlet")
-                            .productStock(10)
+//                            .productStock(10)
                             .product(null)
                             .supplierList(null)
                             .build();

@@ -3,19 +3,33 @@ package com.store.onlinestore.controller.testServlet;
 import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Admin;
 import com.store.onlinestore.model.service.AdminService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.annotation.HttpMethodConstraint;
+import jakarta.servlet.annotation.ServletSecurity;
+
 import java.io.IOException;
+
+@ServletSecurity(
+        value = @HttpConstraint(
+                rolesAllowed = {"admin"}),
+        httpMethodConstraints =
+        @HttpMethodConstraint(
+                value = "GET",
+                rolesAllowed = {"admin"}
+        ))
 
 @WebServlet("/admin.test")
 public class AdminTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
+        try {
             Admin admin1 =
                     Admin
                             .builder()
@@ -27,16 +41,15 @@ public class AdminTestServlet extends HttpServlet {
 
 
             BeanValidator<Admin> adminValidator = new BeanValidator<>();
-            if(adminValidator.validate(admin1).isEmpty()) {
+            if (adminValidator.validate(admin1).isEmpty()) {
                 System.out.println(AdminService.getService().save(admin1));
-            }else{
+            } else {
                 System.out.println(adminValidator.validate(admin1));
             }
 
 
-
             System.out.println(AdminService.getService().save(admin1));
-}catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

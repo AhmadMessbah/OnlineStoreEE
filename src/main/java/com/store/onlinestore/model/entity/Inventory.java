@@ -19,8 +19,8 @@ import java.util.List;
 @Entity(name = "inventoryEntity")
 @Table(name = "inventory_tbl")
 @NamedQueries({
-        @NamedQuery(name = "findByProductId", query = "select p from inventoryEntity p where p.product.id=:productId "),
-        @NamedQuery(name = "findByInventoryName", query = "select p from inventoryEntity p where p.name like :name")
+        @NamedQuery(name = "Inventory.FindByProductId", query = "select p from inventoryEntity p where p.product.id=:productId "),
+        @NamedQuery(name = "Inventory.FindByInventoryName", query = "select p from inventoryEntity p where p.name like :name")
 })
 public class Inventory extends Base {
 

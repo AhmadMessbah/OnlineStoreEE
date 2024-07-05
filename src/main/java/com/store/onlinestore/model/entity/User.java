@@ -39,7 +39,7 @@ public abstract class User extends Base {
 //    @Pattern(regexp = "^(09|\\+989)\\d{9}$" ,message = "Invalid PhoneNumber")
     private String phoneNumber;
 
-    @Column(name = "nationalCode", length = 10)
+    @Column(name = "national_code", length = 10)
 //    @Pattern(regexp = "^//d{10}$")
     private String nationalCode;
 

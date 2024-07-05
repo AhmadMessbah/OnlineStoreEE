@@ -16,10 +16,10 @@ import lombok.experimental.SuperBuilder;
 @Entity(name = "supplierEntity")
 @Table(name = "supplier_tbl")
 @NamedQueries({
-        @NamedQuery(name = "FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobailphone"),
-        @NamedQuery(name = "FideByNationalCode", query = "select p from supplierEntity p where p.nationalCode like :nationalCode"),
-        @NamedQuery(name = "findByCompany", query = "select p from supplierEntity p where p.companyName like :company")
+        @NamedQuery(name = "Supplier.FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
+        @NamedQuery(name = "Supplier.FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobilePhone"),
+        @NamedQuery(name = "Supplier.FindByNationalCode", query = "select p from supplierEntity p where p.nationalCode=:nationalCode"),
+        @NamedQuery(name = "Supplier.FindByCompany", query = "select p from supplierEntity p where p.companyName like :company")
 })
 public class Supplier extends Base {
     @Id

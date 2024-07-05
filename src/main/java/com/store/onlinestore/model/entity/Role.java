@@ -23,6 +23,6 @@ public class Role extends Base {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "role", unique = true, nullable = false)
+    @Column(name = "role_name", unique = true, nullable = false)
     private String role;
 }
