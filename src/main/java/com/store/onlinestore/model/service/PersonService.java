@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
-
 public class PersonService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
