@@ -2,6 +2,7 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.TransactionNotFoundException;
 import com.store.onlinestore.model.entity.InventoryTransaction;
+import com.store.onlinestore.model.entity.Supplier;
 import com.store.onlinestore.model.repository.CrudRepository;
 import lombok.Getter;
 
@@ -66,22 +67,11 @@ public class InventoryTransactionService {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
             params.put("productId", productId);
-            return repository.executeQuery("findByProductId", params, InventoryTransaction.class);
+            return repository.executeQuery("FindByProductId", params, InventoryTransaction.class);
         }
     }
 
-    //    public InventoryTransaction findByPhoneNumber(String phoneNumber) throws Exception {
-//        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
-//            Map<String, Object> params = new HashMap<>();
-//            params.put("phoneNumber", phoneNumber);
-//            List<InventoryTransaction> result = repository.executeQuery("FindByPhoneNumber", params, InventoryTransaction.class);
-//            if (result.isEmpty()) {
-//                return null;
-//            } else {
-//                return result.get(0);
-//            }
-//        }
-//    }
+
     public InventoryTransaction findByRegisterDateTime(LocalDateTime registerDateTime) throws Exception {
         try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
@@ -94,4 +84,42 @@ public class InventoryTransactionService {
             }
         }
     }
+
+    public InventoryTransaction fideByManagerNationalCode(String nationalCode) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("nationalCode", nationalCode);
+            List<InventoryTransaction> result = repository.executeQuery("FindByManagerNationalCode", params, InventoryTransaction.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
+
+    public InventoryTransaction findByReceiverNationalCode(String nationalCode) throws Exception {
+        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("nationalCode", nationalCode);
+            List<InventoryTransaction> result = repository.executeQuery("FindByReceiverNationalCode", params, InventoryTransaction.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }
+    }
+    //    public InventoryTransaction findByPhoneNumber(String phoneNumber) throws Exception {
+//        try (CrudRepository<InventoryTransaction, Long> repository = new CrudRepository<>()) {
+//            Map<String, Object> params = new HashMap<>();
+//            params.put("phoneNumber", phoneNumber);
+//            List<InventoryTransaction> result = repository.executeQuery("FindByPhoneNumber", params, InventoryTransaction.class);
+//            if (result.isEmpty()) {
+//                return null;
+//            } else {
+//                return result.get(0);
+//            }
+//        }
+//    }
 }

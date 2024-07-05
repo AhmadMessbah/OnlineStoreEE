@@ -20,7 +20,9 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "FindByDeliverPerson", query = "select d from inventoryTransactionEntity d where d.deliveryPerson.name like :name and d.deliveryPerson.family like :family"),
         @NamedQuery(name = "FindByReceiverPerson", query = "select r from inventoryTransactionEntity r where r.receiverPerson.name like :name and r.receiverPerson.family like :family"),
         @NamedQuery(name = "FindByRegisterDateTime" , query = "select oo from inventoryTransactionEntity oo where oo.registerDateTime=:registerDateTime"),
-        @NamedQuery(name = "findByProductId" , query = "select oo from inventoryTransactionEntity oo where oo.productId.id=:productId")
+        @NamedQuery(name = "FindByProductId" , query = "select oo from inventoryTransactionEntity oo where oo.productId.id=:productId"),
+        @NamedQuery(name = "FindByManagerNationalCode" , query = "select oo from inventoryTransactionEntity oo where oo.deliveryPerson.nationalCode like :nationalCode"),
+        @NamedQuery(name = "FindByReceiverNationalCode" , query = "select oo from inventoryTransactionEntity oo where oo.receiverPerson.nationalCode like :nationalCode")
 })
 public class InventoryTransaction extends Base {
     @Id
