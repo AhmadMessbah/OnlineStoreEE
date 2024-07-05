@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
                 , @NamedQuery(name = "Delivery.FindByReceiverName", query = "SELECT oo FROM deliveryEntity oo WHERE oo.receiverName=:receiverName")
                 , @NamedQuery(name = "Delivery.FindByDeliveryStatus", query = "SELECT oo FROM deliveryEntity oo WHERE oo.deliveryStatus=:deliveryStatus")
                 ,@NamedQuery(name = "Delivery.FindByDeliveryMethod",query = "SELECT oo FROM deliveryEntity oo WHERE  oo.deliveryMethod =:deliveryMethod")
+                ,@NamedQuery(name = "Delivery.FindByAddress",query ="SELECT oo FROM deliveryEntity oo WHERE  oo.address =:address" )
         }
 )
 
@@ -41,6 +42,9 @@ public class Delivery extends Base {
 
     @OneToOne
     private Invoice invoice;
+
+    @ManyToOne
+    private Address address;
 
     @Column(name = "orderId", length = 9)
 //    @Pattern(regexp = "^[a-zA-Z]{9}$",message = "Invalid Order Id")
