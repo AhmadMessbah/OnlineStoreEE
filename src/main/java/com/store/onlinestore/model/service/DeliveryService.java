@@ -1,5 +1,6 @@
 package com.store.onlinestore.model.service;
 
+import com.store.onlinestore.model.entity.Address;
 import com.store.onlinestore.model.entity.Delivery;
 import com.store.onlinestore.model.entity.enums.DeliveryMethod;
 import com.store.onlinestore.model.entity.enums.DeliveryStatus;
@@ -89,4 +90,26 @@ public class DeliveryService {
         }
     }
 
+// todo : Aya In Do Mored Paiin Dorost Hast ?
+
+        public List<Delivery> findByAddress(Address address) throws Exception {
+        try (CrudRepository<Delivery, Object> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("address", address);
+            return repository.executeQuery("Delivery.FindByAddress", params, Delivery.class);
+        }
+    }
+
+    public List<Delivery> findByAddress(String postalCode) throws Exception {
+        try (CrudRepository<Delivery, Object> repository = new CrudRepository<>()) {
+           Address addressFound =AddressService.getService().findByPostalCode(postalCode);
+           if (addressFound != null){
+               Map<String, Object> params = new HashMap<>();
+               params.put("address", addressFound);
+               return repository.executeQuery("Delivery.FindByAddress", params, Delivery.class);
+           }else {
+                return null;
+           }
+        }
+    }
 }
