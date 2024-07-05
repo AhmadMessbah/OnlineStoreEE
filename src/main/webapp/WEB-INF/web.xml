@@ -58,4 +58,8 @@
         </form-login-config>
     </login-config>
 
+    <error-page>
+        <location>/error-403.jsp</location>
+        <error-code>403</error-code>
+    </error-page>
 </web-app>

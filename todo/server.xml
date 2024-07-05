@@ -130,8 +130,8 @@
       <Realm className="org.apache.catalina.realm.DataSourceRealm"
        dataSourceName="jdbc/JtaDataSource"
        userTable="user_tbl"
-       userNameCol="u_username"
-       userCredCol="u_password"
+       userNameCol="user_name"
+       userCredCol="user_pass"
        userRoleTable="user_roles"
        roleNameCol="role_name"/>
 

@@ -1,70 +1,60 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
-
-import java.util.HashMap;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Map;
+
 
 public class PersonService {
-    @Getter
-    private static PersonService service = new PersonService();
-
-    private PersonService() {
-    }
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public Person save(Person person) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            return repository.save(person);
-        }
+        entityManager.persist(person);
+        return person;
     }
 
     public Person edit(Person person) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            return repository.edit(person);
+        Person foundPerson = entityManager.find(Person.class, person.getId());
+        if (foundPerson != null) {
+            entityManager.merge(person);
         }
+        return person;
     }
 
-    //    todo : convert to logical remove
     public Person remove(Long id) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Person.class);
+        Person person = entityManager.find(Person.class, id);
+        if (person != null) {
+            person.setDeleted(true);
+            entityManager.merge(person);
         }
+        return person;
     }
 
     public List<Person> findAll() throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Person.class);
-        }
+        return entityManager
+                .createQuery("select oo from personEntity oo where oo.deleted=false", Person.class)
+                .getResultList();
     }
 
     public Person findById(Long id) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Person.class);
-        }
+        Person person = entityManager.find(Person.class, id);
+        return person;
     }
 
     public List<Person> findByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
-            return repository.executeQuery("Person.FindByNameAndFamily", params, Person.class);
-        }
+        return entityManager
+                .createQuery("select p from personEntity p where p.name like :name and p.family like :family", Person.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
     }
 
     public Person findByPhoneNumber(String phoneNumber) throws Exception {
-        try (CrudRepository<Person, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("phoneNumber", phoneNumber);
-            List<Person> result = repository.executeQuery("Person.FindByPhoneNumber", params, Person.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager
+                .createQuery("select p from personEntity p where p.phoneNumber =:phoneNumber", Person.class)
+                .setParameter("phoneNumber", phoneNumber)
+                .getSingleResult();
     }
 }

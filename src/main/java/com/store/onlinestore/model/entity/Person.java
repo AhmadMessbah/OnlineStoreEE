@@ -17,10 +17,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity(name = "personEntity")
 @Table(name="person_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Person.FindByNameAndFamily", query = "select p from personEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "Person.FindByPhoneNumber", query = "select p from personEntity p where p.phoneNumber =:phoneNumber")
-})
+
 
 public class Person extends Base {
     @Id
