@@ -1,13 +1,10 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +15,7 @@ import java.util.List;
 
 @Entity(name = "inventoryEntity")
 @Table(name = "inventory_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Inventory.FindByProductId", query = "select p from inventoryEntity p where p.product.id=:productId "),
-        @NamedQuery(name = "Inventory.FindByInventoryName", query = "select p from inventoryEntity p where p.name like :name")
-})
+
 public class Inventory extends Base {
 
     @Id
