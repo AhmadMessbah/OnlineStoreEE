@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="/person.do" method="post">
+<form action="/invoiceItem.do" method="post">
     <input type="number" name="id">
     <input type="text" name="product">
     <input type="number" name="count">
