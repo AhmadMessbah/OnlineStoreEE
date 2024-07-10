@@ -15,12 +15,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "supplierEntity")
 @Table(name = "supplier_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Supplier.FindByNameAndFamily", query = "select p from supplierEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "Supplier.FindByMobilePhone", query = "select p from supplierEntity p where p.mobilePhone=:mobilePhone"),
-        @NamedQuery(name = "Supplier.FindByNationalCode", query = "select p from supplierEntity p where p.nationalCode=:nationalCode"),
-        @NamedQuery(name = "Supplier.FindByCompany", query = "select p from supplierEntity p where p.companyName like :company")
-})
+
 public class Supplier extends Base {
     @Id
     @SequenceGenerator(name = "supplierSeq", sequenceName = "supplier_seq", initialValue = 1, allocationSize = 1)
@@ -39,7 +34,7 @@ public class Supplier extends Base {
 //    @Pattern(regexp = "^(09|\\+989)\\d{9}$" ,message = "Invalid MobileNumber")
     private String mobilePhone;
 
-    @Column(name = "nationalCode", length = 10)
+    @Column(name = "national_code", length = 10)
 //    @Pattern(regexp = "^//d{10}$")
     private String nationalCode;
 
