@@ -1,110 +1,79 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.DupcilateProductGroupException;
-import com.store.onlinestore.controller.exception.ProductGroupNotFoundException;
 import com.store.onlinestore.model.entity.ProductGroup;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+// TODO: 7/11/2024 stateless??? 
+@Stateless
 public class ProductGroupService {
 
-    @Getter
-    private static ProductGroupService service = new ProductGroupService();
 
-    private ProductGroupService() {
-    }
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public ProductGroup save(ProductGroup productGroup) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", productGroup.getName());
-            if (repository.executeQuery("ProductGroup.FindByName", params, ProductGroup.class).isEmpty()) {
-                return repository.save(productGroup);
-
-            }
-            throw new DupcilateProductGroupException();
-        }
+        entityManager.persist(productGroup);
+        return productGroup;
     }
 
     public ProductGroup edit(ProductGroup productGroup) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(productGroup.getId(), ProductGroup.class) != null) {
-                return repository.edit(productGroup);
-            }
-            throw new ProductGroupNotFoundException();
+        ProductGroup foundProductGroup = entityManager.find(ProductGroup.class, productGroup.getId());
+        if (foundProductGroup != null) {
+            entityManager.merge(productGroup);
         }
+        return productGroup;
     }
 
     public ProductGroup remove(Long id) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id, ProductGroup.class) != null) {
-                return repository.remove(id, ProductGroup.class);
-            }
-            throw new ProductGroupNotFoundException();
+        ProductGroup productGroup = entityManager.find(ProductGroup.class, id);
+        if (productGroup != null) {
+            productGroup.setDeleted(true);
+            entityManager.merge(productGroup);
         }
+        return productGroup;
     }
 
     public List<ProductGroup> findAll() throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            List<ProductGroup> productGroupList = repository.findAll(ProductGroup.class);
-            if (!productGroupList.isEmpty()) {
-                return productGroupList;
-            }
-            throw new ProductGroupNotFoundException();
-        }
+        return entityManager
+                .createQuery("select oo from productGroupEntity oo where oo.deleted=false", ProductGroup.class)
+                .getResultList();
     }
 
     public ProductGroup findById(Long id) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            ProductGroup productGroup = repository.findById(id, ProductGroup.class);
-            if (productGroup != null) {
-                return productGroup;
-            }
-            throw new ProductGroupNotFoundException();
-        }
+        ProductGroup productGroup = entityManager.find(ProductGroup.class, id);
+        return productGroup;
     }
 
+    // TODO: 7/11/2024 getResultList??? 
     public ProductGroup findByName(String name) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name);
-            List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByName", params, ProductGroup.class);
-            if (!productGroupList.isEmpty()) {
-                return productGroupList.get(0);
-
-            }
-            throw new ProductGroupNotFoundException();
+        List<ProductGroup> productGroupList =
+        entityManager
+                .createQuery("select p from productGroupEntity  p where p.name =:name and p.deleted=false", ProductGroup.class)
+                .setParameter("name", name)
+                .getResultList();
+        if (!productGroupList.isEmpty()){
+            return productGroupList.get(0);
+        } else {
+            return null;
         }
     }
 
     public List<ProductGroup> findByStatus(boolean status) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("status", status);
-            List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByStatus", params, ProductGroup.class);
-            if (!productGroupList.isEmpty()) {
-                return productGroupList;
-
-            }
-            throw new ProductGroupNotFoundException();
-        }
+        return entityManager
+                .createQuery("select p from productGroupEntity  p where p.status =:status and p.deleted=false", ProductGroup.class)
+                .setParameter("status", status)
+                .getResultList();
     }
 
     public List<ProductGroup> findByParentName(String name) throws Exception {
-        try (CrudRepository<ProductGroup, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name);
-            List<ProductGroup> productGroupList = repository.executeQuery("ProductGroup.FindByParentName", params, ProductGroup.class);
-            if (!productGroupList.isEmpty()) {
-                return productGroupList;
-            }
-            throw new ProductGroupNotFoundException();
-        }
+        return entityManager
+                .createQuery("select p from productGroupEntity  p where p.parentGroup.name =:name and p.deleted=false", ProductGroup.class)
+                .setParameter("name", name)
+                .getResultList();
     }
-
 
 }
