@@ -16,8 +16,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "cash_tbl")
 
 @NamedQueries({
-        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from checkEntity c where c.paymentDateTime = paymentDateTime"),
-        @NamedQuery(name = "Cash.FindById", query = "select c from checkEntity c where c.id = id"),
+        @NamedQuery(name = "Cash.FindByDateTime", query = "select c from cashEntity c where c.paymentDateTime = paymentDateTime"),
+        @NamedQuery(name = "Cash.FindById", query = "select c from cashEntity c where c.id = id"),
 
 })
 

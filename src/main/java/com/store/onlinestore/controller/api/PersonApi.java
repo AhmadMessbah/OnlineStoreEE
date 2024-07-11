@@ -14,6 +14,7 @@ public class PersonApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(PersonService.getService().findAll()).build();
+//        return Response.ok().entity(PersonService.getService().findAll()).build();
+        return null        ;
     }
 }
