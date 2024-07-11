@@ -5,5 +5,10 @@
 </head>
 <body>
 <h1>Admin Panel</h1>
+<a href="/login.jsp">login</a><br><br>
+<a href="/admin/signUp.jsp">sign up</a><br><br>
+
+
+
 </body>
 </html>
