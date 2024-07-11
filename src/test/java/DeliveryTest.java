@@ -24,7 +24,7 @@ public class DeliveryTest {
 //                        .address(address)
                         .build();
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
         Attachment attachment1 =
                 Attachment

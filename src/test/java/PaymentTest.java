@@ -41,7 +41,7 @@ public class PaymentTest {
                         .build();
 
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
 
         CardPayment cardPayment1 =

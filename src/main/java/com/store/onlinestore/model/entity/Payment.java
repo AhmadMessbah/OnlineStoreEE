@@ -2,6 +2,7 @@ package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +23,6 @@ public abstract class Payment extends Base {
     private LocalDateTime paymentDateTime;
 
     @Column(name="description")
+    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$")
     private String description;
 }

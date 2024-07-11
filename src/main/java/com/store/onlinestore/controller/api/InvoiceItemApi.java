@@ -1,6 +1,7 @@
 package com.store.onlinestore.controller.api;
 
 
+import com.store.onlinestore.model.service.InvoiceItemService;
 import com.store.onlinestore.model.service.PersonService;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -15,6 +16,6 @@ public class InvoiceItemApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception{
-        return Response.ok().entity(PersonService.getService().findAll()).build();
+        return Response.ok().entity(InvoiceItemService.getService().findAll()).build();
     }
 }

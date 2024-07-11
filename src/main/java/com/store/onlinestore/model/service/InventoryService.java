@@ -1,73 +1,68 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.InventoryNotFoundException;
 import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
-
-import java.util.HashMap;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Map;
+
 
 public class InventoryService {
-    @Getter
-    private static InventoryService service = new InventoryService();
-
-    private InventoryService() {
-    }
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public Inventory save(Inventory inventory) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            return repository.save(inventory);
-        }
+        entityManager.persist(inventory);
+        return inventory;
     }
 
     public Inventory edit(Inventory inventory) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            return repository.edit(inventory);
+        Inventory findInventory = entityManager.find(Inventory.class, inventory.getId());
+        if (findInventory != null) {
+            entityManager.merge(inventory);
         }
+        return inventory;
     }
 
     public Inventory remove(Long id) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id, Inventory.class) != null) {
-                return repository.remove(id, Inventory.class);
-            }
-            throw new InventoryNotFoundException();
+        Inventory inventory = entityManager.find(Inventory.class, id);
+        if (inventory != null) {
+            inventory.setDeleted(true);
+            entityManager.merge(inventory);
         }
+        return inventory;
     }
 
     public List<Inventory> findAll() throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Inventory.class);
-        }
+        return entityManager.createQuery("select oo from inventoryEntity oo where oo.deleted=false", Inventory.class).getResultList();
     }
 
     public Inventory findById(Long id) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Inventory.class);
-        }
+        Inventory inventory = entityManager.find(Inventory.class, id);
+        return inventory;
     }
 
 
     public List<Inventory> findByProductID(Long productId) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("productId", productId + "%");
-            return repository.executeQuery("findByProductId", params, Inventory.class);
-        }
+        return entityManager.createQuery("select oo from inventoryEntity oo where oo.product=:product", Inventory.class)
+                .setParameter("product", productId)
+                .getResultList();
     }
 
     public Inventory findByInventoryName(String inventoryName) throws Exception {
-        try (CrudRepository<Inventory, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("inventoryNumber", inventoryName + "%");
-            List<Inventory> result = repository.executeQuery("findByInventoryName", params, Inventory.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager.createQuery("select oo from inventoryEntity oo where oo.name like :name", Inventory.class)
+                .setParameter("name", inventoryName + "%")
+                .getSingleResult();
+    }
+
+    public Inventory findByLocation(String location) throws Exception {
+        return entityManager.createQuery("select oo from inventoryEntity oo where oo.loction=:location", Inventory.class)
+                .setParameter("location", location)
+                .getSingleResult();
+    }
+
+    public Inventory findBySupplier(String supplier) throws Exception {
+        return entityManager.createQuery("select oo from inventoryEntity oo where oo.supplierList=:supplier", Inventory.class)
+                .setParameter("supplier", supplier)
+                .getSingleResult();
     }
 }
