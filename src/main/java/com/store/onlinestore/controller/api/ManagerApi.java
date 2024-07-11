@@ -12,6 +12,7 @@ public class ManagerApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(ManagerService.getService().findAll()).build();
+       // return Response.ok().entity(ManagerService.getService().findAll()).build();
+   return null;
     }
 }

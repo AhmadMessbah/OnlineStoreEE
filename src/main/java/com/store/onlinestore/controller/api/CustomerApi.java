@@ -12,6 +12,7 @@ public class CustomerApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(CustomerService.getService().findAll()).build();
+//        return Response.ok().entity(CustomerService.getService().findAll()).build();
+        return null        ;
     }
 }

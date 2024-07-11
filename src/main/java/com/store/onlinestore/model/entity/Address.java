@@ -71,7 +71,7 @@ public class Address extends Base{
 //    @Pattern(regexp = "^[0-9]{5}$",message = "Invalid Home Unit")
     private String homeUnit;
 
-    @Column(name = "postalCode",length = 10, unique = true)
+    @Column(name = "postalCode",length = 10, unique = true,nullable = false)
 //    @Pattern(regexp = "^[0-9]{10}$",message = "Invalid Postal Code")
     private String postalCode;
 

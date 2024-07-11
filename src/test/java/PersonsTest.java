@@ -3,6 +3,7 @@ import com.store.onlinestore.model.entity.enums.FileType;
 import com.store.onlinestore.model.entity.enums.UserState;
 import com.store.onlinestore.model.service.*;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 
 import static com.store.onlinestore.model.entity.Admin.builder;
@@ -25,14 +26,14 @@ public class PersonsTest {
                         .localDateTime(LocalDateTime.now())
                         .build();
 
-        Role adminRole = Role.builder().role("admin").build();
-        System.out.println(RoleService.getService().save(adminRole));
-
-        Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
-
-        Role managerRole = Role.builder().role("manager").build();
-        System.out.println(RoleService.getService().save(managerRole));
+//        Role adminRole = Role.builder().role("admin").build();
+//        System.out.println(RoleService.getService().save(adminRole));
+//
+//        Role customerRole = Role.builder().role("customer").build();
+//        System.out.println(RoleService.getService().save(customerRole));
+//
+//        Role managerRole = Role.builder().role("manager").build();
+//        System.out.println(RoleService.getService().save(managerRole));
 
         Address address = Address
                 .builder()
@@ -65,12 +66,14 @@ public class PersonsTest {
                         .password("123456789")
                         .email("aaa@gmail.com")
                         .phoneNumber("09121234567")
+                        .nationalCode("1234567890")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
 
 
-        System.out.println(CustomerService.getService().save(customer));
+
+//        System.out.println(CustomerService.getService().save(customer));
 
         Manager manager =
                 Manager
@@ -85,6 +88,6 @@ public class PersonsTest {
 //                        .address(address)
                         .build();
 
-        System.out.println(ManagerService.getService().save(manager));
+//        System.out.println(ManagerService.getService().save(manager));
     }
 }

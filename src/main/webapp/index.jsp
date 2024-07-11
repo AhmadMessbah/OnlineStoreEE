@@ -6,8 +6,10 @@
 </head>
 <body>
 <h1>Home</h1>
-<c:forEach var="i" begin="1" end="5" step="1">
-    <h1> ${i}</h1>
-</c:forEach>
+<a href="/admin/panel.jsp">Admin Panel</a><br><br>
+<a href="/managers/panel.jsp">Manager Panel</a><br><br>
+<a href="/customers/panel.jsp">Customer</a><br><br>
+<a href="/logout">Logout</a>
+
 </body>
 </html>

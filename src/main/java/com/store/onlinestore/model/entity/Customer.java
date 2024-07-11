@@ -13,13 +13,6 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "customerEntity")
 @Table(name="customer_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Customer.FindByNameAndFamily", query = "select p from customerEntity p where p.name like :name and p.family like :family"),
-        @NamedQuery(name = "Customer.FindByUsernameAndPassword", query = "select p from customerEntity p where p.username like :username and p.password like :password"),
-        @NamedQuery(name = "Customer.FindByUsername", query = "select p from customerEntity p where p.username like :username"),
-        @NamedQuery(name = "Customer.FindByEmail", query = "select p from customerEntity p where p.email like :email"),
-        @NamedQuery(name = "Customer.FindByPhoneNumber", query = "select p from customerEntity p where p.phoneNumber =:phoneNumber")
-})
 
 public class Customer extends User {
     @Id
@@ -30,6 +23,7 @@ public class Customer extends User {
 
 
     @OneToOne
+    @JoinTable(name="user_roles")
     private Role role ;
 }
 

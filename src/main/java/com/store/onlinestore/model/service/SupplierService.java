@@ -1,89 +1,67 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.SupplierNotFoundException;
 import com.store.onlinestore.model.entity.Supplier;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
-
-import java.util.HashMap;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Map;
 
 public class SupplierService {
-    @Getter
-    private static SupplierService service = new SupplierService();
-
-    private SupplierService(){}
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public Supplier save(Supplier supplier) throws Exception {
-        try(CrudRepository<Supplier , Long> repository = new CrudRepository<>()){
-            return repository.save(supplier);
-        }
+        entityManager.persist(supplier);
+        return supplier;
     }
 
     public Supplier edit(Supplier supplier) throws Exception {
-        try(CrudRepository<Supplier , Long> repository = new CrudRepository<>()){
-            return repository.edit(supplier);
+        Supplier findSupplier = entityManager.find(Supplier.class, supplier.getId());
+        if (findSupplier != null) {
+            entityManager.merge(supplier);
         }
-    }
-    public Supplier remove(Long id) throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id, Supplier.class) != null) {
-                return repository.remove(id, Supplier.class);
-            }
-            throw new SupplierNotFoundException();
-        }
+        return supplier;
     }
 
-        public List<Supplier> findAll() throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Supplier.class);
+    public Supplier remove(Long id) throws Exception {
+        Supplier supplier = entityManager.find(Supplier.class, id);
+        if (supplier != null) {
+            supplier.setDeleted(true);
+            entityManager.merge(supplier);
         }
+        return supplier;
     }
+
+    public List<Supplier> findAll() throws Exception {
+        return entityManager.createQuery("select oo from supplierEntity oo where oo.deleted=false", Supplier.class).getResultList();
+    }
+
     public Supplier findById(Long id) throws Exception {
-        try(CrudRepository<Supplier , Long> repository = new CrudRepository<>()){
-            return repository.findById(id , Supplier.class);
-        }
+        Supplier supplier = entityManager.find(Supplier.class, id);
+        return supplier;
     }
 
     public List<Supplier> findByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
-            return repository.executeQuery("supplier.FindByNameAndFamily", params, Supplier.class);
-        }
-    }
-    public Supplier findByMobilePhone(String mobilePhone) throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("mobilePhone", mobilePhone);
-            List<Supplier> result = repository.executeQuery("supplier.FindByMobilePhone", params, Supplier.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
-    }
-    public Supplier findByNationalCode(String nationalCode) throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("nationalCode", nationalCode);
-            List<Supplier> result = repository.executeQuery("supplier.findByNationalCode", params, Supplier.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager.createQuery("select oo from supplierEntity oo where oo.name like :name and oo.family like :family", Supplier.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
     }
 
-    public List<Supplier> findByCompany(String company) throws Exception {
-        try (CrudRepository<Supplier, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("company", company+"%");
-            return repository.executeQuery("supplier.findByCompany", params, Supplier.class);
-        }
+    public Supplier findByMobilePhone(String mobilePhone) throws Exception {
+        return entityManager.createQuery("select oo from supplierEntity oo where oo.mobilePhone=:mobilePhone", Supplier.class)
+                .setParameter("mobilePhone", mobilePhone)
+                .getSingleResult();
+    }
+
+    public Supplier fideByNationalCode(String nationalCode) throws Exception {
+        return entityManager.createQuery("select oo from supplierEntity oo where oo.nationalCode=:nationalCode", Supplier.class)
+                .setParameter("nationalCode", nationalCode)
+                .getSingleResult();
+    }
+
+    public Supplier findByCompany(String company) throws Exception {
+        return entityManager.createQuery("select oo from supplierEntity oo where oo.companyName=:companyName", Supplier.class)
+                .setParameter("companyName", company)
+                .getSingleResult();
     }
 }

@@ -29,28 +29,26 @@ public class AdminService {
 
     public Admin remove(Long id) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Admin.class);
-        }
-    }
-    public List<Admin> findAll() throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            List<Admin> adminList = repository.findAll(Admin.class);
-            if (!adminList.isEmpty()) {
-                return adminList;
+            if (repository.findById(id, Admin.class) != null) {
+                return repository.remove(id, Admin.class);
             }
             throw new AdminNotFoundException();
         }
     }
+    public List<Admin> findAll() throws Exception {
+        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
+            return repository.findAll(Admin.class);
+        }
+    }
     public Admin findById(Long id) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Admin admin = repository.findById(id, Admin.class);
-            throw new AdminNotFoundException();
+            return repository.findById(id, Admin.class);
         }
     }
     public List<Admin> findByUsername(String username) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
+            params.put("username", username);
             return repository.executeQuery("Admin.FindByUsername", params, Admin.class);
         }
     }
@@ -58,8 +56,8 @@ public class AdminService {
     public List<Admin> findByNameAndFamily(String name, String family) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("family", family+"%");
+            params.put("name", name + "%");
+            params.put("family", family + "%");
             return repository.executeQuery("Admin.FindByNameAndFamily", params, Admin.class);
         }
     }
@@ -67,19 +65,29 @@ public class AdminService {
     public List<Admin> findByUsernameAndPassword(String username, String password) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("username", username+"%");
-            params.put("password", password+"%");
+            params.put("username", username);
+            params.put("password", password);
             return repository.executeQuery("Admin.FindByUsernameAndPassword", params, Admin.class);
         }
     }
     public List<Admin> findByEmail(String email) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
-            params.put("email", email+"%");
+            params.put("email", email);
             return repository.executeQuery("Admin.FindByEmail", params, Admin.class);
         }
     }
-
+    public Admin fideByNationalCode(String nationalCode) throws Exception {
+        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("nationalCode", nationalCode+ "%");
+            List<Admin> result = repository.executeQuery("FideByNationalCode", params, Admin.class);
+            if (result.isEmpty()) {
+                return null;
+            } else {
+                return result.get(0);
+            }
+        }}
     public Admin findByPhoneNumber(String phoneNumber) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
             Map<String, Object> params = new HashMap<>();
@@ -94,6 +102,6 @@ public class AdminService {
     }
 }
 
-//    todo : findByUsernameAndPassword, phoneNumber, email, roleName
+
 
 

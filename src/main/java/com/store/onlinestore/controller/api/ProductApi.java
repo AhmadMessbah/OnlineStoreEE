@@ -11,10 +11,10 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/product")
 public class ProductApi {
-
+    ProductService productService = null;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(ProductService.getService().findAll()).build();
+        return Response.ok().entity(productService.findAll()).build();
     }
 }

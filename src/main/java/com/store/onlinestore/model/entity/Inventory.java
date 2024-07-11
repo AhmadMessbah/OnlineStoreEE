@@ -1,8 +1,6 @@
 package com.store.onlinestore.model.entity;
 
 import jakarta.persistence.*;
-
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,10 +15,7 @@ import java.util.List;
 
 @Entity(name = "inventoryEntity")
 @Table(name = "inventory_tbl")
-@NamedQueries({
-        @NamedQuery(name = "findByProductId", query = "select p from productEntity p where p.id=:id "),
-        @NamedQuery(name = "findByInventoryName", query = "select p from productEntity p where p.name like :name")
-})
+
 public class Inventory extends Base {
 
     @Id
@@ -28,11 +23,18 @@ public class Inventory extends Base {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventorySeq")
     private int id;
 
-    @Column(name = "inventoryDescription")
+    @Column(name = "name")
+//    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
+    private String name;
+
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "productStock")
-    private int productStock;
+    @Column(name = "count")
+    private int count;
+
+    @Column(name = "location")
+    private String loction;
 
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")
@@ -41,6 +43,7 @@ public class Inventory extends Base {
     @OneToMany
     @JoinTable(name = "inventory_supplier_tbl")
     private List<Supplier> supplierList;
+
 
     public void addSupplier(Supplier supplier) {
         if (supplierList == null) {
