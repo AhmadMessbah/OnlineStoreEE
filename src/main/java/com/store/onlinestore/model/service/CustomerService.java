@@ -1,110 +1,90 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.CustomerNotFoundException;
 import com.store.onlinestore.model.entity.Customer;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
+import com.store.onlinestore.model.entity.Product;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CustomerService {
-    @Getter
-    private static CustomerService service = new CustomerService();
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
-    private CustomerService() {
-    }
 
     public Customer save(Customer customer) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            customer.setRole(RoleService.getService().FindByRole("customer"));
-            return repository.save(customer);
-        }
+        entityManager.persist(customer);
+        entityManager.find(Product.class, 1);
+        return customer;
     }
 
     public Customer edit(Customer customer) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            return repository.edit(customer);
+        Customer foundCustomer = entityManager.find(Customer.class, customer.getId());
+        if (foundCustomer != null) {
+            entityManager.merge(customer);
         }
+        return customer;
     }
 
     public Customer remove(Long id) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Customer.class);
+        Customer customer = entityManager.find(Customer.class, id);
+        if (customer != null) {
+            customer.setDeleted(true);
+            entityManager.merge(customer);
         }
+        return customer;
     }
 
     public List<Customer> findAll() throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Customer.class);
-        }
+        return entityManager
+                .createQuery("select oo from customerEntity oo where oo.deleted=false", Customer.class)
+                .getResultList();
     }
     public Customer findById(Long id) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Customer customer = repository.findById(id, Customer.class);
-            if (customer != null) {
-                return customer;
-            }
-            throw new CustomerNotFoundException();
-        }
+        Customer customer = entityManager.find(Customer.class, id);
+        return customer;
     }
 
     public List<Customer> findByUsername(String username) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("username", username);
-            return repository.executeQuery("Customer.FindByUsername", params, Customer.class);
-        }
+        return entityManager
+                .createQuery("select c from customerEntity c where c.username=:username", Customer.class)
+                .setParameter("username", username )
+                .getResultList();
     }
 
     public List<Customer> findByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name+ "%");
-            params.put("family", family + "%");
-            return repository.executeQuery("Customer.FindByNameAndFamily", params, Customer.class);
-        }
+        return entityManager
+                .createQuery("select c from customerEntity c where c.name like :name and c.family like :family", Customer.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
     }
 
     public List<Customer> findByUsernameAndPassword(String username, String password) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("username", username);
-            params.put("password", password);
-            return repository.executeQuery("Customer.FindByUsernameAndPassword", params, Customer.class);
-        }
+        return entityManager
+                .createQuery("select c from customerEntity c where c.username=:username and c.password=:password", Customer.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
     }
 
     public List<Customer> findByEmail(String email) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("email", email+"%");
-            return repository.executeQuery("Customer.FindByEmail", params, Customer.class);
-        }
+        return entityManager
+                .createQuery("select c from customerEntity c where c.email like :email", Customer.class)
+                .setParameter("email", email )
+                .getResultList();
     }
 
     public Customer findByPhoneNumber(String phoneNumber) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("phoneNumber", phoneNumber);
-            List<Customer> result = repository.executeQuery("Customer.FindByPhoneNumber", params, Customer.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager
+                .createQuery("select c from customerEntity c where c.phoneNumber =:phoneNumber", Customer.class)
+                .setParameter("phoneNumber", phoneNumber)
+                .getSingleResult();
     }
-    public Customer fideByNationalCode(String nationalCode) throws Exception {
-        try (CrudRepository<Customer, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("nationalCode", nationalCode);
-            List<Customer> result = repository.executeQuery("FideByNationalCode", params, Customer.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }}
+    public Customer findByNationalCode(String nationalCode) throws Exception {
+        return entityManager
+                .createQuery("select c from customerEntity c where c.nationalCode=:nationalCode", Customer.class)
+                .setParameter("nationalCode", nationalCode)
+                .getSingleResult();
+    }
 }
