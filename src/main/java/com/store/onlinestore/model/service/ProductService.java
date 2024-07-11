@@ -1,87 +1,82 @@
 package com.store.onlinestore.model.service;
 
 
-
 import com.store.onlinestore.model.entity.Product;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
 
-import java.util.HashMap;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
+
 import java.util.List;
-import java.util.Map;
+
 
 public class ProductService {
-    @Getter
-    private static ProductService service = new ProductService();
-    private ProductService() {
-    }
+
+
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public Product save(Product product) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            return repository.save(product);
-        }
+        entityManager.persist(product);
+        return product;
     }
+
     public Product edit(Product product) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            return repository.edit(product);
+        product = entityManager.find(Product.class, product.getId());
+        if (product != null) {
+            entityManager.merge(product);
         }
+        return product;
     }
 
     public Product remove(Long id) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Product.class);
+        Product product = entityManager.find(Product.class, id);
+        if (product != null) {
+            product.setDeleted(true);
+            entityManager.merge(product);
         }
+        return product;
+
     }
+
     public List<Product> findAll() throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Product.class);
-        }
+        return entityManager.createQuery("select p from productEntity p where p.deleted=false ", Product.class).getResultList();
     }
 
     public Product findById(Long id) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Product.class);
-        }
+        Product product = entityManager.find(Product.class, id);
+        return product;
+
     }
 
     public List<Product> findByNameAndBrand(String name, String brand) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name+"%");
-            params.put("brand", brand+"%");
-            return repository.executeQuery("Product.FindByNameAndBrand", params, Product.class);
-        }
+        return entityManager
+                .createQuery("select p from productEntity p where p.name like :name and p.brand like :brand", Product.class)
+                .setParameter("name", name + "%")
+                .setParameter("brand", brand + "%")
+                .getResultList();
     }
+
     public Product FindByBarcode(String barcode) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("barcode", barcode);
-            List<Product> result = repository.executeQuery("Product.FindByBarcode", params, Product.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager
+                .createQuery("select p from productEntity p where p.barcode =:barcode", Product.class)
+                .setParameter("barcode", barcode)
+                .getSingleResult();
     }
 
-    public List<Product>  FindByBrand(String brand) throws Exception {
-        try (CrudRepository<Product, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("brand", brand+"%");
-            List<Product> result = repository.executeQuery("Product.FindByBrand", params, Product.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result ;
-            }
+    public List<Product> FindByBrand(String brand) throws Exception {
+        List<Product> result = null;
+        result = entityManager
+                .createQuery("select p from productEntity p where p.brand like :brand", Product.class)
+                .setParameter("brand", brand + "%")
+                .getResultList();
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result;
         }
     }
-
-
-
-
-
-
-
 }
+
+
+
