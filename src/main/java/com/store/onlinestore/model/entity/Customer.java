@@ -21,14 +21,8 @@ public class Customer extends Profile {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    @JoinTable(name="user_roles")
-    private Role role ;
-
-    @OneToOne
-    // TODO: join column
-    //@JoinColumn(name = "Admin_role_table")
-    private User user ;
+//    @OneToOne
+//    private User user ;
 }
 
 

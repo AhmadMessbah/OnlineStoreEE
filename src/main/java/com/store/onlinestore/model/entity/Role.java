@@ -16,10 +16,6 @@ import lombok.experimental.SuperBuilder;
 
 public class Role extends Base {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "role_name", unique = true, nullable = false)
+    @Column(name = "role_name", length = 20)
     private String role;
 }

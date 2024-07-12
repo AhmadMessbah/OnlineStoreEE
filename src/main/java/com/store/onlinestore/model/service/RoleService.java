@@ -19,10 +19,10 @@ public class RoleService {
     }
 
     public Role edit(Role role) throws Exception {
-        Role foundRole = entityManager.find(Role.class, role.getId());
-        if (foundRole != null) {
-            entityManager.merge(role);
-        }
+//        Role foundRole = entityManager.find(Role.class, role.getId());
+//        if (foundRole != null) {
+//            entityManager.merge(role);
+//        }
         return role;
     }
 

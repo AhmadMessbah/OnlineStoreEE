@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 public abstract class Profile extends Base {
-
     @Column(name="name", length = 30, nullable = false)
     //@Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
     private String name;
@@ -38,9 +37,11 @@ public abstract class Profile extends Base {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
 
-    @Enumerated
+    @Enumerated(EnumType.ORDINAL)
     private UserState status;
 
-
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name="profile_user_tbl")
+    private User user ;
 }
 
