@@ -2,23 +2,25 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Invoice;
 import com.store.onlinestore.model.entity.Product;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@ApplicationScoped
-public class InvoiceService implements Serializable {
+public class InvoiceService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
+    private InvoiceService() {
+    }
+
     public Invoice save(Invoice invoice) throws Exception {
         entityManager.persist(invoice);
+        entityManager.find(Product.class, 1);
         return invoice;
     }
+
 
     public Invoice edit(Invoice invoice) throws Exception {
         Invoice foundInvoice = entityManager.find(Invoice.class, invoice.getId());

@@ -1,11 +1,12 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Customer;
+import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
-
+@Singleton
 public class CustomerService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
@@ -25,7 +26,7 @@ public class CustomerService {
     }
 
     public Customer remove(Long id) throws Exception {
-        Customer customer = entityManager.find(Customer.class, id);
+        Customer customer = entityManager.find(Customer.class,id );
         if (customer != null) {
             customer.setDeleted(true);
             entityManager.merge(customer);

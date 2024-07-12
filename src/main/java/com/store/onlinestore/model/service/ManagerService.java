@@ -1,17 +1,16 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.Customer;
+
 import com.store.onlinestore.model.entity.Manager;
-import com.store.onlinestore.model.repository.CrudRepository;
+
+import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Id;
+
 import jakarta.persistence.PersistenceContext;
-import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Singleton
 public class ManagerService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
@@ -19,7 +18,6 @@ public class ManagerService {
 
     public Manager save(Manager manager) throws Exception {
         entityManager.persist(manager);
-        entityManager.find(ProductGroupService.class,1);
    return manager;
     }
 

@@ -1,75 +1,70 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.ProductUnit;
+import com.store.onlinestore.model.repository.CrudRepository;
+import lombok.Getter;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
-import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@ApplicationScoped
-public class ProductUnitService implements Serializable {
+public class ProductUnitService {
+    @Getter
+    private static ProductUnitService service = new ProductUnitService();
 
-    @PersistenceContext(unitName = "store")
-    private EntityManager entityManager;
-
-    public ProductUnit save(ProductUnit productUnit) throws Exception {
-        entityManager.persist(productUnit);
-        return productUnit;
+    private ProductUnitService() {
     }
 
-    public ProductUnit edit(ProductUnit productUnit) throws Exception {
-        ProductUnit foundProductUnit = entityManager.find(ProductUnit.class, productUnit.getId());
-        if (foundProductUnit != null) {
-            entityManager.merge(productUnit);
+    public ProductUnit save(ProductUnit productUnit) throws Exception {
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            return unitRepository.save(productUnit);
         }
-        return productUnit;
+    }
+
+    public ProductUnit edit(ProductUnit productUnit) throws Exception{
+        try (CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()){
+            return unitRepository.edit(productUnit);
+        }
     }
 
     public ProductUnit remove(Long id) throws Exception {
-        ProductUnit productUnit = entityManager.find(ProductUnit.class, id);
-        if (productUnit != null) {
-            productUnit.setDeleted(true);
-            entityManager.merge(productUnit);
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            return unitRepository.remove(id, ProductUnit.class);
         }
-        return productUnit;
     }
 
-    public List<ProductUnit> findAll() throws Exception {
-        return entityManager
-                .createQuery("select oo from productUnitEntity oo where oo.deleted=false", ProductUnit.class)
-                .getResultList();
+    public List<ProductUnit> findAll() throws Exception{
+        try (CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            return unitRepository.findAll(ProductUnit.class);
+        }
     }
 
     public ProductUnit findById(Long id) throws Exception {
-        ProductUnit productUnit = entityManager.find(ProductUnit.class, id);
-        return productUnit;
-    }
-
-    public ProductUnit findByName(String name) throws Exception {
-        List<ProductUnit> productUnitList = entityManager.createQuery(
-                        "select oo from productUnitEntity oo where oo.name like :name and oo.deleted=false", ProductUnit.class)
-                .setParameter("name", name)
-                .getResultList();
-        if (!productUnitList.isEmpty()) {
-            return productUnitList.get(0);
-        } else {
-            return null;
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            return unitRepository.findById(id, ProductUnit.class);
         }
-
-
     }
 
-    public ProductUnit findBySymbol(String symbol) throws Exception {
-        ProductUnit productUnit = entityManager.createQuery(
-                        "select oo from productUnitEntity oo where oo.symbol =:symbol and oo.deleted=false", ProductUnit.class)
-                .setParameter("symbol", symbol)
-                .getSingleResult();
-        return productUnit;
+    public List<ProductUnit> findByName(String name) throws Exception {
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", name + "%");
+            List<ProductUnit> unitList = unitRepository.executeQuery("ProductUnit.FindByName", params, ProductUnit.class);
+            if (unitList != null) {
+                return unitList;
+            }
+            throw new Exception();
+        }
+    }
+    public List<ProductUnit> findBySymbol(String symbol) throws Exception {
+        try(CrudRepository<ProductUnit, Long> unitRepository = new CrudRepository<>()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("symbol", symbol );
+            List<ProductUnit> unitList = unitRepository.executeQuery("ProductUnit.FindBySymbol", params, ProductUnit.class);
+            if (unitList != null) {
+                return unitList;
+            }
+            throw new Exception();
+        }
     }
 }
-
-
-

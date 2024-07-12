@@ -1,18 +1,13 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.Customer;
-import com.store.onlinestore.model.entity.Inventory;
-import com.store.onlinestore.model.entity.Product;
 import com.store.onlinestore.model.entity.Role;
-import com.store.onlinestore.model.repository.CrudRepository;
+import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@Singleton
 public class RoleService {
 
     @PersistenceContext(unitName = "store")

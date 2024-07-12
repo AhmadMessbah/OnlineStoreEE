@@ -4,9 +4,8 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.ProductGroup;
 
 import com.store.onlinestore.model.service.ProductGroupService;
+import jakarta.ejb.EJB;
 
-
-import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +16,9 @@ import java.io.IOException;
 
 @WebServlet(value = "/product-group.do")
 public class ProductGroupServlet extends HttpServlet {
-
-    @Inject
+    //    @Inject
+    // TODO: 7/11/2024 EJB??? 
+    @EJB
     private ProductGroupService productGroupService;
 
 

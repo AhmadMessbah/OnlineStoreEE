@@ -12,7 +12,6 @@ public class InventoryTransactionApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-//        return Response.ok().entity(InventoryTransactionService.getService().findAll()).build();
-        return null;
+        return Response.ok().entity(InventoryTransactionService.getService().findAll()).build();
     }
 }

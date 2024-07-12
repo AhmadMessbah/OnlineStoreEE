@@ -13,16 +13,8 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "adminEntity")
 @Table(name="admin_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Admin.FindByNameAndFamily", query = "select a from adminEntity  a where a.name like :name and a.family like :family"),
-        @NamedQuery(name = "Admin.FindByUsernameAndPassword", query = "select a from adminEntity a where a.username=:username and a.password=:password"),
-        @NamedQuery(name = "Admin.FindByUsername", query = "select a from adminEntity a where a.username=:username"),
-        @NamedQuery(name = "Admin.FindByEmail", query = "select a from adminEntity a where a.email like :email"),
-        @NamedQuery(name = "Admin.FindByNationalCode", query = "select a from adminEntity a where a.nationalCode=:nationalCode"),
-        @NamedQuery(name = "Admin.FindByPhoneNumber", query = "select a from adminEntity a where a.phoneNumber =:phoneNumber")
-})
 
-public class Admin extends User {
+public class Admin extends Profile {
     @Id
     @SequenceGenerator(name = "adminSeq", sequenceName = "admin_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "adminSeq")
@@ -33,5 +25,9 @@ public class Admin extends User {
     // TODO: join column
     //@JoinColumn(name = "Admin_role_table")
     private Role role ;
+    @OneToOne
+    // TODO: join column
+    //@JoinColumn(name = "Admin_role_table")
+    private User user ;
 }
 
