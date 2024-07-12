@@ -7,7 +7,10 @@ import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @WebServlet(name = "InitServlet", urlPatterns = "/init.do", loadOnStartup = 1)
 public class InitServlet extends HttpServlet {
     @Inject
@@ -26,9 +29,9 @@ public class InitServlet extends HttpServlet {
                     .deleted(false)
                     .build();
             userService.save(user);
-            System.out.println("Admin Created !!!");
+           log.info("Admin Created !!!");
         } catch (Exception e) {
-            System.out.println("Error in init !!!");
+            log.error("Error in init !!!");
         }
     }
 }

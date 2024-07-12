@@ -196,14 +196,14 @@ public class InventoryTest {
                 .description("This is Inventory1 des")
 //                .productStock(20)
                 .product(product1)
-                .supplierList(supplierList1)
+//                .supplierList(supplierList1)
                 .build();
 
         Inventory inventory2=Inventory.builder()
                 .description("This is Inventory2 des")
 //                .productStock(11)
                 .product(product2)
-                .supplierList(supplierList2)
+//                .supplierList(supplierList2)
                 .build();
 
 //        System.out.println(InventoryService.getService().save(inventory1));
