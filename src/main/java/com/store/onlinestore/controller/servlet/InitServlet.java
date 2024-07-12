@@ -8,7 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 
-@WebServlet(name = "/init.do", loadOnStartup = 1)
+@WebServlet(name = "InitServlet", urlPatterns = "/init.do", loadOnStartup = 1)
 public class InitServlet extends HttpServlet {
     @Inject
     private UserService userService;
@@ -16,12 +16,18 @@ public class InitServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        try{
-            User user = User.builder().username("admin").password("admin").deleted(false).build();
+        try {
             Role role = Role.builder().role("admin").build();
+            User user = User
+                    .builder()
+                    .username("admin")
+                    .password("admin")
+                    .role(role)
+                    .deleted(false)
+                    .build();
             userService.save(user);
             System.out.println("Admin Created !!!");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error in init !!!");
         }
     }
