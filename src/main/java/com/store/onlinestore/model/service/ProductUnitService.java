@@ -4,6 +4,7 @@ import com.store.onlinestore.model.entity.ProductUnit;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,11 +14,13 @@ public class ProductUnitService implements Serializable {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
+    @Transactional
     public ProductUnit save(ProductUnit productUnit) throws Exception {
         entityManager.persist(productUnit);
         return productUnit;
     }
 
+    @Transactional
     public ProductUnit edit(ProductUnit productUnit) throws Exception {
         ProductUnit foundProductUnit = entityManager.find(ProductUnit.class, productUnit.getId());
         if (foundProductUnit != null) {
@@ -26,6 +29,7 @@ public class ProductUnitService implements Serializable {
         return productUnit;
     }
 
+    @Transactional
     public ProductUnit remove(Long id) throws Exception {
         ProductUnit productUnit = entityManager.find(ProductUnit.class, id);
         if (productUnit != null) {
@@ -35,17 +39,20 @@ public class ProductUnitService implements Serializable {
         return productUnit;
     }
 
+    @Transactional
     public List<ProductUnit> findAll() throws Exception {
         return entityManager
                 .createQuery("select oo from productUnitEntity oo where oo.deleted=false", ProductUnit.class)
                 .getResultList();
     }
 
+    @Transactional
     public ProductUnit findById(Long id) throws Exception {
         ProductUnit productUnit = entityManager.find(ProductUnit.class, id);
         return productUnit;
     }
 
+    @Transactional
     public ProductUnit findByName(String name) throws Exception {
         List<ProductUnit> productUnitList = entityManager.createQuery(
                         "select oo from productUnitEntity oo where oo.name like :name and oo.deleted=false", ProductUnit.class)
@@ -60,6 +67,7 @@ public class ProductUnitService implements Serializable {
 
     }
 
+    @Transactional
     public ProductUnit findBySymbol(String symbol) throws Exception {
         ProductUnit productUnit = entityManager.createQuery(
                         "select oo from productUnitEntity oo where oo.symbol =:symbol and oo.deleted=false", ProductUnit.class)
