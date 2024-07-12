@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 
 public class Supplier extends Base {
     @Id
-    @SequenceGenerator(name = "managerSeq", sequenceName = "manager_seq", allocationSize = 1)
+    @SequenceGenerator(name = "supplierSeq", sequenceName = "supplier_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "managerSeq")
     @Column(name = "id")
     private Long id;

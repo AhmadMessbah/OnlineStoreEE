@@ -28,6 +28,7 @@ public class Attachment {
     private String filename;
 
     @Enumerated(EnumType.ORDINAL)
+    @Column(name ="file_type")
     private FileType fileType;
 
     @Column(name="file_size")

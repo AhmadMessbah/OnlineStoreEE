@@ -19,36 +19,20 @@ import java.util.List;
 public class Inventory extends Base {
 
     @Id
-    @SequenceGenerator(name = "inventorySeq", sequenceName = "inventory_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "inventorySeq", sequenceName = "inventory_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventorySeq")
     private int id;
-
-    @Column(name = "name")
-//    @Pattern(regexp = "^[a-zA-Z\\s]{3,40}$", message = "Invalid Inventory Name")
-    private String name;
-
-    @Column(name = "description")
-    private String description;
 
     @Column(name = "count")
     private int count;
 
-    @Column(name = "location")
+    @Column(name = "location",length = 100)
     private String location;
 
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")
     private Product product;
 
-    @OneToMany
-    @JoinTable(name = "inventory_supplier_tbl")
-    private List<Supplier> supplierList;
-
-
-    public void addSupplier(Supplier supplier) {
-        if (supplierList == null) {
-            supplierList = new ArrayList<>();
-        }
-        supplierList.add(supplier);
-    }
+    @Column(name = "description",length = 100)
+    private String description;
 }

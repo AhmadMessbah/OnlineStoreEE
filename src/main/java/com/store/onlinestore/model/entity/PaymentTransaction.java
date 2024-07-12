@@ -16,7 +16,8 @@ import java.util.List;
 @Table(name = "payment_transaction_tbl")
 public class PaymentTransaction extends Base {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "paymentTransactionSeq", sequenceName = "payment_transaction_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentTransactionSeq")
     @Column(name = "id")
     private int id;
 

@@ -30,7 +30,7 @@ import lombok.experimental.SuperBuilder;
 public class Address extends Base{
     @Id
     @SequenceGenerator(name = "addressSeq", sequenceName = "address_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "addressSeq")
 
     @Column(name = "id")
     private Long id;

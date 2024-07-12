@@ -34,8 +34,8 @@ import java.time.LocalDateTime;
 @Table(name = "delivery_tbl")
 public class Delivery extends Base {
     @Id
-    @SequenceGenerator(name = "deliverySeq", sequenceName = "delivery", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "deliverySeq", sequenceName = "delivery_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "deliverySeq")
 
     @Column(name = "id")
     private Long id;
@@ -46,7 +46,7 @@ public class Delivery extends Base {
     @ManyToOne
     private Address address;
 
-    @Column(name = "orderId", length = 9)
+    @Column(name = "order_id", length = 9)
 //    @Pattern(regexp = "^[a-zA-Z]{9}$",message = "Invalid Order Id")
     private String orderId;
 
@@ -76,7 +76,7 @@ public class Delivery extends Base {
 //    private String signature;
 
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100)
 //    @Pattern(regexp = "^[a-zA-Z0-9&@$_\\-\\s]{5,255}$",message = "Invalid description")
     private String description;
 
