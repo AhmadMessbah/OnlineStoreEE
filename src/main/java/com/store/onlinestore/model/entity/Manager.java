@@ -12,10 +12,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 @Entity(name = "managerEntity")
-@Table(name="manager_tbl")
+@Table(name = "manager_tbl")
 
-
-public class Manager extends Profile{
+public class Manager extends Profile {
     @Id
     @SequenceGenerator(name = "managerSeq", sequenceName = "manager_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "managerSeq")
@@ -23,12 +22,7 @@ public class Manager extends Profile{
     private Long id;
 
     @OneToOne
-    private Role role ;
-
-    @OneToOne
-    // TODO: join column
-    //@JoinColumn(name = "Admin_role_table")
-    private User user ;
+    private User user;
 }
 
 
