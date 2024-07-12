@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -34,4 +35,5 @@ public class User extends Base {
             inverseJoinColumns = @JoinColumn(name = "role_name"))
     private Role role;
 
+    private boolean locked;
 }

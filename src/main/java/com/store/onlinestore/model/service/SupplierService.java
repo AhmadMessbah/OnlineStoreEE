@@ -1,11 +1,14 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Supplier;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import java.util.List;
 
-public class SupplierService {
+import java.io.Serializable;
+import java.util.List;
+@ApplicationScoped
+public class SupplierService implements Serializable {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
