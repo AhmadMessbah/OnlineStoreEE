@@ -34,4 +34,5 @@ public class User extends Base {
             inverseJoinColumns = @JoinColumn(name = "role_name"))
     private Role role;
 
+    private boolean locked;
 }

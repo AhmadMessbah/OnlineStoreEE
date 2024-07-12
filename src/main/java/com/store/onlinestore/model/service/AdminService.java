@@ -1,5 +1,6 @@
 package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.Admin;
+import com.store.onlinestore.model.entity.User;
 import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -42,6 +43,29 @@ public class AdminService {
     public Admin findById(Long id) throws Exception {
         Admin admin = entityManager.find(Admin.class, id);
         return admin;
+    }
+
+    public List<Admin> findByUsername(String username) throws Exception {
+        return entityManager
+                .createQuery("select a from adminEntity a where a.user.username=:username", Admin.class)
+                .setParameter("username", username )
+                .getResultList();
+    }
+
+    public List<Admin> findByNameAndFamily(String name, String family) throws Exception {
+        return entityManager
+                .createQuery("select a from adminEntity  a where a.name like :name and a.family like :family", Admin.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
+    }
+
+    public List<Admin> findByUsernameAndPassword(String username, String password) throws Exception {
+        return entityManager
+                .createQuery("select a from adminEntity a where a.user.username=:username and a.user.password=:password", Admin.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
     }
 
     public List<Admin> findByEmail(String email) throws Exception {
