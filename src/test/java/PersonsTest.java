@@ -3,7 +3,6 @@ import com.store.onlinestore.model.entity.enums.FileType;
 import com.store.onlinestore.model.entity.enums.UserState;
 import com.store.onlinestore.model.service.*;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 
 import static com.store.onlinestore.model.entity.Admin.builder;

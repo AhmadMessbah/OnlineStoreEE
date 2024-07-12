@@ -1,18 +1,18 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Person;
-import com.store.onlinestore.model.entity.Product;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
+@ApplicationScoped
 public class PersonService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
     public Person save(Person person) throws Exception {
         entityManager.persist(person);
-        entityManager.find(Product.class, 1);
         return person;
     }
 
