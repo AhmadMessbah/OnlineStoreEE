@@ -1,75 +1,58 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.CheckPayment;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
-
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CheckPaymentService {
 
-    @Getter
-    private static CheckPaymentService service = new CheckPaymentService();
-
-    CheckPaymentService() {
-    }
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public CheckPayment save(CheckPayment checkPayment) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            return repository.save(checkPayment);
-        }
+        entityManager.persist(checkPayment);
+        return checkPayment;
     }
 
     public CheckPayment edit(CheckPayment checkPayment) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            return repository.edit(checkPayment);
+        CheckPayment foundCheckPayment = entityManager.find(CheckPayment.class, checkPayment.getId());
+        if (foundCheckPayment != null) {
+            entityManager.merge(checkPayment);
         }
+        return checkPayment;
     }
 
     public CheckPayment remove(Long id) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, CheckPayment.class);
+        CheckPayment checkPayment = entityManager.find(CheckPayment.class, id);
+        if (checkPayment != null) {
+            checkPayment.setDeleted(true);
+            entityManager.merge(checkPayment);
         }
+        return checkPayment;
     }
 
     public List<CheckPayment> findAll() throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(CheckPayment.class);
-        }
+        return entityManager
+            .createQuery("select ch from checkEntity ch where ch.deleted = false", CheckPayment.class)
+            .getResultList();
     }
 
     public CheckPayment findById(Long id) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, CheckPayment.class);
-        }
+        CheckPayment checkPayment = entityManager.find(CheckPayment.class, id);
+        return checkPayment;
     }
 
     public CheckPayment FindByCheckNumber(long checkNumber) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("checkNumber", checkNumber);
-            List<CheckPayment> result = repository.executeQuery( "Check.FindByCheckNumber", params, CheckPayment.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager
+                .createQuery("select ch from checkEntity ch where ch.checkNumber =: checkNumber", CheckPayment.class)
+                .setParameter("checkNumber", checkNumber)
+                .getSingleResult();
     }
 
-    public CheckPayment FindByDateTime(LocalDateTime dateTime) throws Exception {
-        try (CrudRepository<CheckPayment, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("DateTime", dateTime);
-            List<CheckPayment> result = repository.executeQuery( "Check.FindByDateTime", params, CheckPayment.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+    public CheckPayment FindByDateTime(LocalDateTime localDateTime) throws Exception {
+        CheckPayment checkPayment = entityManager.find(CheckPayment.class, localDateTime);
+        return checkPayment;
     }
 }

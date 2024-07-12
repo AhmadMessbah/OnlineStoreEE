@@ -16,7 +16,7 @@ public class AdminService {
 
     public Admin save(Admin admin) throws Exception {
         try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            admin.setRole(RoleService.getService().FindByRole("admin"));
+//            admin.setRole(RoleService.getService().FindByRole("admin"));
             return repository.save(admin);
         }
     }

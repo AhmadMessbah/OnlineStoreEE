@@ -4,11 +4,13 @@ import com.store.onlinestore.model.entity.enums.UserState;
 import com.store.onlinestore.model.service.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryTest {
     public static void main(String[] args) throws Exception {
         Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
+//        System.out.println(RoleService.getService().save(customerRole));
 
         Customer customer =
                 Customer
@@ -23,7 +25,7 @@ public class InventoryTest {
 //                        .address(address)
                         .build();
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
         Attachment attachment1 =
                 Attachment
@@ -97,11 +99,11 @@ public class InventoryTest {
                         .status(true)
                         .build();
 
-        ProductGroupService.getService().save(root);
-        ProductGroupService.getService().save(child1);
-        ProductGroupService.getService().save(child2);
-        ProductGroupService.getService().save(child3);
-        ProductGroupService.getService().save(child4);
+//        ProductGroupService.getService().save(root);
+//        ProductGroupService.getService().save(child1);
+//        ProductGroupService.getService().save(child2);
+//        ProductGroupService.getService().save(child3);
+//        ProductGroupService.getService().save(child4);
 
         Product product1 =
                 Product
@@ -121,9 +123,9 @@ public class InventoryTest {
                         .productGroup(child4)
                         .build();
 
-
-        ProductService.getService().save(product1);
-        ProductService.getService().save(product2);
+//
+//        ProductService.getService().save(product1);
+//        ProductService.getService().save(product2);
 
         Invoice invoice =
                 Invoice
@@ -131,7 +133,7 @@ public class InventoryTest {
                         .customer(customer)
                         .build();
 
-        InvoiceService.getService().save(invoice);
+//        InvoiceService.getService().save(invoice);
 
         InvoiceItem invoiceItem1 =
                 InvoiceItem
@@ -163,7 +165,51 @@ public class InventoryTest {
         invoice.addItem(invoiceItem1);
         invoice.addItem(invoiceItem2);
 
-        InvoiceService.getService().edit(invoice);
+//        InvoiceService.getService().edit(invoice);
+
+        Supplier supplier1=Supplier.builder()
+                .name("Supplier1 name")
+                .family("Supplier1 family")
+                .mobilePhone("09171711111")
+                .nationalCode("34934934900")
+                .email("abcd@gmail.com")
+                .companyName("ramak")
+                .build();
+
+        Supplier supplier2=Supplier.builder()
+                .name("Supplier2 name")
+                .family("Supplier2 family")
+                .mobilePhone("09171700000")
+                .nationalCode("34934934911")
+                .email("efgh@gmail.com")
+                .companyName("kale")
+                .build();
+
+        List<Supplier> supplierList1=new ArrayList<>();
+        supplierList1.add(supplier1);
+
+        List<Supplier> supplierList2=new ArrayList<>();
+        supplierList1.add(supplier2);
+
+
+        Inventory inventory1=Inventory.builder()
+                .description("This is Inventory1 des")
+//                .productStock(20)
+                .product(product1)
+                .supplierList(supplierList1)
+                .build();
+
+        Inventory inventory2=Inventory.builder()
+                .description("This is Inventory2 des")
+//                .productStock(11)
+                .product(product2)
+                .supplierList(supplierList2)
+                .build();
+
+//        System.out.println(InventoryService.getService().save(inventory1));
+//        System.out.println(InventoryService.getService().save(inventory2));
+
+//        System.out.println(InventoryService.getService().findAll());
 
     }
 }

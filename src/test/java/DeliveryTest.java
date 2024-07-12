@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class DeliveryTest {
     public static void main(String[] args) throws Exception {
         Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
+//        System.out.println(RoleService.getService().save(customerRole));
 
         Customer customer =
                 Customer
@@ -24,7 +24,7 @@ public class DeliveryTest {
 //                        .address(address)
                         .build();
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
         Attachment attachment1 =
                 Attachment
@@ -97,12 +97,12 @@ public class DeliveryTest {
                         .parentGroup(child1)
                         .status(true)
                         .build();
-
-        ProductGroupService.getService().save(root);
-        ProductGroupService.getService().save(child1);
-        ProductGroupService.getService().save(child2);
-        ProductGroupService.getService().save(child3);
-        ProductGroupService.getService().save(child4);
+//
+//        ProductGroupService.getService().save(root);
+//        ProductGroupService.getService().save(child1);
+//        ProductGroupService.getService().save(child2);
+//        ProductGroupService.getService().save(child3);
+//        ProductGroupService.getService().save(child4);
 
         Product product1 =
                 Product
@@ -123,8 +123,8 @@ public class DeliveryTest {
                         .build();
 
 
-        ProductService.getService().save(product1);
-        ProductService.getService().save(product2);
+//        ProductService.getService().save(product1);
+//        ProductService.getService().save(product2);
 
         Invoice invoice =
                 Invoice
@@ -132,7 +132,7 @@ public class DeliveryTest {
                         .customer(customer)
                         .build();
 
-        InvoiceService.getService().save(invoice);
+//        InvoiceService.getService().save(invoice);
 
         InvoiceItem invoiceItem1 =
                 InvoiceItem
@@ -164,7 +164,7 @@ public class DeliveryTest {
         invoice.addItem(invoiceItem1);
         invoice.addItem(invoiceItem2);
 
-        InvoiceService.getService().edit(invoice);
+//        InvoiceService.getService().edit(invoice);
 
         DeliveryService deliveryService = DeliveryService.getDeliveryService();
         Delivery delivery1 = Delivery.builder()

@@ -15,11 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "productEntity")
 @Table(name = "product_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Product.FindByNameAndBrand", query = "select p from productEntity p where p.name like :name and p.brand like :brand"),
-        @NamedQuery(name = "Product.FindByBarcode", query = "select p from productEntity p where p.barcode =:barcode"),
-        @NamedQuery(name = "Product.FindByBrand", query = "select p from productEntity p where p.brand like :brand")
-})
+
 public class Product extends Base {
     @Id
     @SequenceGenerator(name = "productSeq", sequenceName = "product_seq", allocationSize = 1)
@@ -60,5 +56,7 @@ public class Product extends Base {
     @Column(name = "barcode", unique = true)
 //    @Pattern(regexp = "^\\d{3,30}$", message = "Invalid Barcode")
     private String barcode;
+
+
 
 }

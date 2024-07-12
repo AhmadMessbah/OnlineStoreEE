@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class InvoiceTest {
     public static void main(String[] args) throws Exception {
         Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
+//        System.out.println(RoleService.getService().save(customerRole));
 
         Customer customer =
                 Customer
@@ -23,7 +23,7 @@ public class InvoiceTest {
 //                        .address(address)
                         .build();
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
         Attachment attachment1 =
                 Attachment
@@ -97,11 +97,11 @@ public class InvoiceTest {
                         .status(true)
                         .build();
 
-        ProductGroupService.getService().save(root);
-        ProductGroupService.getService().save(child1);
-        ProductGroupService.getService().save(child2);
-        ProductGroupService.getService().save(child3);
-        ProductGroupService.getService().save(child4);
+//        ProductGroupService.getService().save(root);
+//        ProductGroupService.getService().save(child1);
+//        ProductGroupService.getService().save(child2);
+//        ProductGroupService.getService().save(child3);
+//        ProductGroupService.getService().save(child4);
 
         Product product1 =
                 Product
@@ -121,9 +121,9 @@ public class InvoiceTest {
                         .productGroup(child4)
                         .build();
 
-
-        ProductService.getService().save(product1);
-        ProductService.getService().save(product2);
+//
+//        ProductService.getService().save(product1);
+//        ProductService.getService().save(product2);
 
         Invoice invoice =
                 Invoice
@@ -131,7 +131,7 @@ public class InvoiceTest {
                         .customer(customer)
                         .build();
 
-        InvoiceService.getService().save(invoice);
+//        InvoiceService.getService().save(invoice);
 
         InvoiceItem invoiceItem1 =
                 InvoiceItem
@@ -163,9 +163,9 @@ public class InvoiceTest {
         invoice.addItem(invoiceItem1);
         invoice.addItem(invoiceItem2);
 
-        InvoiceService.getService().edit(invoice);
+//        InvoiceService.getService().edit(invoice);
 
-        System.out.println(InvoiceService.getService().findAll());
+//        System.out.println(InvoiceService.getService().findAll());
         //todo WARNING: An illegal reflective access operation has occurred
         //WARNING: Illegal reflective access by com.google.gson.internal.reflect.ReflectionHelper (file:/C:/Users/Arash/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar) to field java.time.LocalDateTime.date
         //WARNING: Please consider reporting this to the maintainers of com.google.gson.internal.reflect.ReflectionHelper

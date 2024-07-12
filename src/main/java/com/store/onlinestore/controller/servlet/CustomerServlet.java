@@ -10,36 +10,38 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
-@WebServlet("/customer.test")
-public class CustomerTestServlet extends HttpServlet {
+@WebServlet("/customer.do")
+public class CustomerServlet extends HttpServlet {
+
+    @Inject
+    private CustomerService customerService;
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             Customer customer =
                     Customer
                             .builder()
-                            .name("aaaa")
-                            .family("bbbb")
-                            .username("cccc")
+                            .name("name")
+                            .family("family")
+                            .username("user1")
                             .password("123456789")
-                            .email("aaa@gmail.com")
+                            .email("email@gmail.com")
                             .phoneNumber("09121234567")
+                            .nationalCode("1234567890")
+//                            .address(address)
                             .status(UserState.Active)
                             .build();
 
             BeanValidator<Customer> CustomerValidator = new BeanValidator<>();
             if(CustomerValidator.validate(customer).isEmpty()) {
-                System.out.println(CustomerValidator.validate(customer));
+                customerService.save(customer);
             }else{
-                System.out.println(CustomerValidator.validate(customer));
+                throw new Exception("Invalid Customer Data !!!");  //error
             }
-
-
-            System.out.println(CustomerService.getService().findAll());
-
-            System.out.println(CustomerService.getService().findByUsername("a"));
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

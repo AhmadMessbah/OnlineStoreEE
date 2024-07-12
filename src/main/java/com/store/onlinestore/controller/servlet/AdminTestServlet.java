@@ -4,28 +4,20 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.Admin;
 import com.store.onlinestore.model.service.AdminService;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import jakarta.servlet.annotation.HttpMethodConstraint;
-import jakarta.servlet.annotation.ServletSecurity;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
-@ServletSecurity(
-        value = @HttpConstraint(
-                rolesAllowed = {"admin"}),
-        httpMethodConstraints =
-        @HttpMethodConstraint(
-                value = "GET",
-                rolesAllowed = {"admin"}
-        ))
-
-@WebServlet("/admin.test")
+@WebServlet("/admin.do")
 public class AdminTestServlet extends HttpServlet {
+    @Inject
+    private AdminService adminService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {

@@ -1,7 +1,12 @@
 package com.store.onlinestore.model.service;
 
+import com.store.onlinestore.model.entity.Customer;
+import com.store.onlinestore.model.entity.Inventory;
+import com.store.onlinestore.model.entity.Product;
 import com.store.onlinestore.model.entity.Role;
 import com.store.onlinestore.model.repository.CrudRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -10,52 +15,46 @@ import java.util.Map;
 
 public class RoleService {
 
-    @Getter
-    private static RoleService service = new RoleService();
-
-    private RoleService() {
-    }
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     public Role save(Role role) throws Exception {
-        try (CrudRepository<Role, Long> repository = new CrudRepository<>()) {
-            return repository.save(role);
-        }
+        entityManager.persist(role);
+        return role;
     }
 
     public Role edit(Role role) throws Exception {
-        try (CrudRepository<Role, Long> repository = new CrudRepository<>()) {
-            return repository.save(role);
+        Role foundRole = entityManager.find(Role.class, role.getId());
+        if (foundRole != null) {
+            entityManager.merge(role);
         }
+        return role;
     }
 
     public Role remove(Long id) throws Exception {
-        try (CrudRepository<Role, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, Role.class);
+        Role role = entityManager.find(Role.class, id);
+        if (role != null) {
+            role.setDeleted(true);
+            entityManager.merge(role);
         }
+        return role;
     }
 
     public List<Role> findAll() throws Exception {
-        try (CrudRepository<Role, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Role.class);
-        }
+        return entityManager
+                .createQuery("select oo from roleEntity oo where oo.deleted=false", Role.class)
+                .getResultList();
     }
 
     public Role findById(Long id) throws Exception {
-        try (CrudRepository<Role, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Role.class);
-        }
+        Role role = entityManager.find(Role.class, id);
+        return role;
     }
 
-    public Role FindByRole(String role) throws Exception {
-        try (CrudRepository<Role, String> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("role", role);
-            List<Role> result = repository.executeQuery( "Role.FindByRole", params, Role.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+    public List<Role> FindByRole(String role) throws Exception {
+        return entityManager
+                .createQuery("select r from roleEntity r where r.role = :role", Role.class)
+                .setParameter("role", role)
+                .getResultList();
     }
 }

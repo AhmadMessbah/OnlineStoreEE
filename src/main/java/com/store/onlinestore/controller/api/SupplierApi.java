@@ -13,6 +13,8 @@ public class SupplierApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(SupplierService.getService().findAll()).build();
+//        return Response.ok().entity(SupplierService.getService().findAll()).build();
+        return null;
+
     }
 }

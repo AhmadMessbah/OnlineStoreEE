@@ -18,12 +18,6 @@ import java.util.List;
 
 @Entity(name = "invoiceEntity")
 @Table(name = "invoice_tbl")
-@NamedQueries({
-        @NamedQuery(name = "Invoice.FindByCustomer", query = "select i from invoiceEntity i where i.customer.id = :customerId"),
-        @NamedQuery(name = "Invoice.FindBySerial", query = "select i from invoiceEntity i where i.serial like :serial"),
-        @NamedQuery(name = "Invoice.FindByDate", query = "select  i from invoiceEntity i where  i.localDateTime = :localDateTime"),
-        @NamedQuery(name = "Invoice.FindByRangeDate", query = "select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime")
-})
 
 public class Invoice extends Base {
     @Id
