@@ -23,11 +23,19 @@ public class Attachment {
     @SequenceGenerator(name = "attachmentSeq", sequenceName = "attachment_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attachmentSeq")
     private Long id;
+
+    @Column(name="attach_date_time", length = 50)
     private String filename;
+
+    @Enumerated(EnumType.ORDINAL)
     private FileType fileType;
 
+    @Column(name="file_size")
     private int fileSize;
 
+    @Column(name="attach_date_time")
     private LocalDateTime localDateTime;
+
+    @Column(name="description", length = 100)
     private String description;
 }
