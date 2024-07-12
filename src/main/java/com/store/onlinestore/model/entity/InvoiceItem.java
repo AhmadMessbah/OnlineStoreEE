@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name="invoice_item_tbl")
 public class InvoiceItem extends Base{
     @Id
-    @SequenceGenerator(name = "invoiceItemSeq", sequenceName = "invoiceItem_seq", allocationSize = 1)
+    @SequenceGenerator(name = "invoiceItemSeq", sequenceName = "invoice_Item_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoiceItemSeq")
     private Long id;
 
