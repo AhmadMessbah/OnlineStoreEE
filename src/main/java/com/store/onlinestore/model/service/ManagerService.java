@@ -49,28 +49,6 @@ public class ManagerService {
         return manager;
     }
 
-    public List<Manager> findByUsername(String username) throws Exception {
-        return entityManager
-                .createQuery("select o from managerEntity o where o.username=username",Manager.class)
-                .getResultList();
-    }
-
-    public List<Manager> findByNameAndFamily(String name, String family) throws Exception {
-       return entityManager
-               .createQuery("select o from managerEntity o where o.name like  :name and o.family like :family",Manager.class)
-               .setParameter("name",name+"%")
-               .setParameter("family",family+"%")
-               .getResultList();
-    }
-
-    public List<Manager> findByUsernameAndPassword(String username, String password) throws Exception {
-       return entityManager
-               .createQuery("select o from managerEntity o where o.username=:username and o.password=:password",Manager.class)
-               .setParameter("username",username)
-               .setParameter("password",password)
-               .getResultList();
-    }
-
     public List<Manager> findByEmail(String email) throws Exception {
         return entityManager
         .createQuery("select o from managerEntity o where o.email like :email",Manager.class)
