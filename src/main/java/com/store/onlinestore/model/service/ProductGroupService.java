@@ -1,15 +1,17 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.ProductGroup;
-import jakarta.ejb.Stateless;
+
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.io.Serializable;
 import java.util.List;
 
-// TODO: 7/11/2024 stateless??? 
-@Stateless
-public class ProductGroupService {
+
+@ApplicationScoped
+public class ProductGroupService implements Serializable {
 
 
     @PersistenceContext(unitName = "store")

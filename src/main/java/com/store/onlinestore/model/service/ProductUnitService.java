@@ -1,14 +1,16 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.ProductUnit;
-import jakarta.ejb.Stateless;
+
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Stateless
-public class ProductUnitService {
+@ApplicationScoped
+public class ProductUnitService implements Serializable {
 
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;

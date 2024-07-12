@@ -1,11 +1,10 @@
 package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.ProductGroup;
 import com.store.onlinestore.model.entity.ProductUnit;
-import com.store.onlinestore.model.service.ProductGroupService;
+
 import com.store.onlinestore.model.service.ProductUnitService;
-import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ import java.io.IOException;
 @WebServlet(value = "/product-unit.do")
 public class ProductUnitServlet extends HttpServlet {
 
-    @EJB
+    @Inject
     private ProductUnitService productUnitService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
