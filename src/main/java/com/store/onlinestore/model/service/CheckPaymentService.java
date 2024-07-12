@@ -1,7 +1,5 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.CardPayment;
-import com.store.onlinestore.model.entity.CashPayment;
 import com.store.onlinestore.model.entity.CheckPayment;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
@@ -15,7 +13,6 @@ public class CheckPaymentService {
 
     public CheckPayment save(CheckPayment checkPayment) throws Exception {
         entityManager.persist(checkPayment);
-        entityManager.find(CheckPayment.class, 1);
         return checkPayment;
     }
 

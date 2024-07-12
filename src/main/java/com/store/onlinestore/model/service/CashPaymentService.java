@@ -13,7 +13,6 @@ public class CashPaymentService {
 
     public CashPayment save(CashPayment cashPayment) throws Exception {
         entityManager.persist(cashPayment);
-        entityManager.find(CashPayment.class, 1);
         return cashPayment;
     }
 

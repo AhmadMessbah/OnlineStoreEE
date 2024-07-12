@@ -18,7 +18,6 @@ public class CardPaymentService {
 
     public CardPayment save(CardPayment cardPayment) throws Exception {
         entityManager.persist(cardPayment);
-        entityManager.find(CardPayment.class, 1);
         return cardPayment;
     }
 
