@@ -24,7 +24,7 @@ public class Attachment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attachmentSeq")
     private Long id;
 
-    @Column(name="attach_date_time", length = 50)
+    @Column(name="file_name", length = 50)
     private String filename;
 
     @Enumerated(EnumType.ORDINAL)

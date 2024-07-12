@@ -28,7 +28,10 @@ public class User extends Base {
     private String password;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles")
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name="username"),
+            inverseJoinColumns = @JoinColumn(name = "role_name"))
     private Role role;
 
 }

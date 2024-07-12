@@ -27,6 +27,6 @@ public class Supplier extends Base {
 //    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,50}$" ,message = "Invalid Company Name")
     private String companyName;
 
-    @OneToOne
-    private User user;
+//    @OneToOne
+//    private User user;
 }
