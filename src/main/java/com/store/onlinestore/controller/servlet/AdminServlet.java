@@ -35,7 +35,7 @@ public class AdminServlet extends HttpServlet {
             BeanValidator<Admin> adminValidator = new BeanValidator<>();
 
             if(adminValidator.validate(admin).isEmpty()) {
-//                adminValidator.save(admin);
+                adminService.save(admin);
             }else{
                 throw new Exception("Invalid Person Data !!!");  //error
             }
