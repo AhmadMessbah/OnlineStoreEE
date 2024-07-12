@@ -2,52 +2,55 @@ package com.store.onlinestore.model.service;
 
 
 import com.store.onlinestore.model.entity.InvoiceItem;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
+import java.io.Serializable;
 import java.util.List;
 
+@ApplicationScoped
+public class InvoiceItemService implements Serializable {
 
-public class InvoiceItemService {
-
-
-    @Getter
-    private static InvoiceItemService service = new InvoiceItemService();
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     private InvoiceItemService() {
     }
 
     public InvoiceItem save(InvoiceItem invoiceItem) throws Exception {
-        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()) {
-            return repository.save(invoiceItem);
-        }
+        entityManager.persist(invoiceItem);
+        return invoiceItem;
     }
 
     public InvoiceItem edit(InvoiceItem invoiceItem) throws Exception {
-        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()) {
-            return repository.edit(invoiceItem);
+        InvoiceItem foundinvoiceItem = entityManager.find(InvoiceItem.class, invoiceItem.getId());
+        if (foundinvoiceItem != null) {
+            entityManager.merge(invoiceItem);
         }
+        return invoiceItem;
     }
 
     //    todo : convert to logical remove
     public InvoiceItem remove(Long id) throws Exception {
-        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()) {
-            return repository.remove(id, InvoiceItem.class);
+        InvoiceItem invoiceItem = entityManager.find(InvoiceItem.class, id);
+        if (invoiceItem != null) {
+            invoiceItem.setDeleted(true);
+            entityManager.merge(invoiceItem);
         }
+        return invoiceItem;
     }
 
     public List<InvoiceItem> findAll() throws Exception {
-        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()) {
-            return  repository.findAll(InvoiceItem.class);
-        }
+        return entityManager
+                .createQuery("select ii from invoiceItemEntity ii where ii.deleted=false", InvoiceItem.class)
+                .getResultList();
     }
 
-    public InvoiceItem findById(Long id) throws Exception{
-        try (CrudRepository<InvoiceItem, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, InvoiceItem.class);
-        }
+    public InvoiceItem findById(Long id) throws Exception {
+        InvoiceItem invoiceItem = entityManager.find(InvoiceItem.class, id);
+        return invoiceItem;
     }
-
 
 
 }

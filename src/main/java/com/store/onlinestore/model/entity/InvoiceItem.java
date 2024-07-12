@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name="invoiceItemEntity")
 @Table(name="invoice_item_tbl")
+
 public class InvoiceItem extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

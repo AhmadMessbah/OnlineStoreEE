@@ -11,11 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/invoiceItem.test")
-public class InvoiceItemTestServlet extends HttpServlet {
+@WebServlet("/invoiceItem.do")
+public class InvoiceItemServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             InvoiceItem invoiceItem1=
                     InvoiceItem
@@ -48,7 +48,7 @@ public class InvoiceItemTestServlet extends HttpServlet {
             }
 
 
-            System.out.println(InvoiceItemService.getService().findAll());
+//            System.out.println(InvoiceItemService.getService().findAll());
 
 
         }
