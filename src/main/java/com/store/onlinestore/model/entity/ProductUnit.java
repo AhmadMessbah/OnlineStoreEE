@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "product_unit_tbl")
 public class ProductUnit extends Base {
     @Id
-    @SequenceGenerator(name = "productUnitSeq", sequenceName = "product-unit-seq", allocationSize = 1)
+    @SequenceGenerator(name = "productUnitSeq", sequenceName = "product_unit_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productUnitSeq")
     @Column(name = "id")
     private Long id;
