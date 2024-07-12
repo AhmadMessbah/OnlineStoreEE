@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/invoice.test")
-public class InvoiceTestServlet extends HttpServlet {
+@WebServlet("/invoice.do")
+public class InvoiceServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Customer customer =
                     Customer

@@ -2,7 +2,11 @@ package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.controller.exception.InvoiceNotFoundException;
 import com.store.onlinestore.model.entity.Invoice;
+import com.store.onlinestore.model.entity.Person;
+import com.store.onlinestore.model.entity.Product;
 import com.store.onlinestore.model.repository.CrudRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -11,104 +15,77 @@ import java.util.List;
 import java.util.Map;
 
 public class InvoiceService {
-    @Getter
-    private static InvoiceService service = new InvoiceService();
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
 
     private InvoiceService() {
     }
 
     public Invoice save(Invoice invoice) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            return repository.save(invoice);
-        }
+        entityManager.persist(invoice);
+        entityManager.find(Product.class, 1);
+        return invoice;
     }
 
+
     public Invoice edit(Invoice invoice) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(invoice.getId(), Invoice.class) != null) {
-                return repository.edit(invoice);
-            }
-            throw new InvoiceNotFoundException();
+        Invoice foundInvoice = entityManager.find(Invoice.class, invoice.getId());
+        if (foundInvoice != null) {
+            entityManager.merge(invoice);
         }
+        return invoice;
     }
 
     public Invoice remove(Long id) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id, Invoice.class) != null) {
-                return repository.remove(id, Invoice.class);
-            }
-            throw new InvoiceNotFoundException();
+        Invoice invoice = entityManager.find(Invoice.class, id);
+        if (invoice != null) {
+            invoice.setDeleted(true);
+            entityManager.merge(invoice);
         }
+        return invoice;
     }
 
     public List<Invoice> findAll() throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            List<Invoice> invoiceList = repository.findAll(Invoice.class);
-            if (!invoiceList.isEmpty()) {
-                return invoiceList;
-            }
-            throw new InvoiceNotFoundException();
-
-        }
+        return entityManager
+                .createQuery("select i from invoiceEntity i where i.deleted=false", Invoice.class)
+                .getResultList();
     }
 
     public Invoice findById(Long id) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            Invoice invoice = repository.findById(id, Invoice.class);
-            if (invoice != null) {
-                return invoice;
-            }
-            throw new InvoiceNotFoundException();
-        }
+        Invoice invoice = entityManager.find(Invoice.class, id);
+        return invoice;
     }
 
     public Invoice findBySerial(String serial) throws Exception {
-        try (CrudRepository<Invoice, String> repository = new CrudRepository<>()) {
-            Invoice invoice = repository.findById(serial, Invoice.class);
-            if (invoice != null) {
-                return invoice;
-            }
-            throw new InvoiceNotFoundException();
-        }
+        return entityManager
+                .createQuery("select i from invoiceEntity i where i.serial =:serial", Invoice.class)
+                .setParameter("serial", serial)
+                .getSingleResult();
     }
 
+
     public List<Invoice> findByCustomerId(Long customerId) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("customerId", customerId);
-            List<Invoice> invoiceList = repository.executeQuery("Invoice.FindByCustomer", params, Invoice.class);
-            if (!invoiceList.isEmpty()) {
-                return invoiceList;
-            }
-            throw new InvoiceNotFoundException();
-        }
+        return entityManager
+                .createQuery("select i from invoiceEntity i where i.customer.id = :customerId", Invoice.class)
+                .setParameter("customerId", customerId)
+                .getResultList();
     }
 
 //  todo :  findByNameAndFamily
 
     public List<Invoice> findByDate(LocalDateTime localDateTime) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("localDateTime", localDateTime);
-            List<Invoice> invoiceList = repository.executeQuery("Invoice.FindByDate", params, Invoice.class);
-            if (!invoiceList.isEmpty()) {
-                return invoiceList;
-            }
-            throw new InvoiceNotFoundException();
-        }
+        return entityManager
+                .createQuery("select  i from invoiceEntity i where  i.localDateTime = :localDateTime", Invoice.class)
+                .setParameter("localDateTime", localDateTime)
+                .getResultList();
     }
 
-    public List<Invoice> findByRangeDate(LocalDateTime startDate ,LocalDateTime endDate) throws Exception {
-        try (CrudRepository<Invoice, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("startDate", startDate);
-            params.put("endDate", endDate);
-            List<Invoice> invoiceList = repository.executeQuery("Invoice.FindRangeByDate", params, Invoice.class);
-            if (!invoiceList.isEmpty()) {
-                return invoiceList;
-            }
-            throw new InvoiceNotFoundException();
-        }
+    public List<Invoice> findByRangeDate(LocalDateTime startDate, LocalDateTime endDate) throws Exception {
+        return entityManager
+                .createQuery("select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime", Invoice.class)
+                .setParameter("startTime", startDate)
+                .setParameter("endTime", endDate)
+                .getResultList();
     }
 }
 
