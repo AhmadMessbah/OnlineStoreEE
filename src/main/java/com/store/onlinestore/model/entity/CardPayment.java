@@ -14,13 +14,6 @@ import lombok.experimental.SuperBuilder;
 @Entity(name = "cardEntity")
 @Table(name = "card_tbl")
 
-@NamedQueries({
-        @NamedQuery(name = "Card.FindByCardNumber", query = "select c from cardEntity  c where c.cardNumber =cardNumber"),
-        @NamedQuery(name = "Card.FindByDateTime", query = "select c from cardEntity c where c.paymentDateTime = paymentDateTime"),
-        @NamedQuery(name = "Card.FindById", query = "select c from cardEntity c where c.id = id"),
-        @NamedQuery(name = "Card.FindByBankName", query = "select c from cardEntity c where c.bankName = bankName")
-})
-
 public class CardPayment extends Payment {
     @Id
     @SequenceGenerator(name = "paymentSeq", sequenceName = "payment_seq", allocationSize = 1)
