@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 @Entity(name = "cardEntity")
-@Table(name = "card_tbl")
+@Table(name = "card_payment_tbl")
 
 public class CardPayment extends Payment {
     @Id

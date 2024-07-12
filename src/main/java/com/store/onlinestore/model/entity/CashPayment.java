@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 @Entity(name = "cashEntity")
-@Table(name = "cash_tbl")
+@Table(name = "cash_ payment_tbl")
 
 
 public class CashPayment extends Payment {
