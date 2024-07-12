@@ -16,6 +16,6 @@ public class ProductUnitApi {
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response findAll() throws Exception {
-        return Response.ok().entity(ProductUnitService.getService().findAll()).build();
+        return null; //Response.ok().entity(ProductUnitService.getService().findAll()).build();
     }
 }
