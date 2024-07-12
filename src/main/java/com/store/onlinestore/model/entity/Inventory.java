@@ -34,7 +34,7 @@ public class Inventory extends Base {
     private int count;
 
     @Column(name = "location")
-    private String loction;
+    private String location;
 
     @OneToOne
     @JoinTable(name = "inventory_product_tbl")

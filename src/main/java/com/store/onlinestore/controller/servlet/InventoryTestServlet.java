@@ -26,7 +26,7 @@ public class InventoryTestServlet extends HttpServlet {
                             .name(req.getParameter("name_inventory"))
                             .description(req.getParameter("description_inventory"))
                             .count(Integer.parseInt(req.getParameter("count_inventory")))
-                            .loction(req.getParameter("loction_inventory"))
+                            .location(req.getParameter("loction_inventory"))
                             .product(null)
                             .supplierList(null)
                             .build();
