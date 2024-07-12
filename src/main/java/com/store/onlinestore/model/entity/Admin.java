@@ -22,12 +22,6 @@ public class Admin extends Profile {
     private Long id;
 
     @OneToOne
-    // TODO: join column
-    //@JoinColumn(name = "Admin_role_table")
-    private Role role ;
-    @OneToOne
-    // TODO: join column
-    //@JoinColumn(name = "Admin_role_table")
     private User user ;
 }
 

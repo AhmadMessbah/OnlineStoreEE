@@ -26,11 +26,11 @@ public class supplierTestServlet extends HttpServlet {
             Supplier supplier =
                     Supplier
                             .builder()
-                            .name(req.getParameter("name_supplier"))
-                            .family(req.getParameter("family_supplier"))
-                            .mobilePhone(req.getParameter("mobilePhone_supplier"))
-                            .nationalCode(req.getParameter("nationalCode_supplier"))
-                            .email(req.getParameter("email_supplier"))
+//                            .name(req.getParameter("name_supplier"))
+//                            .family(req.getParameter("family_supplier"))
+//                            .mobilePhone(req.getParameter("mobilePhone_supplier"))
+//                            .nationalCode(req.getParameter("nationalCode_supplier"))
+//                            .email(req.getParameter("email_supplier"))
                             .companyName(req.getParameter("companyName_supplier"))
                             .build();
 

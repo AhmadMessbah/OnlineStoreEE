@@ -1,7 +1,6 @@
 package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.service.CheckPaymentService;
 import jakarta.servlet.annotation.HttpMethodConstraint;
 import com.store.onlinestore.model.entity.CheckPayment;
 import jakarta.servlet.annotation.ServletSecurity;
@@ -26,8 +25,8 @@ import java.io.IOException;
         )
 )
 
-@WebServlet("/Check.test")
-public class CheckPaymentTestServlet extends HttpServlet {
+@WebServlet("/Check.do")
+public class CheckPaymentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

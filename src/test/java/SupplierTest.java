@@ -6,20 +6,20 @@ public class SupplierTest {
     public static void main(String[] args) throws Exception {
 
         Supplier supplier1 = Supplier.builder()
-                .name("ali")
-                .family("alipoor")
-                .mobilePhone("09177772424")
-                .nationalCode("3490006200")
-                .email("alipoor@gmail.com")
+//                .name("ali")
+//                .family("alipoor")
+//                .mobilePhone("09177772424")
+//                .nationalCode("3490006200")
+//                .email("alipoor@gmail.com")
                 .companyName("ramak")
                 .build();
 
         Supplier supplier2 = Supplier.builder()
-                .name("saeed")
-                .family("saeedi")
-                .mobilePhone("09178882424")
-                .nationalCode("1110006200")
-                .email("saeedi@gmail.com")
+//                .name("saeed")
+//                .family("saeedi")
+//                .mobilePhone("09178882424")
+//                .nationalCode("1110006200")
+//                .email("saeedi@gmail.com")
                 .companyName("pegah")
                 .build();
 

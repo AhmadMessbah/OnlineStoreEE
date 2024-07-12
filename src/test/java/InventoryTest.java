@@ -168,20 +168,20 @@ public class InventoryTest {
 //        InvoiceService.getService().edit(invoice);
 
         Supplier supplier1=Supplier.builder()
-                .name("Supplier1 name")
-                .family("Supplier1 family")
-                .mobilePhone("09171711111")
-                .nationalCode("34934934900")
-                .email("abcd@gmail.com")
+//                .name("Supplier1 name")
+//                .family("Supplier1 family")
+//                .mobilePhone("09171711111")
+//                .nationalCode("34934934900")
+//                .email("abcd@gmail.com")
                 .companyName("ramak")
                 .build();
 
         Supplier supplier2=Supplier.builder()
-                .name("Supplier2 name")
-                .family("Supplier2 family")
-                .mobilePhone("09171700000")
-                .nationalCode("34934934911")
-                .email("efgh@gmail.com")
+//                .name("Supplier2 name")
+//                .family("Supplier2 family")
+//                .mobilePhone("09171700000")
+//                .nationalCode("34934934911")
+//                .email("efgh@gmail.com")
                 .companyName("kale")
                 .build();
 
