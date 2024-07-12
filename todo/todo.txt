@@ -13,5 +13,8 @@ Entity :
 
 
 
+Test with apache benchmark :
 
+CMD:
+    ab -k -c 350 -n 20000 localhost/
 

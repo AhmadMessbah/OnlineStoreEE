@@ -39,7 +39,7 @@ public class ProductGroup extends Base{
     @Column(name = "is_active")
     private boolean status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    @JoinTable(name = "product_group_relation_tbl")
     private ProductGroup parentGroup;
 

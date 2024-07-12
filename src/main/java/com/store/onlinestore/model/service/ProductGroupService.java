@@ -5,6 +5,7 @@ import com.store.onlinestore.model.entity.ProductGroup;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,11 +18,13 @@ public class ProductGroupService implements Serializable {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
+    @Transactional
     public ProductGroup save(ProductGroup productGroup) throws Exception {
         entityManager.persist(productGroup);
         return productGroup;
     }
 
+    @Transactional
     public ProductGroup edit(ProductGroup productGroup) throws Exception {
         ProductGroup foundProductGroup = entityManager.find(ProductGroup.class, productGroup.getId());
         if (foundProductGroup != null) {
@@ -30,6 +33,7 @@ public class ProductGroupService implements Serializable {
         return productGroup;
     }
 
+    @Transactional
     public ProductGroup remove(Long id) throws Exception {
         ProductGroup productGroup = entityManager.find(ProductGroup.class, id);
         if (productGroup != null) {
@@ -39,12 +43,14 @@ public class ProductGroupService implements Serializable {
         return productGroup;
     }
 
+    @Transactional
     public List<ProductGroup> findAll() throws Exception {
         return entityManager
                 .createQuery("select oo from productGroupEntity oo where oo.deleted=false", ProductGroup.class)
                 .getResultList();
     }
 
+    @Transactional
     public ProductGroup findById(Long id) throws Exception {
         ProductGroup productGroup = entityManager.find(ProductGroup.class, id);
         return productGroup;

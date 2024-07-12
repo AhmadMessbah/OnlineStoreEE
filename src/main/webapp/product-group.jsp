@@ -23,7 +23,7 @@
 
     <form action="/product-group.do" method="post">
 
-        <input type="text" name="id" placeholder="ID" style="display: block; margin-bottom: 30px">
+<%--        <input type="text" name="id" placeholder="ID" style="display: block; margin-bottom: 30px">--%>
         <input type="text" name="name" placeholder="Name" style="display: block; margin-bottom: 30px">
 
         <select name="status" id="1" style="display: block; margin-bottom: 30px">

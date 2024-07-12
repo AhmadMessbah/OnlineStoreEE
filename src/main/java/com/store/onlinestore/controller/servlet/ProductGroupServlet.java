@@ -12,9 +12,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 
-
+@Slf4j
 @WebServlet(urlPatterns = "/product-group.do")
 public class ProductGroupServlet extends HttpServlet {
 
@@ -39,7 +41,6 @@ public class ProductGroupServlet extends HttpServlet {
         try {
 
             ProductGroup parentProductGroup = null;
-
             if (req.getParameter("parent") != null) {
                 parentProductGroup = productGroupService.findByName(req.getParameter("parent"));
             }
@@ -50,15 +51,14 @@ public class ProductGroupServlet extends HttpServlet {
                             .name(req.getParameter("name"))
                             .description(req.getParameter("description"))
                             .status(true)
-                            .parentGroup(parentProductGroup)
-                            .childGroupList(null)
+//                            .parentGroup(parentProductGroup)
                             .deleted(false)
                             .build();
 
             BeanValidator<ProductGroup> productGroupValidator = new BeanValidator<>();
             if (productGroupValidator.validate(productGroup).isEmpty()) {
-
                 if (productGroupService.findByName(productGroup.getName()) == null) {
+                    log.info(productGroup.toString());
                     productGroupService.save(productGroup);
                     if (parentProductGroup != null) {
                         parentProductGroup.addChildGroup(productGroup);
@@ -79,7 +79,7 @@ public class ProductGroupServlet extends HttpServlet {
 
         } catch (Exception e) {
             resp.getWriter().write("<h1 style=\"background-color: yellow;\">" + e.getMessage() + "</h1>");
-
+            e.printStackTrace();
             System.out.println("Error : " + e.getMessage());
         }
     }
