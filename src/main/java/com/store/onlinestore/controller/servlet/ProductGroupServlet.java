@@ -51,7 +51,7 @@ public class ProductGroupServlet extends HttpServlet {
                             .name(req.getParameter("name"))
                             .description(req.getParameter("description"))
                             .status(true)
-//                            .parentGroup(parentProductGroup)
+                            .parentGroup(parentProductGroup)
                             .deleted(false)
                             .build();
 
