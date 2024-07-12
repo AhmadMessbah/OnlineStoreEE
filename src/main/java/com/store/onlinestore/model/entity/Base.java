@@ -2,10 +2,7 @@ package com.store.onlinestore.model.entity;
 
 import com.google.gson.Gson;
 import jakarta.json.bind.annotation.JsonbTransient;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +20,8 @@ import java.util.List;
 @MappedSuperclass
 public class Base implements Serializable {
     @JsonbTransient
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.DETACH})
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "attach_id")
     private List<Attachment> attachmentList;
 
     @JsonbTransient
