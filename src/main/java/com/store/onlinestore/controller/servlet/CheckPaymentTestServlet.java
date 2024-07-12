@@ -1,15 +1,30 @@
 package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
-import com.store.onlinestore.model.entity.CheckPayment;
 import com.store.onlinestore.model.service.CheckPaymentService;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.annotation.HttpMethodConstraint;
+import com.store.onlinestore.model.entity.CheckPayment;
+import jakarta.servlet.annotation.ServletSecurity;
+import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import java.time.LocalDateTime;
+import java.io.IOException;
+
+@ServletSecurity(
+        value = @HttpConstraint(
+                rolesAllowed = {"cashPayment"}
+        ),
+
+        httpMethodConstraints =
+        @HttpMethodConstraint(
+                value = "GET",
+                rolesAllowed = {"cashPayment"}
+        )
+)
 
 @WebServlet("/Check.test")
 public class CheckPaymentTestServlet extends HttpServlet {
@@ -31,25 +46,16 @@ public class CheckPaymentTestServlet extends HttpServlet {
                     .paymentDateTime(LocalDateTime.now())
                     .build();
 
-            BeanValidator<CheckPayment> checkValidator = new BeanValidator<>();
-
-            if(checkValidator.validate(checkPayment1).isEmpty()) {
-                System.out.println(checkValidator.validate(checkPayment1));
-            }else{
-                System.out.println(checkValidator.validate(checkPayment1));
+            // todo : Error check payment service
+            BeanValidator<CheckPayment> checkPaymentBeanValidator = new BeanValidator<>();
+            if (checkPaymentBeanValidator.validate(checkPayment1).isEmpty()) {
+//                System.out.println(CheckPaymentService.getService.save(checkPayment1));
+            } else {
+                System.out.println(checkPaymentBeanValidator.validate(checkPayment1));
             }
 
-            if(checkValidator.validate(checkPayment2).isEmpty()) {
-                System.out.println(checkValidator.validate(checkPayment2));
-            }else{
-                System.out.println(checkValidator.validate(checkPayment2));
-            }
-
-            System.out.println(CheckPaymentService.getService().findAll());
-
-            System.out.println(CheckPaymentService.getService().FindByCheckNumber(123456789));
-
-        }catch (Exception e){
+//            System.out.println(CheckPaymentService.getService().save(checkPayment2));
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
