@@ -1,18 +1,12 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.controller.exception.InvoiceNotFoundException;
 import com.store.onlinestore.model.entity.Invoice;
-import com.store.onlinestore.model.entity.Person;
 import com.store.onlinestore.model.entity.Product;
-import com.store.onlinestore.model.repository.CrudRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class InvoiceService {
     @PersistenceContext(unitName = "store")
