@@ -4,8 +4,9 @@ import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.ProductGroup;
 
 import com.store.onlinestore.model.service.ProductGroupService;
-import jakarta.ejb.EJB;
 
+
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,17 +15,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(value = "/product-group.do")
+@WebServlet(urlPatterns = "/product-group.do")
 public class ProductGroupServlet extends HttpServlet {
-    //    @Inject
-    // TODO: 7/11/2024 EJB??? 
-    @EJB
+
+    @Inject
     private ProductGroupService productGroupService;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            System.out.println(productGroupService.findByName("hgh"));
             req.getSession().setAttribute("findAllProductGroups", productGroupService.findAll());
             req.getRequestDispatcher("/product-group.jsp").forward(req, resp);
         } catch (Exception e) {

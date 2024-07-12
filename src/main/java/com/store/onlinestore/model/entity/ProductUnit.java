@@ -13,11 +13,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 
-@NamedQueries({
-    @NamedQuery(name = "ProductUnit.FindByName", query = "select u from productUnitEntity u where u.name like :name and u.deleted=false"),
-    @NamedQuery(name = "ProductUnit.FindBySymbol", query = "select u from productUnitEntity u where u.symbol =:symbol and u.deleted=false")
-})
-
 @Entity(name = "productUnitEntity")
 @Table(name = "product_unit_tbl")
 public class ProductUnit extends Base {
@@ -31,7 +26,7 @@ public class ProductUnit extends Base {
 //    @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
     private String name;
 
-    @Column(name = "symbol")
+    @Column(name = "symbol",length = 10)
 //    @Pattern(regexp = "^[a-zA-Z\\d]{3,30}$", message = "Invalid Symbol")
     private String symbol;
 
