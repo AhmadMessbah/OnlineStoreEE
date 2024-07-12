@@ -1,7 +1,7 @@
 package com.store.onlinestore.model.service;
 import com.store.onlinestore.model.entity.InventoryTransaction;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
 

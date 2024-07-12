@@ -7,7 +7,7 @@ import com.store.onlinestore.model.service.ProductGroupService;
 import com.store.onlinestore.model.service.ProductService;
 import com.store.onlinestore.model.service.ProductUnitService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.time.LocalDateTime;
 
 public class ProductTest {

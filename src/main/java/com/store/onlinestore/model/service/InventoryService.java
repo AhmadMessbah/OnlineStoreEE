@@ -1,8 +1,8 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Inventory;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 
