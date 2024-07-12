@@ -1,15 +1,10 @@
 package com.store.onlinestore.model.service;
 
-import com.store.onlinestore.model.entity.CashPayment;
-import com.store.onlinestore.model.repository.CrudRepository;
 import com.store.onlinestore.model.entity.CardPayment;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
-import jakarta.persistence.Id;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CardPaymentService {
 
