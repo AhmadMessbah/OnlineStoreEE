@@ -16,7 +16,8 @@ import java.util.List;
 @Table(name = "payment_transaction_tbl")
 public class PaymentTransaction extends Base {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "paymentTransactionSeq", sequenceName = "payment_Transaction_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paymentTransactionSeq")
     @Column(name = "id")
     private int id;
 
@@ -25,7 +26,7 @@ public class PaymentTransaction extends Base {
 
 //    todo : relation not saved
     @OneToMany(mappedBy = "paymentTransaction")
-//    @JoinTable(name = "payment_transaction_cash")
+    @JoinColumn(name = "transaction_id")
     private List<CashPayment> cashPaymentList;
 
     @OneToMany(mappedBy = "paymentTransaction")
