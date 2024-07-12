@@ -63,7 +63,7 @@ public class InventoryTransactionService {
                 .getSingleResult();
     }
 
-    public InventoryTransaction fideByManagerNationalCode(String nationalCode) throws Exception {
+    public InventoryTransaction findByManagerNationalCode(String nationalCode) throws Exception {
         return entityManager.createQuery("select oo from inventoryTransactionEntity oo where oo.deliveryPerson.nationalCode=:nationalCode", InventoryTransaction.class)
                 .setParameter("nationalCode", nationalCode)
                 .getSingleResult();

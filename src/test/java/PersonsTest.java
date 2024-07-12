@@ -26,14 +26,14 @@ public class PersonsTest {
                         .localDateTime(LocalDateTime.now())
                         .build();
 
-        Role adminRole = Role.builder().role("admin").build();
-        System.out.println(RoleService.getService().save(adminRole));
-
-        Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
-
-        Role managerRole = Role.builder().role("manager").build();
-        System.out.println(RoleService.getService().save(managerRole));
+//        Role adminRole = Role.builder().role("admin").build();
+//        System.out.println(RoleService.getService().save(adminRole));
+//
+//        Role customerRole = Role.builder().role("customer").build();
+//        System.out.println(RoleService.getService().save(customerRole));
+//
+//        Role managerRole = Role.builder().role("manager").build();
+//        System.out.println(RoleService.getService().save(managerRole));
 
         Address address = Address
                 .builder()
@@ -88,6 +88,6 @@ public class PersonsTest {
 //                        .address(address)
                         .build();
 
-        System.out.println(ManagerService.getService().save(manager));
+//        System.out.println(ManagerService.getService().save(manager));
     }
 }

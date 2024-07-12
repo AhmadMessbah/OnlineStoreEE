@@ -1,7 +1,6 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.Customer;
-import com.store.onlinestore.model.entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -14,7 +13,6 @@ public class CustomerService {
 
     public Customer save(Customer customer) throws Exception {
         entityManager.persist(customer);
-        entityManager.find(Product.class, 1);
         return customer;
     }
 
