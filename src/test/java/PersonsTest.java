@@ -46,23 +46,23 @@ public class PersonsTest {
                 builder()
                         .name("leva")
                         .family("ziaei")
-                        .username("Levaziaeii")
-                        .password("admin123")
+//                        .username("Levaziaeii")
+//                        .password("admin123")
                         .status(UserState.Active)
 //                        .address(address)
                         .build();
         admin.addAttachment(attachment1);
         admin.addAttachment(attachment2);
 
-        System.out.println(AdminService.getService().save(admin));
+//        System.out.println(AdminService.getService().save(admin));
 
         Customer customer =
                 Customer
                         .builder()
                         .name("aaaa")
                         .family("bbbb")
-                        .username("cccc")
-                        .password("123456789")
+//                        .username("cccc")
+//                        .password("123456789")
                         .email("aaa@gmail.com")
                         .phoneNumber("09121234567")
                         .nationalCode("1234567890")
@@ -79,8 +79,8 @@ public class PersonsTest {
                         .builder()
                         .name("aaaa")
                         .family("bbbb")
-                        .username("cccc")
-                        .password("123456789")
+//                        .username("cccc")
+//                        .password("123456789")
                         .email("aaa@gmail.com")
                         .phoneNumber("09121234567")
                         .status(UserState.Active)

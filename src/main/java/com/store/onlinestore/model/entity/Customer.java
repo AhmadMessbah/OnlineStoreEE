@@ -30,5 +30,5 @@ public class Customer extends Profile {
     //@JoinColumn(name = "Admin_role_table")
     private User user ;
 }
-}
+
 
