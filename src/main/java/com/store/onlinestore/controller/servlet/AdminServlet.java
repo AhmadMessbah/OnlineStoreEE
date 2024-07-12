@@ -27,15 +27,15 @@ public class AdminServlet extends HttpServlet {
                             .builder()
                             .name("leva")
                             .family("ziaee")
-                            .username("levaziaei")
-                            .password("admin123")
+//                            .username("levaziaei")
+//                            .password("admin123")
                             .build();
 
 
             BeanValidator<Admin> adminValidator = new BeanValidator<>();
 
             if(adminValidator.validate(admin).isEmpty()) {
-                adminValidator.save(admin);
+//                adminValidator.save(admin);
             }else{
                 throw new Exception("Invalid Person Data !!!");  //error
             }
