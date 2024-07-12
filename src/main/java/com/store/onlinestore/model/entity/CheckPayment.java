@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 @Entity(name = "checkEntity")
-@Table(name = "check_tbl")
+@Table(name = "check_payment_tbl")
 
 public class CheckPayment extends Payment {
     @Id
@@ -25,5 +25,6 @@ public class CheckPayment extends Payment {
     private Long checkNumber;
 
     @ManyToOne
+    @JoinColumn(name="transaction_id")
     private PaymentTransaction paymentTransaction;
 }

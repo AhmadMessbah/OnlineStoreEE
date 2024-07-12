@@ -22,7 +22,7 @@ public abstract class Payment extends Base {
     @Column(name="payment_date")
     private LocalDateTime paymentDateTime;
 
-    @Column(name="description")
+    @Column(name="description" , length = 50)
     @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$")
     private String description;
 }

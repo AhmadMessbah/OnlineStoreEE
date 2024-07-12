@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 
 @Entity(name = "cardEntity")
-@Table(name = "card_tbl")
+@Table(name = "card_payment_tbl")
 
 public class CardPayment extends Payment {
     @Id
@@ -21,13 +21,14 @@ public class CardPayment extends Payment {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="bank_name")
+    @Column(name="bank_name",length = 50)
     private  String bankName;
 
     @Column(name = "card_number" ,length = 20, unique = true)
     private Long cardNumber;
 
     @ManyToOne
+    @JoinColumn(name="transaction_id")
     private PaymentTransaction paymentTransaction;
 }
 

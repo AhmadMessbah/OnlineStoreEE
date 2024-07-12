@@ -1,12 +1,15 @@
 package com.store.onlinestore.model.service;
 
 import com.store.onlinestore.model.entity.CashPayment;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-
-public class CashPaymentService {
+@ApplicationScoped
+public class CashPaymentService  implements Serializable {
 
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
