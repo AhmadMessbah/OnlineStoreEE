@@ -20,8 +20,11 @@ import java.util.List;
 @Table(name = "invoice_tbl")
 
 public class Invoice extends Base {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "invoiceSeq", sequenceName = "invoice_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoiceSeq")
     @Column(name = "id")
     private Long id;
 
