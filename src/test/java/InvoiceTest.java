@@ -53,9 +53,9 @@ public class InvoiceTest {
                         .name("Cm")
                         .build();
 
-        ProductUnitService.getService().save(unit1);
-        ProductUnitService.getService().save(unit2);
-        System.out.println(ProductUnitService.getService().findAll());
+//        ProductUnitService.getService().save(unit1);
+//        ProductUnitService.getService().save(unit2);
+//        System.out.println(ProductUnitService.getService().findAll());
 
         ProductGroup root =
                 ProductGroup
@@ -152,8 +152,8 @@ public class InvoiceTest {
                         .invoice(invoice)
                         .build();
 
-        InvoiceItemService.getService().save(invoiceItem1);
-        InvoiceItemService.getService().save(invoiceItem2);
+//        InvoiceItemService.getService().save(invoiceItem1);
+//        InvoiceItemService.getService().save(invoiceItem2);
 
 //        invoice.setInvoiceItemList(new ArrayList<InvoiceItem>());
 //        invoice.getInvoiceItemList().add(invoiceItem1);
