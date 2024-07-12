@@ -13,17 +13,9 @@ import lombok.experimental.SuperBuilder;
 
 @Entity(name = "managerEntity")
 @Table(name="manager_tbl")
-//@NamedQueries({
-//        @NamedQuery(name = "Manager.FindByNameAndFamily", query = "select p from managerEntity p where p.name like :name and p.family like :family"),
-//        @NamedQuery(name = "Manager.FindByUsernameAndPassword", query = "select p from managerEntity p where p.username=:username and p.password=:password"),
-//        @NamedQuery(name = "Manager.FindByUsername", query = "select p from managerEntity p where p.username=:username"),
-//        @NamedQuery(name = "Manager.FindByEmail", query = "select p from managerEntity p where p.email like :email"),
-//        @NamedQuery(name = "Manager.FindByNationalCode", query = "select p from managerEntity p where p.nationalCode=:nationalCode"),
-//        @NamedQuery(name = "Manager.FindByPhoneNumber", query = "select p from managerEntity p where p.phoneNumber=:phoneNumber")
-//})
 
 
-public class Manager extends User{
+public class Manager extends Profile{
     @Id
     @SequenceGenerator(name = "managerSeq", sequenceName = "manager_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "managerSeq")
@@ -32,5 +24,11 @@ public class Manager extends User{
 
     @OneToOne
     private Role role ;
+
+    @OneToOne
+    // TODO: join column
+    //@JoinColumn(name = "Admin_role_table")
+    private User user ;
 }
+
 

@@ -1,104 +1,90 @@
 package com.store.onlinestore.model.service;
-import com.store.onlinestore.controller.exception.AdminNotFoundException;
 import com.store.onlinestore.model.entity.Admin;
-import com.store.onlinestore.model.repository.CrudRepository;
-import lombok.Getter;
+import jakarta.ejb.Singleton;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
+@Singleton
 public class AdminService {
-    @Getter
-    private static AdminService service = new AdminService();
 
-    private AdminService() {}
+    @PersistenceContext(unitName = "store")
+    private EntityManager entityManager;
+
 
     public Admin save(Admin admin) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            admin.setRole(RoleService.getService().FindByRole("admin"));
-            return repository.save(admin);
-        }
+        entityManager.persist(admin);
+        return admin;
     }
 
     public Admin edit(Admin admin) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            return repository.edit(admin);
+        Admin foundAdmin = entityManager.find(Admin.class, admin.getId());
+        if (foundAdmin != null) {
+            entityManager.merge(admin);
         }
+        return admin;
     }
 
     public Admin remove(Long id) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            if (repository.findById(id, Admin.class) != null) {
-                return repository.remove(id, Admin.class);
-            }
-            throw new AdminNotFoundException();
+        Admin admin = entityManager.find(Admin.class,id );
+        if (admin != null) {
+            admin.setDeleted(true);
+            entityManager.merge(admin);
         }
+        return admin;
     }
+
     public List<Admin> findAll() throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            return repository.findAll(Admin.class);
-        }
+        return entityManager
+                .createQuery("select oo from adminEntity oo where oo.deleted=false", Admin.class)
+                .getResultList();
     }
     public Admin findById(Long id) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            return repository.findById(id, Admin.class);
-        }
+        Admin admin = entityManager.find(Admin.class, id);
+        return admin;
     }
+
     public List<Admin> findByUsername(String username) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("username", username);
-            return repository.executeQuery("Admin.FindByUsername", params, Admin.class);
-        }
+        return entityManager
+                .createQuery("select a from adminEntity a where a.username=:username", Admin.class)
+                .setParameter("username", username )
+                .getResultList();
     }
 
     public List<Admin> findByNameAndFamily(String name, String family) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("name", name + "%");
-            params.put("family", family + "%");
-            return repository.executeQuery("Admin.FindByNameAndFamily", params, Admin.class);
-        }
+        return entityManager
+                .createQuery("select a from adminEntity  a where a.name like :name and a.family like :family", Admin.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
     }
 
     public List<Admin> findByUsernameAndPassword(String username, String password) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("username", username);
-            params.put("password", password);
-            return repository.executeQuery("Admin.FindByUsernameAndPassword", params, Admin.class);
-        }
+        return entityManager
+                .createQuery("select a from adminEntity a where a.username=:username and a.password=:password", Admin.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
     }
+
     public List<Admin> findByEmail(String email) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("email", email);
-            return repository.executeQuery("Admin.FindByEmail", params, Admin.class);
-        }
+        return entityManager
+                .createQuery("select a from adminEntity a where a.email like :email", Admin.class)
+                .setParameter("email", email )
+                .getResultList();
     }
-    public Admin fideByNationalCode(String nationalCode) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("nationalCode", nationalCode+ "%");
-            List<Admin> result = repository.executeQuery("FideByNationalCode", params, Admin.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }}
+
     public Admin findByPhoneNumber(String phoneNumber) throws Exception {
-        try (CrudRepository<Admin, Long> repository = new CrudRepository<>()) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("phoneNumber", phoneNumber);
-            List<Admin> result = repository.executeQuery("Admin.FindByPhoneNumber", params, Admin.class);
-            if (result.isEmpty()) {
-                return null;
-            } else {
-                return result.get(0);
-            }
-        }
+        return entityManager
+                .createQuery("select a from adminEntity a where a.phoneNumber =:phoneNumber", Admin.class)
+                .setParameter("phoneNumber", phoneNumber)
+                .getSingleResult();
+    }
+    public Admin findByNationalCode(String nationalCode) throws Exception {
+        return entityManager
+                .createQuery("select a from adminEntity a where a.nationalCode=:nationalCode", Admin.class)
+                .setParameter("nationalCode", nationalCode)
+                .getSingleResult();
     }
 }
 

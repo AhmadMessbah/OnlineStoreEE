@@ -13,6 +13,8 @@ public class AdminApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() throws Exception {
-        return Response.ok().entity(AdminService.getService().findAll()).build();
+    //    return Response.ok().entity(AdminService.getService().findAll()).build();
+        return null        ;
+
     }
 }

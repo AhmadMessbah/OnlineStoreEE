@@ -14,16 +14,21 @@ import lombok.experimental.SuperBuilder;
 @Entity(name = "customerEntity")
 @Table(name="customer_tbl")
 
-public class Customer extends User {
+public class Customer extends Profile {
     @Id
     @SequenceGenerator(name = "customerSeq", sequenceName = "customer_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customerSeq")
     @Column(name = "id")
     private Long id;
 
-
     @OneToOne
     @JoinTable(name="user_roles")
     private Role role ;
+
+    @OneToOne
+    // TODO: join column
+    //@JoinColumn(name = "Admin_role_table")
+    private User user ;
+}
 }
 
