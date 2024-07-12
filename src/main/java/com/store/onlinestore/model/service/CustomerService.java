@@ -44,29 +44,6 @@ public class CustomerService {
         return customer;
     }
 
-    public List<Customer> findByUsername(String username) throws Exception {
-        return entityManager
-                .createQuery("select c from customerEntity c where c.username=:username", Customer.class)
-                .setParameter("username", username )
-                .getResultList();
-    }
-
-    public List<Customer> findByNameAndFamily(String name, String family) throws Exception {
-        return entityManager
-                .createQuery("select c from customerEntity c where c.name like :name and c.family like :family", Customer.class)
-                .setParameter("name", name + "%")
-                .setParameter("family", family + "%")
-                .getResultList();
-    }
-
-    public List<Customer> findByUsernameAndPassword(String username, String password) throws Exception {
-        return entityManager
-                .createQuery("select c from customerEntity c where c.username=:username and c.password=:password", Customer.class)
-                .setParameter("username", username)
-                .setParameter("password", password)
-                .getResultList();
-    }
-
     public List<Customer> findByEmail(String email) throws Exception {
         return entityManager
                 .createQuery("select c from customerEntity c where c.email like :email", Customer.class)
