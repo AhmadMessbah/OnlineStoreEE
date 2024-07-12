@@ -25,5 +25,6 @@ public class CheckPayment extends Payment {
     private Long checkNumber;
 
     @ManyToOne
+    @JoinColumn(name="transaction_id")
     private PaymentTransaction paymentTransaction;
 }

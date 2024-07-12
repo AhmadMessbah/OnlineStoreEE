@@ -24,5 +24,6 @@ public class CashPayment extends Payment {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="transaction_id")
     private PaymentTransaction paymentTransaction;
 }
