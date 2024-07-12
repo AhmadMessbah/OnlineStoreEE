@@ -10,7 +10,7 @@ import java.util.List;
 public class InventoryTest {
     public static void main(String[] args) throws Exception {
         Role customerRole = Role.builder().role("customer").build();
-        System.out.println(RoleService.getService().save(customerRole));
+//        System.out.println(RoleService.getService().save(customerRole));
 
         Customer customer =
                 Customer
@@ -25,7 +25,7 @@ public class InventoryTest {
 //                        .address(address)
                         .build();
 
-        CustomerService.getService().save(customer);
+//        CustomerService.getService().save(customer);
 
         Attachment attachment1 =
                 Attachment
@@ -99,11 +99,11 @@ public class InventoryTest {
                         .status(true)
                         .build();
 
-        ProductGroupService.getService().save(root);
-        ProductGroupService.getService().save(child1);
-        ProductGroupService.getService().save(child2);
-        ProductGroupService.getService().save(child3);
-        ProductGroupService.getService().save(child4);
+//        ProductGroupService.getService().save(root);
+//        ProductGroupService.getService().save(child1);
+//        ProductGroupService.getService().save(child2);
+//        ProductGroupService.getService().save(child3);
+//        ProductGroupService.getService().save(child4);
 
         Product product1 =
                 Product
@@ -123,9 +123,9 @@ public class InventoryTest {
                         .productGroup(child4)
                         .build();
 
-
-        ProductService.getService().save(product1);
-        ProductService.getService().save(product2);
+//
+//        ProductService.getService().save(product1);
+//        ProductService.getService().save(product2);
 
         Invoice invoice =
                 Invoice
@@ -133,7 +133,7 @@ public class InventoryTest {
                         .customer(customer)
                         .build();
 
-        InvoiceService.getService().save(invoice);
+//        InvoiceService.getService().save(invoice);
 
         InvoiceItem invoiceItem1 =
                 InvoiceItem
@@ -165,7 +165,7 @@ public class InventoryTest {
         invoice.addItem(invoiceItem1);
         invoice.addItem(invoiceItem2);
 
-        InvoiceService.getService().edit(invoice);
+//        InvoiceService.getService().edit(invoice);
 
         Supplier supplier1=Supplier.builder()
                 .name("Supplier1 name")
@@ -194,22 +194,22 @@ public class InventoryTest {
 
         Inventory inventory1=Inventory.builder()
                 .description("This is Inventory1 des")
-                .productStock(20)
+//                .productStock(20)
                 .product(product1)
                 .supplierList(supplierList1)
                 .build();
 
         Inventory inventory2=Inventory.builder()
                 .description("This is Inventory2 des")
-                .productStock(11)
+//                .productStock(11)
                 .product(product2)
                 .supplierList(supplierList2)
                 .build();
 
-        System.out.println(InventoryService.getService().save(inventory1));
-        System.out.println(InventoryService.getService().save(inventory2));
+//        System.out.println(InventoryService.getService().save(inventory1));
+//        System.out.println(InventoryService.getService().save(inventory2));
 
-        System.out.println(InventoryService.getService().findAll());
+//        System.out.println(InventoryService.getService().findAll());
 
     }
 }
