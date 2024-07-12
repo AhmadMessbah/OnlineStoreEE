@@ -39,5 +39,9 @@ public abstract class Profile extends Base {
 
     @Enumerated(EnumType.ORDINAL)
     private UserState status;
+
+    @OneToOne
+    @JoinTable(name="profile_user_tbl")
+    private User user ;
 }
 

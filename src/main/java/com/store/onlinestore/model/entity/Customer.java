@@ -21,8 +21,8 @@ public class Customer extends Profile {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    private User user ;
+//    @OneToOne
+//    private User user ;
 }
 
 

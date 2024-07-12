@@ -16,6 +16,6 @@ import lombok.experimental.SuperBuilder;
 
 public class Role extends Base {
     @Id
-    @Column(name = "role_name")
+    @Column(name = "role_name", length = 20)
     private String role;
 }
