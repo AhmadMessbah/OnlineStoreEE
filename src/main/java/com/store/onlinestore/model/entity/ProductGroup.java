@@ -33,14 +33,14 @@ public class ProductGroup extends Base{
     @Pattern(regexp = "^[a-zA-Z\\s]{3,30}$" ,message = "Invalid Name")
     private String name;
 
-    @Column(name = "description", length = 30)
+    @Column(name = "description", length = 50)
     private String description;
 
     @Column(name = "is_active")
     private boolean status;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(name = "product_group_relation_tbl")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_group_id")
     private ProductGroup parentGroup;
 
     @ToString.Exclude

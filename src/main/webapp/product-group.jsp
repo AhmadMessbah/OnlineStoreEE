@@ -21,17 +21,17 @@
 
 <div style="margin-left: 400px; margin-top: -470px; background-color: #dcb12c; height: 60%; width: 20%; padding-top: 50px; padding-left: 40px;">
 
-    <form action="/product-group.do" method="post">
+    <form action="/product-group.do" method="post" id="1">
 
-<%--        <input type="text" name="id" placeholder="ID" style="display: block; margin-bottom: 30px">--%>
+        <input type="number" name="id" placeholder="ID" style="display: block; margin-bottom: 30px">
         <input type="text" name="name" placeholder="Name" style="display: block; margin-bottom: 30px">
 
-        <select name="status" id="1" style="display: block; margin-bottom: 30px">
+        <select name="status" id="2" style="display: block; margin-bottom: 30px">
             <option value="true">active</option>
             <option value="false">not active</option>
         </select>
 
-        <select name="parent" id="2" style="display: block; margin-bottom: 30px">
+        <select name="parent" id="3" style="display: block; margin-bottom: 30px">
             <c:forEach var="productGroup" items="${sessionScope.findAllProductGroups}">
 
                 <option>${productGroup.name}</option>
@@ -40,10 +40,12 @@
         </select>
 
         <input type="text" name="description" placeholder="Description" style="display: block; margin-bottom: 30px">
-        <input type="submit" value="Save" style="display: block">
-
+        <input type="submit" value="Save" name="save" style="display: inline">
+        <input type="submit" value="Edit"  name="edit" style="display: inline">
+        <input type="submit" value="Remove" name="delete" style="display: inline">
 
     </form>
+
 
 </div>
 
@@ -69,6 +71,7 @@
                 <td>${productGroup.status}</td>
                 <td>${productGroup.parentGroup.name}</td>
                 <td>${productGroup.description}</td>
+<%--                <td> <button formaction="/product-group.do" type="submit" form="1" value="Delete">Delete</button> </td>--%>
             </tr>
         </c:forEach>
 

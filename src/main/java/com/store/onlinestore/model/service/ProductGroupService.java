@@ -46,14 +46,13 @@ public class ProductGroupService implements Serializable {
     @Transactional
     public List<ProductGroup> findAll() throws Exception {
         return entityManager
-                .createQuery("select oo from productGroupEntity oo where oo.deleted=false", ProductGroup.class)
+                .createQuery("select p from productGroupEntity p where p.deleted=false order by id", ProductGroup.class)
                 .getResultList();
     }
 
     @Transactional
     public ProductGroup findById(Long id) throws Exception {
-        ProductGroup productGroup = entityManager.find(ProductGroup.class, id);
-        return productGroup;
+        return entityManager.find(ProductGroup.class, id);
     }
 
     // TODO: 7/11/2024 getResultList??? 
