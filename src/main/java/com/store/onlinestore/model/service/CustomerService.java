@@ -8,6 +8,7 @@ import jakarta.persistence.PersistenceContext;
 
 import java.io.Serializable;
 import java.util.List;
+
 @ApplicationScoped
 @Singleton
 public class CustomerService implements Serializable {
@@ -45,6 +46,29 @@ public class CustomerService implements Serializable {
     public Customer findById(Long id) throws Exception {
         Customer customer = entityManager.find(Customer.class, id);
         return customer;
+    }
+
+    public List<Customer> findByUsername(String username) throws Exception {
+        return entityManager
+                .createQuery("select c from customerEntity c where c.user.username=:username", Customer.class)
+                .setParameter("username", username )
+                .getResultList();
+    }
+
+    public List<Customer> findByNameAndFamily(String name, String family) throws Exception {
+        return entityManager
+                .createQuery("select c from customerEntity c where c.name like :name and c.family like :family", Customer.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
+    }
+
+    public List<Customer> findByUsernameAndPassword(String username, String password) throws Exception {
+        return entityManager
+                .createQuery("select c from customerEntity c where c.user.username=:username and c.user.password=:password", Customer.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
     }
 
     public List<Customer> findByEmail(String email) throws Exception {
