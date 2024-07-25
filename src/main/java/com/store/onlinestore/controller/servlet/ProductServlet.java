@@ -1,14 +1,12 @@
 package com.store.onlinestore.controller.servlet;
 
 import com.store.onlinestore.controller.validation.BeanValidator;
-
 import com.store.onlinestore.model.entity.Product;
 
 
-import com.store.onlinestore.model.entity.ProductUnit;
-import com.store.onlinestore.model.service.PersonService;
+
+
 import com.store.onlinestore.model.service.ProductService;
-import com.store.onlinestore.model.service.ProductUnitService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,15 +14,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.inject.Inject;
-import java.io.EOFException;
+import lombok.extern.slf4j.Slf4j;
+
+
 import java.io.IOException;
 
 import java.time.LocalDateTime;
-
-@WebServlet("/product.do")
+@Slf4j
+@WebServlet(urlPatterns ="/product.do")
 public class ProductServlet extends HttpServlet {
     @Inject
     private ProductService productService;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            req.getSession().setAttribute("findAllProduct", productService.findAll());
+            req.getRequestDispatcher("/product.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,6 +50,7 @@ public class ProductServlet extends HttpServlet {
                             .productGroup(null)
                             .dateOfModified(LocalDateTime.now())
                             .barcode(req.getParameter("barcode"))
+                            .deleted(false)
                             .build();
 
 
@@ -47,11 +58,13 @@ public class ProductServlet extends HttpServlet {
             BeanValidator<Product> productValidator = new BeanValidator<>();
             if(productValidator.validate(product).isEmpty()) {
                 productService.save(product);
+                resp.sendRedirect("/product.do");
             }else{
-                throw new Exception("Invalid person Data !!!");
+                resp.getWriter().write("<h1 style=\"background-color: red;\">" + productValidator.validate(product) + "</h1>");
            }
 
         } catch (Exception e) {
+            resp.getWriter().write("<h1 style=\"background-color: red;\">" + e.getMessage() + "</h1>");
             System.out.println(e.getMessage());
         }
     }

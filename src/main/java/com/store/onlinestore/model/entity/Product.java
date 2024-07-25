@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SuperBuilder
+@ToString
 
 @Entity(name = "productEntity")
 @Table(name = "product_tbl")
@@ -27,13 +29,13 @@ public class Product extends Base {
 //    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,60}$", message = "Invalid Name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description",length = 100)
     private String description;
 
     @Column(name = "is_active")
     private boolean status;
 
-    @Column(name = "brand")
+    @Column(name = "brand", length = 60)
 //    @Pattern(regexp = "^[a-zA-Z\\s\\d]{3,60}$", message = "Invalid Brand")
     private String brand;
 
