@@ -9,7 +9,7 @@
 <form action="/invoice.do" method="post">
   <input type="number" name="id">
   <input type="text" name="serial">
-  <input type="text" name="customer">
+  <input type="number" name="customer">
   <input type="date" name="localDateTime">
   <input type="text" name="invoiceComment">
   <input type="number" name="discount">
