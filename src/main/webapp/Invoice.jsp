@@ -17,10 +17,8 @@
   <input type="text" name="serial">
   <input type="text" name="customer">
   <input type="date" name="localDateTime">
-  <input type="number" name="amount">
   <input type="text" name="invoiceComment">
   <input type="number" name="discount">
-  <input type="number" name="pureAmount">
   <input type="submit" value="save">
 </form>
 
@@ -33,10 +31,8 @@
     <th>serial</th>
     <th>customer</th>
     <th>localDateTime</th>
-    <th>amount</th>
     <th>invoiceComment</th>
     <th>discount</th>
-    <th>pureAmount</th>
 
   </tr>
   </thead>
@@ -44,13 +40,6 @@
 
   <tbody></tbody>
 </table>
-
-
-
-
-
-
-
 
 </body>
 </html>
