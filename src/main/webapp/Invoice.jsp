@@ -7,13 +7,13 @@
 <body>
 
 <form action="/invoice.do" method="post">
-  <input type="number" name="id">
-  <input type="text" name="serial">
-  <input type="number" name="customer">
-  <input type="date" name="localDateTime">
-  <input type="text" name="invoiceComment">
-  <input type="number" name="discount">
-  <input type="submit" value="save">
+  <input type="number" name="id" placeholder="ID">
+  <input type="text" name="serial" placeholder="Serial">
+  <input type="number" name="customer" placeholder="Customer ID">
+  <input type="datetime-local" name="localDateTime" placeholder="Local DateTime">
+  <input type="text" name="invoiceComment" placeholder="Invoice Comment">
+  <input type="number" name="discount" placeholder="Discount">
+  <input type="submit" value="Save">
 </form>
 
 
