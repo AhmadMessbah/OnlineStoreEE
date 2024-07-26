@@ -1,8 +1,8 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Product</title>
 </head>
 <body>
 <form action="/product.do" method="post">
@@ -14,7 +14,9 @@
     <input type="text" name="unit">
     <input type="text" name="productGroup">
     <input type="text" name="barcode">
-    <input type="submit" value="save">
+    <input type="submit" value="save" name="save">
+    <input type="submit" value="Edit"  name="edit" >
+    <input type="submit" value="Remove" name="delete">
 </form>
 
 <table>
@@ -32,7 +34,21 @@
     </thead>
 
 
-    <tbody></tbody>
+    <tbody>
+    <c:forEach var="product" items="${sessionScope.findAllProduct}">
+        <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.description}</td>
+            <td>${product.status}</td>
+            <td>${product.brand}</td>
+            <td>${product.unit}</td>
+            <td>${product.productGroup}</td>
+            <td>${product.barcode}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
 </table>
+
 </body>
 </html>

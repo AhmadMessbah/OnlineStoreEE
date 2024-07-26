@@ -1,16 +1,14 @@
 package com.store.onlinestore.model.service;
 
-
 import com.store.onlinestore.model.entity.Manager;
-
 import jakarta.ejb.Singleton;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-
 import jakarta.persistence.PersistenceContext;
 
 import java.io.Serializable;
 import java.util.List;
+
 @ApplicationScoped
 @Singleton
 public class ManagerService implements Serializable {
@@ -49,6 +47,29 @@ public class ManagerService implements Serializable {
     public Manager findById(Long id) throws Exception {
         Manager manager=entityManager.find(Manager.class,id);
         return manager;
+    }
+
+    public List<Manager> findByUsername(String username) throws Exception {
+        return entityManager
+                .createQuery("select m from managerEntity m where m.user.username=:username", Manager.class)
+                .setParameter("username", username )
+                .getResultList();
+    }
+
+    public List<Manager> findByNameAndFamily(String name, String family) throws Exception {
+        return entityManager
+                .createQuery("select m from managerEntity m where m.name like :name and m.family like :family", Manager.class)
+                .setParameter("name", name + "%")
+                .setParameter("family", family + "%")
+                .getResultList();
+    }
+
+    public List<Manager> findByUsernameAndPassword(String username, String password) throws Exception {
+        return entityManager
+                .createQuery("select m from managerEntity m where m.user.username=:username and m.user.password=:password", Manager.class)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
     }
 
     public List<Manager> findByEmail(String email) throws Exception {

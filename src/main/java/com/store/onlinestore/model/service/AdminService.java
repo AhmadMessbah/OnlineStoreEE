@@ -92,7 +92,3 @@ public class AdminService implements Serializable {
                 .getSingleResult();
     }
 }
-
-
-
-
