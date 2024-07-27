@@ -4,6 +4,7 @@ import com.store.onlinestore.model.entity.Invoice;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,12 +14,13 @@ public class InvoiceService {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
+    @Transactional
     public Invoice save(Invoice invoice) throws Exception {
         entityManager.persist(invoice);
         return invoice;
     }
 
-
+    @Transactional
     public Invoice edit(Invoice invoice) throws Exception {
         Invoice foundInvoice = entityManager.find(Invoice.class, invoice.getId());
         if (foundInvoice != null) {
@@ -27,6 +29,7 @@ public class InvoiceService {
         return invoice;
     }
 
+    @Transactional
     public Invoice remove(Long id) throws Exception {
         Invoice invoice = entityManager.find(Invoice.class, id);
         if (invoice != null) {
@@ -36,17 +39,20 @@ public class InvoiceService {
         return invoice;
     }
 
+    @Transactional
     public List<Invoice> findAll() throws Exception {
         return entityManager
                 .createQuery("select i from invoiceEntity i where i.deleted=false", Invoice.class)
                 .getResultList();
     }
 
+    @Transactional
     public Invoice findById(Long id) throws Exception {
         Invoice invoice = entityManager.find(Invoice.class, id);
         return invoice;
     }
 
+    @Transactional
     public Invoice findBySerial(String serial) throws Exception {
         return entityManager
                 .createQuery("select i from invoiceEntity i where i.serial =:serial", Invoice.class)
@@ -55,6 +61,7 @@ public class InvoiceService {
     }
 
 
+    @Transactional
     public List<Invoice> findByCustomerId(Long customerId) throws Exception {
         return entityManager
                 .createQuery("select i from invoiceEntity i where i.customer.id = :customerId", Invoice.class)
@@ -64,6 +71,7 @@ public class InvoiceService {
 
 //  todo :  findByNameAndFamily
 
+    @Transactional
     public List<Invoice> findByDate(LocalDateTime localDateTime) throws Exception {
         return entityManager
                 .createQuery("select  i from invoiceEntity i where  i.localDateTime = :localDateTime", Invoice.class)
@@ -71,6 +79,7 @@ public class InvoiceService {
                 .getResultList();
     }
 
+    @Transactional
     public List<Invoice> findByRangeDate(LocalDateTime startDate, LocalDateTime endDate) throws Exception {
         return entityManager
                 .createQuery("select  i from invoiceEntity i where  i.localDateTime between :startTime and :endTime", Invoice.class)

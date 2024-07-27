@@ -1,13 +1,10 @@
 package com.store.onlinestore.controller.servlet;
 
 
-import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.*;
 
-import com.store.onlinestore.model.service.CustomerService;
-import com.store.onlinestore.model.service.InvoiceItemService;
+
 import com.store.onlinestore.model.service.InvoiceService;
-import com.store.onlinestore.model.service.PersonService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,23 +23,15 @@ public class InvoiceServlet extends HttpServlet {
     @Inject
     private InvoiceService invoiceService;
 
-    @Inject
-    private CustomerService customerService;
-
-    @Inject
-    private Customer customer;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
 
             Long customerId = Long.valueOf(req.getParameter("customer"));
-            System.out.println(customerId);
-
             Customer customer =
                     Customer
                             .builder()
-                            .id(1L)
+                            .id(customerId)
 
                             .build();
 
