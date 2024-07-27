@@ -27,6 +27,7 @@
     </tr>
     </thead>
 
+    <img src="${sessionScope.person.attachment.image}" alt="تصویر موجود نیست">
 
     <tbody></tbody>
 </table>

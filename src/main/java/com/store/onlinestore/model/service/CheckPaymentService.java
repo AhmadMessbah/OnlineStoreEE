@@ -4,6 +4,7 @@ import com.store.onlinestore.model.entity.CheckPayment;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class CheckPaymentService implements Serializable {
     @PersistenceContext(unitName = "store")
     private EntityManager entityManager;
 
+    @Transactional
     public CheckPayment save(CheckPayment checkPayment) throws Exception {
         entityManager.persist(checkPayment);
         return checkPayment;
@@ -43,8 +45,7 @@ public class CheckPaymentService implements Serializable {
     }
 
     public CheckPayment findById(Long id) throws Exception {
-        CheckPayment checkPayment = entityManager.find(CheckPayment.class, id);
-        return checkPayment;
+        return entityManager.find(CheckPayment.class, id);
     }
 
     public CheckPayment FindByCheckNumber(long checkNumber) throws Exception {
@@ -55,7 +56,6 @@ public class CheckPaymentService implements Serializable {
     }
 
     public CheckPayment FindByDateTime(LocalDateTime localDateTime) throws Exception {
-        CheckPayment checkPayment = entityManager.find(CheckPayment.class, localDateTime);
-        return checkPayment;
+        return entityManager.find(CheckPayment.class, localDateTime);
     }
 }

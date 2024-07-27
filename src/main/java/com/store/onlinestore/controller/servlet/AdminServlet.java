@@ -15,7 +15,7 @@ import jakarta.inject.Inject;
 import java.io.IOException;
 
 @WebServlet("/admin.do")
-public class AdminServlet extends HttpServlet {
+public class  AdminServlet extends HttpServlet {
     @Inject
     private AdminService adminService;
 
