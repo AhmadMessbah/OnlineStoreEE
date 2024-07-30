@@ -40,7 +40,7 @@ public class PersonsTest {
                 .stateName("Tehran")
                 .cityName("Tehran")
                 .build();
-        System.out.println(AddressService.getService().save(address));
+//        System.out.println(AddressService.getService().save(address));
 
         Admin admin =
                 builder()
