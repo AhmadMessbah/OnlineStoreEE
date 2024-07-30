@@ -117,7 +117,7 @@ public class PaymentTest {
         paymentTransaction.addCheckPayment(checkPayment1);
         paymentTransaction.addCheckPayment(checkPayment2);
 
-        System.out.println(PaymentTransactionService.getService().save(paymentTransaction));
+//        System.out.println(PaymentTransactionService.getService().save(paymentTransaction));
 
 
 //        System.out.println(PaymentTransactionService.getService().edit(paymentTransaction));

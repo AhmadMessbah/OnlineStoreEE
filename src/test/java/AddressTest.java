@@ -4,7 +4,7 @@ import com.store.onlinestore.model.service.AddressService;
 
 public class AddressTest {
     public static void main(String[] args) throws Exception{
-        AddressService addressService = AddressService.getService();
+//        AddressService addressService = AddressService.getService();
 
         Address address1= Address
                 .builder()
@@ -34,15 +34,15 @@ public class AddressTest {
                 .postalCode("4646464646")
                 .build();
 
-        addressService.save(address1);
-        addressService.save(address2);
-        System.out.println(addressService.findAll());
-        System.out.println(addressService.findById(1L));
-        System.out.println(addressService.findByCountryAndState("Iran", "Tehran"));
-        System.out.println(addressService.findByPostalCode("4646464646"));
-        addressService.remove(2L);
-        addressService.remove(1L);
-        System.out.println(addressService.findAll());
+//        addressService.save(address1);
+//        addressService.save(address2);
+//        System.out.println(addressService.findAll());
+//        System.out.println(addressService.findById(1L));
+//        System.out.println(addressService.findByCountryAndState("Iran", "Tehran"));
+//        System.out.println(addressService.findByPostalCode("4646464646"));
+//        addressService.remove(2L);
+//        addressService.remove(1L);
+//        System.out.println(addressService.findAll());
 
     }
 }

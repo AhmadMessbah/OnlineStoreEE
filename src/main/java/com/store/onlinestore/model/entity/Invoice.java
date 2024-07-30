@@ -45,7 +45,7 @@ public class Invoice extends Base {
     @Column(name = "invoice_comment")
     private String invoiceComment;
 
-    @OneToMany(mappedBy = "invoice")
+    @OneToMany(mappedBy = "invoice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    @JoinColumn(name= "invoiceItem_id")
     private List<InvoiceItem> invoiceItemList;
 

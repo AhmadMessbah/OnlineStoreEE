@@ -166,7 +166,6 @@ public class DeliveryTest {
 
 //        InvoiceService.getService().edit(invoice);
 
-        DeliveryService deliveryService = DeliveryService.getDeliveryService();
         Delivery delivery1 = Delivery.builder()
                 .orderId("abcdhdsfshhadssd")
                 .receiverName("Mehrdad")
@@ -187,20 +186,20 @@ public class DeliveryTest {
                 .receiverName("Mohammad")
                 .description("hdsk hkfsdl s sajoi#$%@%$#@$*/-/+")
                 .build();
-        deliveryService.save(delivery1);
-        deliveryService.save(delivery2);
-        deliveryService.save(delivery3);
-        deliveryService.save(delivery4);
-        System.out.println(deliveryService.findAll());
-        System.out.println(deliveryService.findById(1L));
-        System.out.println(deliveryService.findByDeliveryStatus(DeliveryStatus.SENDING));
-      //  System.out.println(deliveryService.deliveryFindByNameAndFamily("ali", "alipour"));
-        System.out.println(deliveryService.findByOrderId("asdfghjkl"));
-        System.out.println(deliveryService.findByReceiverName("Mohammad"));
-        System.out.println(deliveryService.findAll());
-        System.out.println(deliveryService.findAll());
-        deliveryService.remove(2L);
-        deliveryService.remove(1L);
-        System.out.println(deliveryService.findAll());
+//        deliveryService.save(delivery1);
+//        deliveryService.save(delivery2);
+//        deliveryService.save(delivery3);
+//        deliveryService.save(delivery4);
+//        System.out.println(deliveryService.findAll());
+//        System.out.println(deliveryService.findById(1L));
+//        System.out.println(deliveryService.findByDeliveryStatus(DeliveryStatus.SENDING));
+//      //  System.out.println(deliveryService.deliveryFindByNameAndFamily("ali", "alipour"));
+//        System.out.println(deliveryService.findByOrderId("asdfghjkl"));
+//        System.out.println(deliveryService.findByReceiverName("Mohammad"));
+//        System.out.println(deliveryService.findAll());
+//        System.out.println(deliveryService.findAll());
+//        deliveryService.remove(2L);
+//        deliveryService.remove(1L);
+//        System.out.println(deliveryService.findAll());
     }
 }
