@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @SuperBuilder
-@Entity(name="paymentTransaction")
+@Entity(name="paymentTransactionEntity")
 @Table(name = "payment_transaction_tbl")
 public class PaymentTransaction extends Base {
     @Id
