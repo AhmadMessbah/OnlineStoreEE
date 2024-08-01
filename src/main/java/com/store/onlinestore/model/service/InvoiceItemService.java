@@ -43,7 +43,6 @@ public class InvoiceItemService {
     }
 
     public InvoiceItem findById(Long id) throws Exception{
-        InvoiceItem invoiceItem = entityManager.find(InvoiceItem.class, id);
-        return invoiceItem;
+        return entityManager.find(InvoiceItem.class, id);
     }
 }

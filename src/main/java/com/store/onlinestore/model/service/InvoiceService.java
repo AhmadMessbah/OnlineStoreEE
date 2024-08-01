@@ -48,8 +48,7 @@ public class InvoiceService {
 
     @Transactional
     public Invoice findById(Long id) throws Exception {
-        Invoice invoice = entityManager.find(Invoice.class, id);
-        return invoice;
+        return entityManager.find(Invoice.class, id);
     }
 
     @Transactional

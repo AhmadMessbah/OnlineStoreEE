@@ -1,6 +1,8 @@
 package com.store.onlinestore.controller.servlet;
 
 
+import com.store.onlinestore.controller.exception.ExceptionWrapper;
+import com.store.onlinestore.controller.validation.BeanValidator;
 import com.store.onlinestore.model.entity.*;
 
 
@@ -11,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -18,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @WebServlet("/invoice.do")
 public class InvoiceServlet extends HttpServlet {
     @Inject
@@ -89,21 +94,26 @@ public class InvoiceServlet extends HttpServlet {
             invoice.setAmount(amount);
             invoice.setPureAmount(pureAmount);
 
+            BeanValidator<Invoice> invoiceValidator = new BeanValidator<>();
 
-            invoiceService.save(invoice);
-
-//            TODO
-            //HTTP Status 404 – Not Found
-            //Type Status Report
+            if (invoiceValidator.validate(invoice).isEmpty()) {
+                invoiceService.save(invoice);
+                log.info("Invoice saved successfully : " + invoice.toString());
+            } else {
+                throw new Exception("Invalid Invoice Data !!!");  //error
+            }
+        //            TODO
+        //HTTP Status 404 – Not Found
+        //Type Status Report
 //
-            //Description The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+        //Description The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
 //
-            //Apache Tomcat (TomEE)/10.0.27 (9.1.3)
+        //Apache Tomcat (TomEE)/10.0.27 (9.1.3)
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
+    } catch(Exception e){
+        e.printStackTrace();
+        log.error(ExceptionWrapper.getMessage(e).toString());
     }
+}
 }
 
