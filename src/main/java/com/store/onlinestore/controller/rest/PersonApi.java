@@ -20,7 +20,7 @@ public class PersonApi {
             System.out.println("PERSON API EDIT : " + person.toString());
 
             personService.edit(person);
-            return Response.accepted().build();
+            return Response.ok().entity("salam").build();
         }catch (Exception e) {
             return Response.serverError().build();
         }

@@ -58,6 +58,7 @@ public class PersonServlet extends HttpServlet {
                 Person person = personService.findById(Long.parseLong(req.getParameter("edit")));
                 if(!person.isEditing()) {
                     person.setEditing(true);
+                    personService.edit(person);
                     req.getSession().setAttribute("person", person);
 
                     req.getRequestDispatcher("edit-person.jsp").forward(req, resp);
@@ -144,6 +145,7 @@ public class PersonServlet extends HttpServlet {
            Person person = objectMapper.readValue(req.getReader(), Person.class);
            person.setEditing(false);
            personService.edit(person);
+           resp.getWriter().write("javab");
        }catch (Exception e){
 
        }

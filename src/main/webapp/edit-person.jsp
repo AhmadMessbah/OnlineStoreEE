@@ -18,6 +18,8 @@
     <input type="submit">Edit</input>
 </form>
 
+<a href="/person.do">Return to main</a>
+
 <script>
     function handleSubmit(event) {
         event.preventDefault();
@@ -25,13 +27,19 @@
         const fromData = new FormData(event.target);
         const jsonData = Object.fromEntries(fromData.entries());
 
-        fetch("rest/person",{
-            method:"PUT",
-            body:JSON.stringify(jsonData),
-            headers:{
-                "Content-Type":"application/json"
+        fetch("rest/person", {
+            method: "PUT",
+            body: JSON.stringify(jsonData),
+            headers: {
+                "Content-Type": "application/json"
             }
-        })
+        }).then(response => response.json())
+            .then(jsonData =>{
+            //     show on alert
+            })
+            .then(() => {
+                window.location = "/person.do"
+            })
 
     }
 
