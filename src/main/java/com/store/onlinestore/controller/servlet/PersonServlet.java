@@ -143,7 +143,6 @@ public class PersonServlet extends HttpServlet {
            ObjectMapper objectMapper = new ObjectMapper();
            Person person = objectMapper.readValue(req.getReader(), Person.class);
            person.setEditing(false);
-           System.out.println(person);
            personService.edit(person);
        }catch (Exception e){
 

@@ -25,9 +25,12 @@
         const fromData = new FormData(event.target);
         const jsonData = Object.fromEntries(fromData.entries());
 
-        fetch("/person.do",{
+        fetch("rest/person",{
             method:"PUT",
-            body:JSON.stringify(jsonData)
+            body:JSON.stringify(jsonData),
+            headers:{
+                "Content-Type":"application/json"
+            }
         })
 
     }
