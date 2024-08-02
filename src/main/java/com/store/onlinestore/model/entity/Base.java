@@ -25,8 +25,10 @@ public class Base implements Serializable {
     private List<Attachment> attachmentList;
 
     @JsonbTransient
-    private boolean deleted = false;
+    private boolean editing = false;
 
+    @JsonbTransient
+    private boolean deleted = false;
 
     public void addAttachment(Attachment attachment) {
         if (this.attachmentList == null) {
